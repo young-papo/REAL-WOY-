@@ -144,3 +144,73 @@ export const CloseFilled = ({ color = '#000000', size = 24, ...props }) => (
     <Path fill={color} d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2m5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12z" />
   </Svg>
 );
+
+// Icône Heart (like/favoris)
+export const Heart = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53z" />
+  </Svg>
+);
+
+// Icône HeartOutline (like vide)
+export const HeartOutline = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3" />
+  </Svg>
+);
+
+// Icône Repeat (republier/repost)
+export const Repeat = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M7 7h10v3l4-4l-4-4v3H5v6h2zm10 10H7v-3l-4 4l4 4v-3h12v-6h-2z" />
+  </Svg>
+);
+
+// Icône ShareForwardFill (partager)
+export const ShareForwardFill = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M21 12l-7-7v4C7 10 4 15 3 20c2.5-3.5 6-5.1 11-5.1V19z" />
+  </Svg>
+);
+
+// Icône EyeFill (vues)
+export const EyeFill = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3" />
+  </Svg>
+);
+
+// Icône Warning (signaler)
+export const Warning = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z" />
+  </Svg>
+);
+
+// Icône Truck (livraison)
+export const Truck = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5m13.5-9l1.96 2.5H17V9.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5" />
+  </Svg>
+);
+
+// Icône Close (fermer simple)
+export const Close = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
+  </Svg>
+);
+
+// Icône Plus (ajouter)
+export const Plus = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" />
+  </Svg>
+);
+
+// Icône ChevronRight (flèche droite)
+export const ChevronRight = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M8.59 16.59L13.17 12L8.59 7.41L10 6l6 6l-6 6z" />
+  </Svg>
+);
