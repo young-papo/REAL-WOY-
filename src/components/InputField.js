@@ -21,6 +21,7 @@ const InputField = ({
   placeholder,
   icon: Icon,
   error,
+  success,
   secureTextEntry,
   toggleSecure,
   keyboardType,
@@ -38,6 +39,7 @@ const InputField = ({
     inputBorder: isDarkMode ? '#333333' : '#E0E0E0',
     placeholder: '#BDBDBD',
     error: '#FF6B6B',
+    success: '#22C55E',
   };
 
   return (
@@ -87,6 +89,12 @@ const InputField = ({
           <Text style={[styles.errorMessage, { color: colors.error }]}>{error}</Text>
         </View>
       )}
+      {success && (
+        <View style={styles.successContainer}>
+          <Ionicons name="checkmark-circle" size={14} color={colors.success} />
+          <Text style={[styles.successMessage, { color: colors.success }]}>{success}</Text>
+        </View>
+      )}
     </Animated.View>
   );
 };
@@ -117,6 +125,8 @@ const styles = StyleSheet.create({
   input: { flex: 1, paddingVertical: 14, fontSize: 16 },
   errorContainer: { flexDirection: 'row', alignItems: 'center', marginTop: 6, gap: 4 },
   errorMessage: { fontSize: 12, fontWeight: '600' },
+  successContainer: { flexDirection: 'row', alignItems: 'center', marginTop: 6, gap: 4 },
+  successMessage: { fontSize: 12, fontWeight: '600' },
 });
 
 export default InputField;
