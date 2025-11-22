@@ -359,3 +359,46 @@ export const TriangleInvertedFilled = ({ color = '#000000', size = 16, ...props 
     </G>
   </Svg>
 );
+
+// Icône PencilSquareSolid (nouveau message)
+export const PencilSquareSolid = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 14 14" {...props}>
+    <Path fill={color} fillRule="evenodd" d="M13.354.637a1.944 1.944 0 0 0-2.8.053L7.24 4.265a1.5 1.5 0 0 0-.323.545l-.5 1.498a1 1 0 0 0 1.265 1.265l1.498-.5a1.5 1.5 0 0 0 .546-.322L13.3 3.437c.808-.75.833-2.02.053-2.8m-7.03 2.778a2.75 2.75 0 0 0-.592 1l-.5 1.498C4.646 7.672 6.32 9.345 8.079 8.759l1.498-.5a2.75 2.75 0 0 0 1-.591l1.853-1.719a.246.246 0 0 1 .415.163q.048.697.05 1.417q0 .369-.014.733q0 .027.004.053q.015.098.01.2c-.043.843-.13 1.664-.217 2.441a3.1 3.1 0 0 1-1.241 2.14a3.1 3.1 0 0 1-1.497.6c-.83.095-1.715.194-2.623.235q-.088.004-.172-.007l-.045-.002q-.3.01-.601.01c-1.211 0-2.385-.13-3.466-.256a3.094 3.094 0 0 1-2.713-2.72C.2 9.878.076 8.713.076 7.51q0-.369.015-.732q0-.027-.004-.054a1 1 0 0 1-.01-.2c.043-.842.13-1.664.217-2.44a3.1 3.1 0 0 1 1.241-2.141a3.1 3.1 0 0 1 1.497-.599a37 37 0 0 1 2.624-.236q.087-.003.17.007q.024.003.046.002a18 18 0 0 1 1.996.042a.246.246 0 0 1 .162.414z" clipRule="evenodd" />
+  </Svg>
+);
+
+// Icône StarFourPointsCircle (favoris cercle)
+export const StarFourPointsCircle = ({ color = '#000000', size = 14, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M8.17 2.76A10.1 10.1 0 0 1 12 2c1.31 0 2.61.26 3.83.76c1.21.5 2.31 1.24 3.24 2.17c.93.93 1.67 2.03 2.17 3.24c.5 1.22.76 2.52.76 3.83c0 2.65-1.05 5.2-2.93 7.07A9.974 9.974 0 0 1 12 22a10.1 10.1 0 0 1-3.83-.76a9.975 9.975 0 0 1-3.24-2.17A9.974 9.974 0 0 1 2 12c0-2.65 1.05-5.2 2.93-7.07c.93-.93 2.03-1.67 3.24-2.17M12 17l1.56-3.42L17 12l-3.44-1.56L12 7l-1.57 3.44L7 12l3.43 1.58L12 17Z" />
+  </Svg>
+);
+
+// Icône PinFill (épinglé)
+export const PinFill = ({ color = '#000000', size = 14, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 25" {...props}>
+    <Path fill={color} d="M11 21.715v-3.858a1 1 0 1 1 2 0v3.858l-.005.101a1 1 0 0 1-1.99 0z" />
+    <Path fill={color} d="m15.713 7.47l.437-1.53a1.746 1.746 0 0 0-1.679-2.226H10.23A2.32 2.32 0 0 0 7.955 6.49Q8 6.715 8 6.945v3.879c0 .899-.315 1.77-.89 2.46l-.874 1.048a1.758 1.758 0 0 0 1.35 2.883h8.972a1.307 1.307 0 0 0 1.087-2.032l-.98-1.471a4.9 4.9 0 0 1-.797-2.187l-.283-2.541a3.9 3.9 0 0 1 .127-1.513Z" />
+  </Svg>
+);
+
+// Icône Check (simple coche)
+export const Check = ({ color = '#999999', size = 16, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill="none" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m6 12l4.243 4.243l8.484-8.486" />
+  </Svg>
+);
+
+// Icône CheckAll (double coche)
+export const CheckAll = ({ color = '#999999', size = 16, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill="none" stroke={color} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m8 12.485l4.243 4.243l8.484-8.485M3 12.485l4.243 4.243m8.485-8.485L12.5 11.5" />
+  </Svg>
+);
+
+// Icône VerifiedBadge (badge vérifié bleu)
+export const VerifiedBadge = ({ color = '#3B82F6', size = 18, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M23 12l-2.44-2.79l.34-3.69l-3.61-.82l-1.89-3.2L12 2.96L8.6 1.5L6.71 4.7L3.1 5.52l.34 3.69L1 12l2.44 2.79l-.34 3.7l3.61.82L8.6 22.5l3.4-1.47l3.4 1.46l1.89-3.19l3.61-.82l-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81l1.48-1.48l2.32 2.33l5.85-5.87l1.48 1.48l-7.33 7.35z" />
+  </Svg>
+);
