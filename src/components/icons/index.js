@@ -462,6 +462,13 @@ export const Download2Rounded = ({ color = '#000000', size = 20, ...props }) => 
   </Svg>
 );
 
+// Icône Upload2Rounded (téléverser)
+export const Upload2Rounded = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M5 20h14q.425 0 .713.288T20 21q0 .425-.288.713T19 22H5q-.425 0-.713-.288T4 21q0-.425.288-.713T5 20Zm5-2q-.425 0-.713-.288T9 17v-6H7.05q-.625 0-.9-.563t.1-1.062l4.95-6.35q.15-.2.363-.3t.437-.1q.225 0 .438.1t.362.3l4.95 6.35q.375.5.1 1.063t-.9.562H15v6q0 .425-.288.713T14 18h-4Z" />
+  </Svg>
+);
+
 // Icône CloseCircle (fermer cercle outline)
 export const CloseCircle = ({ color = '#000000', size = 20, ...props }) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
