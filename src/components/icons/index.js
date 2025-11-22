@@ -180,6 +180,16 @@ export const EyeFill = ({ color = '#000000', size = 24, ...props }) => (
   </Svg>
 );
 
+// Icône EyeFill12 (vues version compacte)
+export const EyeFill12 = ({ color = '#000000', size = 16, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 12 12" {...props}>
+    <G fill={color}>
+      <Path d="M6 4.5a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3" />
+      <Path d="M11.79 5.34C11.08 4.33 9.1 2 6 2S.92 4.33.21 5.34c-.28.4-.28.93 0 1.32C.92 7.67 2.9 10 6 10s5.08-2.33 5.79-3.34c.28-.39.28-.93 0-1.32M6 8.5a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5" />
+    </G>
+  </Svg>
+);
+
 // Icône Warning (signaler)
 export const Warning = ({ color = '#000000', size = 24, ...props }) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
