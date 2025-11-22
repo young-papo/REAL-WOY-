@@ -629,3 +629,24 @@ export const PinterestSquare = ({ color = '#000000', size = 24, ...props }) => (
     <Path fill={color} d="M1248 0q119 0 203.5 84.5T1536 288v960q0 119-84.5 203.5T1248 1536H523q85-122 108-210q9-34 53-209q21 39 73.5 67t112.5 28q181 0 295.5-147.5T1280 691q0-84-35-162.5t-96.5-139t-152.5-97T799 256q-104 0-194.5 28.5t-153 76.5T344 470.5t-66.5 128T256 731q0 102 39.5 180T412 1021q13 5 23.5 0t14.5-19q10-44 15-61q6-23-11-42q-50-62-50-150q0-150 103.5-256.5T778 386q149 0 232.5 81t83.5 210q0 168-67.5 286T853 1081q-60 0-97-43.5T733 934q8-34 26.5-92.5t29.5-102t11-74.5q0-49-26.5-81.5T698 551q-61 0-103.5 56.5T552 747q0 72 24 121l-98 414q-24 100-7 254H288q-119 0-203.5-84.5T0 1248V288Q0 169 84.5 84.5T288 0h960z" />
   </Svg>
 );
+
+// Icône PhoneLaptop16Filled (appareils connectés)
+export const PhoneLaptop16Filled = ({ color = '#000000', size = 64, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 16 16" {...props}>
+    <Path fill={color} d="M1 4.5A1.5 1.5 0 0 1 2.5 3h6A1.5 1.5 0 0 1 10 4.5v6A1.5 1.5 0 0 1 8.5 12h-6A1.5 1.5 0 0 1 1 10.5zM5.5 9a.5.5 0 0 0 0 1h.5a.5.5 0 0 0 0-1zm6-5.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 .5.5h3.5a.5.5 0 0 0 0-1H12V4.5a1 1 0 0 0-1-1z" />
+  </Svg>
+);
+
+// Icône PhoneFill (téléphone)
+export const PhoneFill = ({ color = '#000000', size = 24, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M7 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm5 17a1 1 0 1 1 0-2a1 1 0 0 1 0 2" />
+  </Svg>
+);
+
+// Icône Disconnected (déconnexion appareil)
+export const Disconnected = ({ color = '#000000', size = 16, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
+    <Path fill={color} d="M19.07 4.93a10 10 0 0 0-14.14 0l1.41 1.41a8 8 0 0 1 11.32 0zM12 10c1.93 0 3.68.78 4.95 2.05l1.41-1.41A9 9 0 0 0 6.64 10.64l1.41 1.41A6.95 6.95 0 0 1 12 10m0 6c-.55 0-1 .45-1 1s.45 1 1 1s1-.45 1-1s-.45-1-1-1m2.12-2.12l1.41-1.41A5 5 0 0 0 8.47 12.47l1.41 1.41A3 3 0 0 1 12 13c.79 0 1.5.31 2.12.88" />
+  </Svg>
+);
