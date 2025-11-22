@@ -17,8 +17,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   PencilSquareSolid,
-  VerifiedBadge,
-  StarFourPointsCircle,
+  VerifiedCheckFill,
+  Heart,
   PinFill,
   Trash,
   Check,
@@ -501,7 +501,7 @@ const MessagesScreen = ({ navigation }) => {
                 <Text style={[styles.userName, { color: colors.text }]} numberOfLines={1}>
                   {item.user.username}
                 </Text>
-                {item.user.verified && <VerifiedBadge color="#3B82F6" size={14} />}
+                {item.user.verified && <VerifiedCheckFill color="#3B82F6" size={14} />}
                 {!item.isOnline && !item.isTyping && item.lastSeen && (
                   <Text style={[styles.lastSeenTextInline, { color: colors.textSecondary }]}>
                     • {getLastSeenText(item.lastSeen)}
@@ -579,7 +579,7 @@ const MessagesScreen = ({ navigation }) => {
       <View style={styles.suggestionInfo}>
         <View style={styles.suggestionNameRow}>
           <Text style={[styles.suggestionName, { color: colors.text }]}>{item.username}</Text>
-          {item.verified && <VerifiedBadge color="#3B82F6" size={14} />}
+          {item.verified && <VerifiedCheckFill color="#3B82F6" size={14} />}
         </View>
         <Text style={[styles.suggestionSubtext, { color: colors.textSecondary }]}>
           {item.isFollowing && item.lastMessage ? 'Abonné • Message récent' : item.isFollowing ? 'Abonné' : 'Suggéré'}
@@ -683,7 +683,7 @@ const MessagesScreen = ({ navigation }) => {
               style={styles.actionModalButton}
               onPress={handleFavoriteConversation}
             >
-              <StarFourPointsCircle color={colors.text} size={20} />
+              <Heart color={colors.text} size={20} />
               <Text style={[styles.actionModalButtonText, { color: colors.text }]}>
                 {longPressedItem?.favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
               </Text>
