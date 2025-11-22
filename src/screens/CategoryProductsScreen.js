@@ -261,16 +261,6 @@ const CategoryProductsScreen = ({ route, navigation }) => {
           style={styles.gradientOverlay}
         />
 
-        <TouchableOpacity
-          style={styles.menuButton}
-          onPress={(e) => {
-            e.stopPropagation();
-            handleMenuPress(item.id);
-          }}
-        >
-          <MoreVertical color="#FFFFFF" size={20} />
-        </TouchableOpacity>
-
         <View style={styles.productInfoOverlay}>
           <View style={styles.productTextSection}>
             <Text
@@ -553,14 +543,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: '40%',
-  },
-
-  menuButton: {
-    position: 'absolute',
-    top: 8,
-    right: 8,
-    padding: 4,
-    zIndex: 10,
   },
 
   productInfoOverlay: {
