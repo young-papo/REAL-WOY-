@@ -638,9 +638,9 @@ export const PhoneLaptop16Filled = ({ color = '#000000', size = 64, ...props }) 
 );
 
 // Icône PhoneFill (téléphone)
-export const PhoneFill = ({ color = '#000000', size = 24, ...props }) => (
-  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...props}>
-    <Path fill={color} d="M7 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm5 17a1 1 0 1 1 0-2a1 1 0 0 1 0 2" />
+export const PhoneFill = ({ color = '#000000', size = 20, ...props }) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 16 16" {...props}>
+    <Path fill={color} d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0a1 1 0 0 0 2 0z" />
   </Svg>
 );
 
