@@ -87,7 +87,7 @@ const MapScreen = ({ navigation }) => {
       sellerVerified: true,
       rating: 4.8,
       condition: 'Neuf',
-      coordinate: { latitude: 18.5392, longitude: -72.3380 },
+      coordinate: { latitude: 18.5392, longitude: -72.338 },
     },
     {
       id: 'p2',
@@ -102,7 +102,7 @@ const MapScreen = ({ navigation }) => {
       sellerVerified: true,
       rating: 4.9,
       condition: 'Bon',
-      coordinate: { latitude: 18.5410, longitude: -72.3350 },
+      coordinate: { latitude: 18.541, longitude: -72.335 },
     },
     {
       id: 'p3',
@@ -117,7 +117,7 @@ const MapScreen = ({ navigation }) => {
       sellerVerified: true,
       rating: 4.7,
       condition: 'Neuf',
-      coordinate: { latitude: 18.5360, longitude: -72.3420 },
+      coordinate: { latitude: 18.536, longitude: -72.342 },
     },
     // Requêtes (bleu)
     {
@@ -130,7 +130,7 @@ const MapScreen = ({ navigation }) => {
       authorVerified: false,
       budget: '8 000',
       currency: 'HTG',
-      coordinate: { latitude: 18.5425, longitude: -72.3400 },
+      coordinate: { latitude: 18.5425, longitude: -72.34 },
     },
     {
       id: 'r2',
@@ -142,7 +142,7 @@ const MapScreen = ({ navigation }) => {
       authorVerified: true,
       budget: '100 000',
       currency: 'HTG',
-      coordinate: { latitude: 18.5375, longitude: -72.3340 },
+      coordinate: { latitude: 18.5375, longitude: -72.334 },
     },
     {
       id: 'r3',
@@ -154,7 +154,7 @@ const MapScreen = ({ navigation }) => {
       authorVerified: false,
       budget: '5 000',
       currency: 'HTG',
-      coordinate: { latitude: 18.5445, longitude: -72.3360 },
+      coordinate: { latitude: 18.5445, longitude: -72.336 },
     },
     // Vendeurs (profile)
     {
@@ -167,7 +167,7 @@ const MapScreen = ({ navigation }) => {
       rating: 4.9,
       products: 45,
       sales: 230,
-      coordinate: { latitude: 18.5400, longitude: -72.3390 },
+      coordinate: { latitude: 18.54, longitude: -72.339 },
     },
     {
       id: 's2',
@@ -179,7 +179,7 @@ const MapScreen = ({ navigation }) => {
       rating: 4.7,
       products: 78,
       sales: 156,
-      coordinate: { latitude: 18.5350, longitude: -72.3370 },
+      coordinate: { latitude: 18.535, longitude: -72.337 },
     },
     {
       id: 's3',
@@ -191,7 +191,7 @@ const MapScreen = ({ navigation }) => {
       rating: 4.5,
       products: 34,
       sales: 89,
-      coordinate: { latitude: 18.5430, longitude: -72.3310 },
+      coordinate: { latitude: 18.543, longitude: -72.331 },
     },
     {
       id: 's4',
@@ -203,7 +203,7 @@ const MapScreen = ({ navigation }) => {
       rating: 4.8,
       products: 120,
       sales: 450,
-      coordinate: { latitude: 18.5385, longitude: -72.3450 },
+      coordinate: { latitude: 18.5385, longitude: -72.345 },
     },
     // Partenaires (orange)
     {
@@ -216,10 +216,20 @@ const MapScreen = ({ navigation }) => {
       rating: 4.9,
       specialty: 'Accessoires de luxe',
       description: 'Partenaire officiel WOY - Livraison gratuite',
-      coordinate: { latitude: 18.5415, longitude: -72.3330 },
+      coordinate: { latitude: 18.5415, longitude: -72.333 },
       recentProducts: [
-        { id: 'pp1', title: 'Montre Rolex', price: '150 000', image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=200&q=80' },
-        { id: 'pp2', title: 'Lunettes Ray-Ban', price: '8 000', image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&q=80' },
+        {
+          id: 'pp1',
+          title: 'Montre Rolex',
+          price: '150 000',
+          image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=200&q=80',
+        },
+        {
+          id: 'pp2',
+          title: 'Lunettes Ray-Ban',
+          price: '8 000',
+          image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&q=80',
+        },
       ],
     },
     {
@@ -234,8 +244,18 @@ const MapScreen = ({ navigation }) => {
       description: 'Boutique certifiée - Retours acceptés',
       coordinate: { latitude: 18.5365, longitude: -72.3395 },
       recentProducts: [
-        { id: 'pp3', title: 'Robe Chanel', price: '35 000', image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200&q=80' },
-        { id: 'pp4', title: 'Sac Hermès', price: '85 000', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200&q=80' },
+        {
+          id: 'pp3',
+          title: 'Robe Chanel',
+          price: '35 000',
+          image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=200&q=80',
+        },
+        {
+          id: 'pp4',
+          title: 'Sac Hermès',
+          price: '85 000',
+          image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200&q=80',
+        },
       ],
     },
     {
@@ -248,10 +268,20 @@ const MapScreen = ({ navigation }) => {
       rating: 4.7,
       specialty: 'Streetwear',
       description: 'Éditions limitées - Authentique garanti',
-      coordinate: { latitude: 18.5440, longitude: -72.3440 },
+      coordinate: { latitude: 18.544, longitude: -72.344 },
       recentProducts: [
-        { id: 'pp5', title: 'Hoodie Supreme', price: '12 000', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200&q=80' },
-        { id: 'pp6', title: 'Casquette New Era', price: '3 500', image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&q=80' },
+        {
+          id: 'pp5',
+          title: 'Hoodie Supreme',
+          price: '12 000',
+          image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200&q=80',
+        },
+        {
+          id: 'pp6',
+          title: 'Casquette New Era',
+          price: '3 500',
+          image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&q=80',
+        },
       ],
     },
     {
@@ -264,10 +294,20 @@ const MapScreen = ({ navigation }) => {
       rating: 4.9,
       specialty: 'Électronique',
       description: 'Garantie 1 an - Service après-vente',
-      coordinate: { latitude: 18.5355, longitude: -72.3460 },
+      coordinate: { latitude: 18.5355, longitude: -72.346 },
       recentProducts: [
-        { id: 'pp7', title: 'MacBook Air M2', price: '95 000', image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&q=80' },
-        { id: 'pp8', title: 'AirPods Pro', price: '18 000', image: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=200&q=80' },
+        {
+          id: 'pp7',
+          title: 'MacBook Air M2',
+          price: '95 000',
+          image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&q=80',
+        },
+        {
+          id: 'pp8',
+          title: 'AirPods Pro',
+          price: '18 000',
+          image: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=200&q=80',
+        },
       ],
     },
   ]);
@@ -295,12 +335,21 @@ const MapScreen = ({ navigation }) => {
     if (showFilterModal) {
       Animated.parallel([
         Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-        Animated.spring(slideAnim, { toValue: 0, tension: 65, friction: 11, useNativeDriver: true }),
+        Animated.spring(slideAnim, {
+          toValue: 0,
+          tension: 65,
+          friction: 11,
+          useNativeDriver: true,
+        }),
       ]).start();
     } else {
       Animated.parallel([
         Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }),
-        Animated.timing(slideAnim, { toValue: SCREEN_HEIGHT, duration: 200, useNativeDriver: true }),
+        Animated.timing(slideAnim, {
+          toValue: SCREEN_HEIGHT,
+          duration: 200,
+          useNativeDriver: true,
+        }),
       ]).start();
     }
   }, [showFilterModal]);
@@ -309,12 +358,21 @@ const MapScreen = ({ navigation }) => {
     if (showDetailModal) {
       Animated.parallel([
         Animated.timing(detailFadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-        Animated.spring(detailSlideAnim, { toValue: 0, tension: 65, friction: 11, useNativeDriver: true }),
+        Animated.spring(detailSlideAnim, {
+          toValue: 0,
+          tension: 65,
+          friction: 11,
+          useNativeDriver: true,
+        }),
       ]).start();
     } else {
       Animated.parallel([
         Animated.timing(detailFadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }),
-        Animated.timing(detailSlideAnim, { toValue: SCREEN_HEIGHT, duration: 200, useNativeDriver: true }),
+        Animated.timing(detailSlideAnim, {
+          toValue: SCREEN_HEIGHT,
+          duration: 200,
+          useNativeDriver: true,
+        }),
       ]).start();
     }
   }, [showDetailModal]);
@@ -548,14 +606,19 @@ const MapScreen = ({ navigation }) => {
                 <View style={styles.productDetailRow}>
                   <Image source={{ uri: selectedMarker.image }} style={styles.productDetailImage} />
                   <View style={styles.productDetailInfo}>
-                    <Text style={[styles.productDetailTitle, { color: colors.text }]} numberOfLines={2}>
+                    <Text
+                      style={[styles.productDetailTitle, { color: colors.text }]}
+                      numberOfLines={2}
+                    >
                       {selectedMarker.title}
                     </Text>
                     <Text style={styles.productDetailPrice}>
                       {selectedMarker.price} {selectedMarker.currency}
                     </Text>
                     <View style={styles.productDetailMeta}>
-                      <Text style={[styles.productDetailCondition, { color: colors.textSecondary }]}>
+                      <Text
+                        style={[styles.productDetailCondition, { color: colors.textSecondary }]}
+                      >
                         {selectedMarker.condition}
                       </Text>
                       <View style={styles.ratingBadge}>
@@ -568,16 +631,24 @@ const MapScreen = ({ navigation }) => {
 
                 <TouchableOpacity style={styles.sellerRow} onPress={handleProfilePress}>
                   <Image source={{ uri: selectedMarker.sellerImage }} style={styles.sellerAvatar} />
-                  <Text style={[styles.sellerName, { color: colors.text }]}>{selectedMarker.seller}</Text>
+                  <Text style={[styles.sellerName, { color: colors.text }]}>
+                    {selectedMarker.seller}
+                  </Text>
                   {selectedMarker.sellerVerified && <VerifiedCheckFill color="#3B82F6" size={14} />}
                 </TouchableOpacity>
 
                 <View style={styles.detailActions}>
                   <TouchableOpacity
-                    style={[styles.actionButton, styles.secondaryButton, { borderColor: colors.border }]}
+                    style={[
+                      styles.actionButton,
+                      styles.secondaryButton,
+                      { borderColor: colors.border },
+                    ]}
                     onPress={handleMessage}
                   >
-                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>Message</Text>
+                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
+                      Message
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.primaryButton]}
@@ -593,7 +664,9 @@ const MapScreen = ({ navigation }) => {
               <View style={styles.detailBody}>
                 <TouchableOpacity style={styles.authorRow} onPress={handleProfilePress}>
                   <Image source={{ uri: selectedMarker.authorImage }} style={styles.authorAvatar} />
-                  <Text style={[styles.authorName, { color: colors.text }]}>{selectedMarker.author}</Text>
+                  <Text style={[styles.authorName, { color: colors.text }]}>
+                    {selectedMarker.author}
+                  </Text>
                   {selectedMarker.authorVerified && <VerifiedCheckFill color="#3B82F6" size={14} />}
                 </TouchableOpacity>
 
@@ -610,10 +683,16 @@ const MapScreen = ({ navigation }) => {
 
                 <View style={styles.detailActions}>
                   <TouchableOpacity
-                    style={[styles.actionButton, styles.secondaryButton, { borderColor: colors.border }]}
+                    style={[
+                      styles.actionButton,
+                      styles.secondaryButton,
+                      { borderColor: colors.border },
+                    ]}
                     onPress={handleMessage}
                   >
-                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>Message</Text>
+                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
+                      Message
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.primaryButton]}
@@ -638,19 +717,29 @@ const MapScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.sellerStats}>
                       <View style={styles.statItem}>
-                        <Text style={[styles.statValue, { color: colors.text }]}>{selectedMarker.products}</Text>
-                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Produits</Text>
+                        <Text style={[styles.statValue, { color: colors.text }]}>
+                          {selectedMarker.products}
+                        </Text>
+                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
+                          Produits
+                        </Text>
                       </View>
                       <View style={styles.statItem}>
-                        <Text style={[styles.statValue, { color: colors.text }]}>{selectedMarker.sales}</Text>
-                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Ventes</Text>
+                        <Text style={[styles.statValue, { color: colors.text }]}>
+                          {selectedMarker.sales}
+                        </Text>
+                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
+                          Ventes
+                        </Text>
                       </View>
                       <View style={styles.statItem}>
                         <View style={styles.ratingBadge}>
                           <StarSolid color="#FFA500" size={12} />
                           <Text style={styles.ratingText}>{selectedMarker.rating}</Text>
                         </View>
-                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Note</Text>
+                        <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
+                          Note
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -658,10 +747,16 @@ const MapScreen = ({ navigation }) => {
 
                 <View style={styles.detailActions}>
                   <TouchableOpacity
-                    style={[styles.actionButton, styles.secondaryButton, { borderColor: colors.border }]}
+                    style={[
+                      styles.actionButton,
+                      styles.secondaryButton,
+                      { borderColor: colors.border },
+                    ]}
                     onPress={handleMessage}
                   >
-                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>Message</Text>
+                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
+                      Message
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.primaryButton]}
@@ -714,8 +809,14 @@ const MapScreen = ({ navigation }) => {
                           style={styles.recentProductCard}
                           onPress={() => handleRecentProductPress(product)}
                         >
-                          <Image source={{ uri: product.image }} style={styles.recentProductImage} />
-                          <Text style={[styles.recentProductTitle, { color: colors.text }]} numberOfLines={1}>
+                          <Image
+                            source={{ uri: product.image }}
+                            style={styles.recentProductImage}
+                          />
+                          <Text
+                            style={[styles.recentProductTitle, { color: colors.text }]}
+                            numberOfLines={1}
+                          >
                             {product.title}
                           </Text>
                           <Text style={styles.recentProductPrice}>{product.price} HTG</Text>
@@ -727,10 +828,16 @@ const MapScreen = ({ navigation }) => {
 
                 <View style={styles.detailActions}>
                   <TouchableOpacity
-                    style={[styles.actionButton, styles.secondaryButton, { borderColor: colors.border }]}
+                    style={[
+                      styles.actionButton,
+                      styles.secondaryButton,
+                      { borderColor: colors.border },
+                    ]}
                     onPress={handleMessage}
                   >
-                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>Message</Text>
+                    <Text style={[styles.secondaryButtonText, { color: colors.text }]}>
+                      Message
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, styles.primaryButton]}
@@ -749,7 +856,7 @@ const MapScreen = ({ navigation }) => {
 
   const defaultRegion = {
     latitude: 18.5392,
-    longitude: -72.3380,
+    longitude: -72.338,
     latitudeDelta: 0.05,
     longitudeDelta: 0.05,
   };
@@ -867,9 +974,7 @@ const MapScreen = ({ navigation }) => {
 
             <ScrollView style={styles.filterScroll} showsVerticalScrollIndicator={false}>
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Types de marqueurs
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Types de marqueurs</Text>
                 <View style={styles.filterOptionsRow}>
                   <TouchableOpacity
                     style={[
@@ -936,7 +1041,10 @@ const MapScreen = ({ navigation }) => {
                     ]}
                     onPress={() => setFilters({ ...filters, showPartners: !filters.showPartners })}
                   >
-                    <HandshakeSimple color={filters.showPartners ? '#FFFFFF' : colors.text} size={14} />
+                    <HandshakeSimple
+                      color={filters.showPartners ? '#FFFFFF' : colors.text}
+                      size={14}
+                    />
                     <Text
                       style={[
                         styles.filterOptionText,
@@ -950,9 +1058,7 @@ const MapScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Distance (km)
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Distance (km)</Text>
                 <View style={styles.filterOptionsRow}>
                   {['Tous', '1', '5', '10', '20', '50+'].map((dist) => (
                     <TouchableOpacity
@@ -960,8 +1066,7 @@ const MapScreen = ({ navigation }) => {
                       style={[
                         styles.filterOption,
                         {
-                          backgroundColor:
-                            filters.distance === dist ? colors.text : colors.inputBg,
+                          backgroundColor: filters.distance === dist ? colors.text : colors.inputBg,
                         },
                       ]}
                       onPress={() => setFilters({ ...filters, distance: dist })}
@@ -970,8 +1075,7 @@ const MapScreen = ({ navigation }) => {
                         style={[
                           styles.filterOptionText,
                           {
-                            color:
-                              filters.distance === dist ? colors.background : colors.text,
+                            color: filters.distance === dist ? colors.background : colors.text,
                           },
                         ]}
                       >
@@ -983,43 +1087,47 @@ const MapScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Catégories
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Catégories</Text>
                 <View style={styles.filterOptionsRow}>
-                  {['Tous', 'Vêtements', 'Chaussures', 'Sacs', 'Accessoires', 'Électronique', 'Bijoux'].map(
-                    (cat) => (
-                      <TouchableOpacity
-                        key={cat}
+                  {[
+                    'Tous',
+                    'Vêtements',
+                    'Chaussures',
+                    'Sacs',
+                    'Accessoires',
+                    'Électronique',
+                    'Bijoux',
+                  ].map((cat) => (
+                    <TouchableOpacity
+                      key={cat}
+                      style={[
+                        styles.filterOption,
+                        {
+                          backgroundColor:
+                            filters.categories.includes(cat) ||
+                            (cat === 'Tous' && filters.categories.length === 0)
+                              ? colors.text
+                              : colors.inputBg,
+                        },
+                      ]}
+                      onPress={() => toggleFilterArray('categories', cat)}
+                    >
+                      <Text
                         style={[
-                          styles.filterOption,
+                          styles.filterOptionText,
                           {
-                            backgroundColor:
+                            color:
                               filters.categories.includes(cat) ||
                               (cat === 'Tous' && filters.categories.length === 0)
-                                ? colors.text
-                                : colors.inputBg,
+                                ? colors.background
+                                : colors.text,
                           },
                         ]}
-                        onPress={() => toggleFilterArray('categories', cat)}
                       >
-                        <Text
-                          style={[
-                            styles.filterOptionText,
-                            {
-                              color:
-                                filters.categories.includes(cat) ||
-                                (cat === 'Tous' && filters.categories.length === 0)
-                                  ? colors.background
-                                  : colors.text,
-                            },
-                          ]}
-                        >
-                          {cat}
-                        </Text>
-                      </TouchableOpacity>
-                    )
-                  )}
+                        {cat}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
                 </View>
               </View>
 
@@ -1045,10 +1153,7 @@ const MapScreen = ({ navigation }) => {
                           style={[
                             styles.filterOptionText,
                             {
-                              color:
-                                filters.priceRange === range
-                                  ? colors.background
-                                  : colors.text,
+                              color: filters.priceRange === range ? colors.background : colors.text,
                             },
                           ]}
                         >
@@ -1098,9 +1203,7 @@ const MapScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Note minimum
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Note minimum</Text>
                 <View style={styles.filterOptionsRow}>
                   {['Tous', '3', '4', '4.5'].map((rating) => (
                     <TouchableOpacity
@@ -1108,8 +1211,7 @@ const MapScreen = ({ navigation }) => {
                       style={[
                         styles.filterOption,
                         {
-                          backgroundColor:
-                            filters.rating === rating ? colors.text : colors.inputBg,
+                          backgroundColor: filters.rating === rating ? colors.text : colors.inputBg,
                         },
                       ]}
                       onPress={() => setFilters({ ...filters, rating: rating })}
@@ -1119,8 +1221,7 @@ const MapScreen = ({ navigation }) => {
                           style={[
                             styles.filterOptionText,
                             {
-                              color:
-                                filters.rating === rating ? colors.background : colors.text,
+                              color: filters.rating === rating ? colors.background : colors.text,
                             },
                           ]}
                         >
@@ -1132,8 +1233,7 @@ const MapScreen = ({ navigation }) => {
                             style={[
                               styles.filterOptionText,
                               {
-                                color:
-                                  filters.rating === rating ? colors.background : colors.text,
+                                color: filters.rating === rating ? colors.background : colors.text,
                                 marginRight: 4,
                               },
                             ]}
@@ -1165,9 +1265,7 @@ const MapScreen = ({ navigation }) => {
                 style={[styles.filterResetButton, { borderColor: colors.border }]}
                 onPress={resetFilters}
               >
-                <Text style={[styles.filterResetText, { color: colors.text }]}>
-                  Réinitialiser
-                </Text>
+                <Text style={[styles.filterResetText, { color: colors.text }]}>Réinitialiser</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.filterApplyButton, { backgroundColor: colors.text }]}

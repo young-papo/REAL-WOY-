@@ -156,7 +156,7 @@ const MessagesScreen = ({ navigation }) => {
         profileImage: 'https://i.pravatar.cc/150?img=15',
         verified: false,
       },
-      lastMessage: 'Super ! Merci pour l\'info',
+      lastMessage: "Super ! Merci pour l'info",
       timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
       unreadCount: 0,
       favorite: true,
@@ -313,7 +313,7 @@ const MessagesScreen = ({ navigation }) => {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 1) return 'vu à l\'instant';
+    if (diffMins < 1) return "vu à l'instant";
     if (diffMins < 60) return `vu il y a ${diffMins} min`;
     if (diffHours < 24) return `vu il y a ${diffHours}h`;
     if (diffDays === 1) return 'vu hier';
@@ -360,12 +360,8 @@ const MessagesScreen = ({ navigation }) => {
   const handlePinConversation = () => {
     if (!longPressedItem) return;
 
-    setConversations(prev =>
-      prev.map(c =>
-        c.id === longPressedItem.id
-          ? { ...c, isPinned: !c.isPinned }
-          : c
-      )
+    setConversations((prev) =>
+      prev.map((c) => (c.id === longPressedItem.id ? { ...c, isPinned: !c.isPinned } : c))
     );
     setShowActionModal(false);
     setLongPressedItem(null);
@@ -374,12 +370,8 @@ const MessagesScreen = ({ navigation }) => {
   const handleFavoriteConversation = () => {
     if (!longPressedItem) return;
 
-    setConversations(prev =>
-      prev.map(c =>
-        c.id === longPressedItem.id
-          ? { ...c, favorite: !c.favorite }
-          : c
-      )
+    setConversations((prev) =>
+      prev.map((c) => (c.id === longPressedItem.id ? { ...c, favorite: !c.favorite } : c))
     );
     setShowActionModal(false);
     setLongPressedItem(null);
@@ -388,7 +380,7 @@ const MessagesScreen = ({ navigation }) => {
   const handleDeleteConversation = () => {
     if (!longPressedItem) return;
 
-    setConversations(prev => prev.filter(c => c.id !== longPressedItem.id));
+    setConversations((prev) => prev.filter((c) => c.id !== longPressedItem.id));
     setShowActionModal(false);
     setLongPressedItem(null);
   };
@@ -423,21 +415,22 @@ const MessagesScreen = ({ navigation }) => {
     });
 
     if (filterType === 'unread') {
-      filtered = filtered.filter(c => c.unreadCount > 0);
+      filtered = filtered.filter((c) => c.unreadCount > 0);
     } else if (filterType === 'favorite') {
-      filtered = filtered.filter(c => c.favorite);
+      filtered = filtered.filter((c) => c.favorite);
     } else if (filterType === 'offers') {
-      filtered = filtered.filter(c => c.hasOffer);
+      filtered = filtered.filter((c) => c.hasOffer);
     } else if (filterType === 'online') {
-      filtered = filtered.filter(c => c.isOnline);
+      filtered = filtered.filter((c) => c.isOnline);
     } else if (filterType === 'verified') {
-      filtered = filtered.filter(c => c.user.verified);
+      filtered = filtered.filter((c) => c.user.verified);
     }
 
     if (searchText) {
-      filtered = filtered.filter(c =>
-        c.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
-        c.lastMessage.toLowerCase().includes(searchText.toLowerCase())
+      filtered = filtered.filter(
+        (c) =>
+          c.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+          c.lastMessage.toLowerCase().includes(searchText.toLowerCase())
       );
     }
 
@@ -448,7 +441,7 @@ const MessagesScreen = ({ navigation }) => {
     let filtered = suggestions;
 
     if (newMessageSearch) {
-      filtered = filtered.filter(s =>
+      filtered = filtered.filter((s) =>
         s.username.toLowerCase().includes(newMessageSearch.toLowerCase())
       );
     }
@@ -465,7 +458,12 @@ const MessagesScreen = ({ navigation }) => {
       <View style={[styles.skeletonCircle, { backgroundColor: colors.skeletonBg }]} />
       <View style={styles.conversationMiddle}>
         <View style={[styles.skeletonLine, { width: '40%', backgroundColor: colors.skeletonBg }]} />
-        <View style={[styles.skeletonLine, { width: '80%', marginTop: 8, backgroundColor: colors.skeletonBg }]} />
+        <View
+          style={[
+            styles.skeletonLine,
+            { width: '80%', marginTop: 8, backgroundColor: colors.skeletonBg },
+          ]}
+        />
       </View>
     </View>
   );
@@ -485,13 +483,15 @@ const MessagesScreen = ({ navigation }) => {
           <View style={styles.profileImageContainer}>
             <Image source={{ uri: item.user.profileImage }} style={styles.profileImage} />
             {item.isOnline && (
-              <View style={[
-                styles.onlineDot,
-                {
-                  backgroundColor: colors.text,
-                  borderColor: isDarkMode ? '#000000' : '#FFFFFF'
-                }
-              ]} />
+              <View
+                style={[
+                  styles.onlineDot,
+                  {
+                    backgroundColor: colors.text,
+                    borderColor: isDarkMode ? '#000000' : '#FFFFFF',
+                  },
+                ]}
+              />
             )}
           </View>
 
@@ -510,12 +510,16 @@ const MessagesScreen = ({ navigation }) => {
               </View>
               <View style={styles.timestampRow}>
                 {item.isPinned && <PinFill color={colors.text} size={12} />}
-                <Text style={[styles.timestamp, { color: colors.textSecondary }]}>{getTimeAgo(item.timestamp)}</Text>
+                <Text style={[styles.timestamp, { color: colors.textSecondary }]}>
+                  {getTimeAgo(item.timestamp)}
+                </Text>
               </View>
             </View>
 
             {item.isTyping ? (
-              <Text style={[styles.typingIndicator, { color: colors.text }]}>en train d'écrire...</Text>
+              <Text style={[styles.typingIndicator, { color: colors.text }]}>
+                en train d'écrire...
+              </Text>
             ) : (
               <>
                 {!item.hasOffer && (
@@ -525,7 +529,7 @@ const MessagesScreen = ({ navigation }) => {
                       style={[
                         styles.lastMessage,
                         { color: colors.textSecondary },
-                        item.unreadCount > 0 && { fontWeight: '600', color: colors.text }
+                        item.unreadCount > 0 && { fontWeight: '600', color: colors.text },
                       ]}
                       numberOfLines={1}
                     >
@@ -538,7 +542,10 @@ const MessagesScreen = ({ navigation }) => {
                   <View style={styles.productInfo}>
                     <Image source={{ uri: item.product.image }} style={styles.productThumbnail} />
                     <View style={styles.productTextInfo}>
-                      <Text style={[styles.productTitle, { color: colors.textSecondary }]} numberOfLines={1}>
+                      <Text
+                        style={[styles.productTitle, { color: colors.textSecondary }]}
+                        numberOfLines={1}
+                      >
                         {item.product.title}
                       </Text>
                       {item.product.offer ? (
@@ -546,7 +553,10 @@ const MessagesScreen = ({ navigation }) => {
                           Offre: {item.product.offer}
                         </Text>
                       ) : item.product.messageText ? (
-                        <Text style={[styles.productMessage, { color: colors.textSecondary }]} numberOfLines={1}>
+                        <Text
+                          style={[styles.productMessage, { color: colors.textSecondary }]}
+                          numberOfLines={1}
+                        >
                           {item.product.messageText}
                         </Text>
                       ) : null}
@@ -582,7 +592,11 @@ const MessagesScreen = ({ navigation }) => {
           {item.verified && <VerifiedCheckFill color="#3B82F6" size={14} />}
         </View>
         <Text style={[styles.suggestionSubtext, { color: colors.textSecondary }]}>
-          {item.isFollowing && item.lastMessage ? 'Abonné • Message récent' : item.isFollowing ? 'Abonné' : 'Suggéré'}
+          {item.isFollowing && item.lastMessage
+            ? 'Abonné • Message récent'
+            : item.isFollowing
+              ? 'Abonné'
+              : 'Suggéré'}
         </Text>
       </View>
     </TouchableOpacity>
@@ -590,22 +604,35 @@ const MessagesScreen = ({ navigation }) => {
 
   const filteredConversations = getFilteredConversations();
   const filteredSuggestions = getFilteredSuggestions();
-  const pinnedCount = conversations.filter(c => c.isPinned).length;
+  const pinnedCount = conversations.filter((c) => c.isPinned).length;
 
   // Masquer les filtres vides
   const availableFilters = [
     { key: 'all', label: 'Tous', count: conversations.length },
-    { key: 'unread', label: 'Non lus', count: conversations.filter(c => c.unreadCount > 0).length },
-    { key: 'offers', label: 'Offres', count: conversations.filter(c => c.hasOffer).length },
-    { key: 'online', label: 'En ligne', count: conversations.filter(c => c.isOnline).length },
-    { key: 'favorite', label: 'Favoris', count: conversations.filter(c => c.favorite).length },
-    { key: 'verified', label: 'Vérifié', count: conversations.filter(c => c.user.verified).length },
-  ].filter(f => f.count > 0);
+    {
+      key: 'unread',
+      label: 'Non lus',
+      count: conversations.filter((c) => c.unreadCount > 0).length,
+    },
+    { key: 'offers', label: 'Offres', count: conversations.filter((c) => c.hasOffer).length },
+    { key: 'online', label: 'En ligne', count: conversations.filter((c) => c.isOnline).length },
+    { key: 'favorite', label: 'Favoris', count: conversations.filter((c) => c.favorite).length },
+    {
+      key: 'verified',
+      label: 'Vérifié',
+      count: conversations.filter((c) => c.user.verified).length,
+    },
+  ].filter((f) => f.count > 0);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Modal Nouveau Message */}
-      <Modal visible={showNewMessageModal} transparent={true} animationType="none" onRequestClose={() => setShowNewMessageModal(false)}>
+      <Modal
+        visible={showNewMessageModal}
+        transparent={true}
+        animationType="none"
+        onRequestClose={() => setShowNewMessageModal(false)}
+      >
         <View style={styles.modalContainer}>
           <Animated.View style={[styles.modalOverlay, { opacity: fadeAnim }]}>
             <TouchableOpacity
@@ -615,14 +642,16 @@ const MessagesScreen = ({ navigation }) => {
             />
           </Animated.View>
 
-          <Animated.View style={[
-            styles.modalContent,
-            { backgroundColor: colors.background },
-            {
-              transform: [{ translateY: slideAnim }],
-              bottom: keyboardHeight
-            }
-          ]}>
+          <Animated.View
+            style={[
+              styles.modalContent,
+              { backgroundColor: colors.background },
+              {
+                transform: [{ translateY: slideAnim }],
+                bottom: keyboardHeight,
+              },
+            ]}
+          >
             <View style={[styles.modalHeader, { borderBottomColor: colors.border }]}>
               <Text style={[styles.modalTitle, { color: colors.text }]}>Nouveau message</Text>
               <TouchableOpacity onPress={() => setShowNewMessageModal(false)}>
@@ -632,7 +661,10 @@ const MessagesScreen = ({ navigation }) => {
 
             <View style={styles.modalSearchBar}>
               <TextInput
-                style={[styles.modalSearchInput, { backgroundColor: colors.searchBg, color: colors.text }]}
+                style={[
+                  styles.modalSearchInput,
+                  { backgroundColor: colors.searchBg, color: colors.text },
+                ]}
                 placeholder="Rechercher un correspondant..."
                 placeholderTextColor={colors.textSecondary}
                 value={newMessageSearch}
@@ -660,7 +692,12 @@ const MessagesScreen = ({ navigation }) => {
       </Modal>
 
       {/* Modal Actions */}
-      <Modal visible={showActionModal} transparent={true} animationType="fade" onRequestClose={() => setShowActionModal(false)}>
+      <Modal
+        visible={showActionModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowActionModal(false)}
+      >
         <TouchableOpacity
           style={styles.actionModalOverlay}
           activeOpacity={1}
@@ -668,10 +705,7 @@ const MessagesScreen = ({ navigation }) => {
         >
           <View style={[styles.actionModal, { backgroundColor: colors.background }]}>
             {(pinnedCount < 3 || longPressedItem?.isPinned) && (
-              <TouchableOpacity
-                style={styles.actionModalButton}
-                onPress={handlePinConversation}
-              >
+              <TouchableOpacity style={styles.actionModalButton} onPress={handlePinConversation}>
                 <PinFill color={colors.text} size={20} />
                 <Text style={[styles.actionModalButtonText, { color: colors.text }]}>
                   {longPressedItem?.isPinned ? 'Désépingler' : 'Épingler'}
@@ -679,20 +713,14 @@ const MessagesScreen = ({ navigation }) => {
               </TouchableOpacity>
             )}
 
-            <TouchableOpacity
-              style={styles.actionModalButton}
-              onPress={handleFavoriteConversation}
-            >
+            <TouchableOpacity style={styles.actionModalButton} onPress={handleFavoriteConversation}>
               <Heart color={colors.text} size={20} />
               <Text style={[styles.actionModalButtonText, { color: colors.text }]}>
                 {longPressedItem?.favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.actionModalButton}
-              onPress={handleDeleteConversation}
-            >
+            <TouchableOpacity style={styles.actionModalButton} onPress={handleDeleteConversation}>
               <Trash color="#EF4444" size={20} />
               <Text style={[styles.actionModalButtonText, { color: '#EF4444' }]}>Supprimer</Text>
             </TouchableOpacity>
@@ -700,7 +728,16 @@ const MessagesScreen = ({ navigation }) => {
         </TouchableOpacity>
       </Modal>
 
-      <View style={[styles.searchBar, { borderBottomColor: colors.border, backgroundColor: colors.background, paddingTop: insets.top + 10 }]}>
+      <View
+        style={[
+          styles.searchBar,
+          {
+            borderBottomColor: colors.border,
+            backgroundColor: colors.background,
+            paddingTop: insets.top + 10,
+          },
+        ]}
+      >
         <View style={[styles.searchInputContainer, { backgroundColor: colors.searchBg }]}>
           <TextInput
             style={[styles.searchInput, { color: colors.text }]}
@@ -722,27 +759,39 @@ const MessagesScreen = ({ navigation }) => {
       </View>
 
       {availableFilters.length > 0 && (
-        <View style={[styles.filtersContainer, { borderBottomColor: conversations.length === 0 ? 'transparent' : colors.border }]}>
+        <View
+          style={[
+            styles.filtersContainer,
+            { borderBottomColor: conversations.length === 0 ? 'transparent' : colors.border },
+          ]}
+        >
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.filtersList}
           >
-            {availableFilters.map(filter => (
+            {availableFilters.map((filter) => (
               <TouchableOpacity
                 key={filter.key}
                 style={[
                   styles.filterButton,
                   { borderColor: colors.border, backgroundColor: colors.background },
-                  filterType === filter.key && { backgroundColor: colors.text, borderColor: colors.text }
+                  filterType === filter.key && {
+                    backgroundColor: colors.text,
+                    borderColor: colors.text,
+                  },
                 ]}
                 onPress={() => handleFilterSelect(filter.key)}
               >
-                <Text style={[
-                  styles.filterButtonText,
-                  { color: colors.textSecondary },
-                  filterType === filter.key && { color: colors.background }
-                ]}>{filter.label}</Text>
+                <Text
+                  style={[
+                    styles.filterButtonText,
+                    { color: colors.textSecondary },
+                    filterType === filter.key && { color: colors.background },
+                  ]}
+                >
+                  {filter.label}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -751,7 +800,7 @@ const MessagesScreen = ({ navigation }) => {
 
       {isLoading ? (
         <View>
-          {[1, 2, 3, 4, 5].map(i => (
+          {[1, 2, 3, 4, 5].map((i) => (
             <View key={i}>{renderSkeletonItem()}</View>
           ))}
         </View>
@@ -767,7 +816,9 @@ const MessagesScreen = ({ navigation }) => {
         <View style={styles.emptyState}>
           <MessageDotsFill color={colors.emptyText} size={64} />
           <Text style={[styles.emptyStateText, { color: colors.emptyText }]}>
-            {searchText ? 'Aucun résultat' : 'Tes messages apparaîtront ici. Commence une discussion.'}
+            {searchText
+              ? 'Aucun résultat'
+              : 'Tes messages apparaîtront ici. Commence une discussion.'}
           </Text>
         </View>
       )}

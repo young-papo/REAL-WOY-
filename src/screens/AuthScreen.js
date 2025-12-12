@@ -142,7 +142,8 @@ const InputField = ({
   <Animated.View
     entering={FadeIn.duration(300)}
     exiting={FadeOut.duration(200)}
-    style={styles.fieldContainer}>
+    style={styles.fieldContainer}
+  >
     <View style={styles.labelRow}>
       <View style={styles.labelWithIcon}>
         <Text style={[styles.label, { color: colors.text }]}>{label}</Text>
@@ -156,7 +157,8 @@ const InputField = ({
           backgroundColor: colors.inputBg,
           borderColor: error ? colors.error : colors.inputBorder,
         },
-      ]}>
+      ]}
+    >
       <Icon color={colors.textSecondary} size={22} />
       <TextInput
         style={[styles.input, { color: colors.text }]}
@@ -183,17 +185,13 @@ const InputField = ({
     {error && (
       <View style={styles.messageContainer}>
         <Ionicons name="close-circle" size={14} color={colors.error} />
-        <Text style={[styles.messageText, { color: colors.error }]}>
-          {error}
-        </Text>
+        <Text style={[styles.messageText, { color: colors.error }]}>{error}</Text>
       </View>
     )}
     {success && (
       <View style={styles.messageContainer}>
         <Ionicons name="checkmark-circle" size={14} color={colors.success} />
-        <Text style={[styles.messageText, { color: colors.success }]}>
-          {success}
-        </Text>
+        <Text style={[styles.messageText, { color: colors.success }]}>{success}</Text>
       </View>
     )}
   </Animated.View>
@@ -213,32 +211,24 @@ const SexeSelector = ({ value, onChange, colors }) => (
           key={option}
           style={styles.sexeOption}
           onPress={() => onChange(option.toLowerCase())}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+        >
           <View
             style={[
               styles.customCheckbox,
               {
                 backgroundColor:
-                  value === option.toLowerCase()
-                    ? colors.checkbox
-                    : colors.checkboxUnchecked,
+                  value === option.toLowerCase() ? colors.checkbox : colors.checkboxUnchecked,
                 borderColor:
-                  value === option.toLowerCase()
-                    ? colors.checkbox
-                    : colors.checkboxUnchecked,
+                  value === option.toLowerCase() ? colors.checkbox : colors.checkboxUnchecked,
               },
-            ]}>
+            ]}
+          >
             {value === option.toLowerCase() && (
-              <Ionicons
-                name="checkmark"
-                size={16}
-                color={colors.checkboxText}
-              />
+              <Ionicons name="checkmark" size={16} color={colors.checkboxText} />
             )}
           </View>
-          <Text style={[styles.sexeLabel, { color: colors.text }]}>
-            {option}
-          </Text>
+          <Text style={[styles.sexeLabel, { color: colors.text }]}>{option}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -371,9 +361,7 @@ export default function AuthScreen({ navigation }) {
 
   const handleEmailChange = (text) => {
     setEmail(text);
-    setEmailError(
-      text.length > 0 && !validateEmail(text) ? 'Email invalide' : ''
-    );
+    setEmailError(text.length > 0 && !validateEmail(text) ? 'Email invalide' : '');
   };
 
   // ========================================
@@ -391,9 +379,7 @@ export default function AuthScreen({ navigation }) {
   const handlePasswordChange = (text) => {
     setPassword(text);
     if (mode === 'login') {
-      setPasswordError(
-        text.length > 0 && text.length < 8 ? 'Minimum 8 caractères' : ''
-      );
+      setPasswordError(text.length > 0 && text.length < 8 ? 'Minimum 8 caractères' : '');
     } else {
       const errors = validatePassword(text);
       setPasswordErrors(errors);
@@ -566,16 +552,7 @@ export default function AuthScreen({ navigation }) {
       dateError === '' &&
       agreeTerms === true
     );
-  }, [
-    pseudo,
-    pseudoAvailable,
-    pseudoError,
-    nom,
-    prenom,
-    sexe,
-    dateError,
-    agreeTerms,
-  ]);
+  }, [pseudo, pseudoAvailable, pseudoError, nom, prenom, sexe, dateError, agreeTerms]);
 
   // ========================================
   // ACTIONS
@@ -672,14 +649,9 @@ export default function AuthScreen({ navigation }) {
   // ========================================
 
   const renderLoginForm = () => (
-    <Animated.View
-      key="login"
-      entering={FadeIn.duration(400)}
-      exiting={FadeOut.duration(200)}>
+    <Animated.View key="login" entering={FadeIn.duration(400)} exiting={FadeOut.duration(200)}>
       <Text style={[styles.title, { color: colors.text }]}>WOY</Text>
-      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        Se connecter
-      </Text>
+      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Se connecter</Text>
 
       <InputField
         label="Email"
@@ -716,75 +688,56 @@ export default function AuthScreen({ navigation }) {
         style={[
           styles.button,
           {
-            backgroundColor:
-              isLoginValid() && !loading
-                ? colors.button
-                : colors.buttonDisabled,
+            backgroundColor: isLoginValid() && !loading ? colors.button : colors.buttonDisabled,
           },
         ]}
         onPress={handleLogin}
-        disabled={!isLoginValid() || loading}>
+        disabled={!isLoginValid() || loading}
+      >
         {loading ? (
           <ActivityIndicator color={colors.buttonText} />
         ) : (
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Se connecter
-          </Text>
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>Se connecter</Text>
         )}
       </TouchableOpacity>
 
       <View style={styles.separatorContainer}>
-        <View
-          style={[styles.separatorLine, { backgroundColor: colors.border }]}
-        />
-        <Text style={[styles.separatorText, { color: colors.textSecondary }]}>
-          ou
-        </Text>
-        <View
-          style={[styles.separatorLine, { backgroundColor: colors.border }]}
-        />
+        <View style={[styles.separatorLine, { backgroundColor: colors.border }]} />
+        <Text style={[styles.separatorText, { color: colors.textSecondary }]}>ou</Text>
+        <View style={[styles.separatorLine, { backgroundColor: colors.border }]} />
       </View>
 
       <View style={styles.socialContainer}>
         <TouchableOpacity
           style={[styles.socialButton, { borderColor: colors.border }]}
-          onPress={handleGoogleAuth}>
+          onPress={handleGoogleAuth}
+        >
           <Google />
-          <Text style={[styles.socialText, { color: colors.text }]}>
-            Google
-          </Text>
+          <Text style={[styles.socialText, { color: colors.text }]}>Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.socialButton, { borderColor: colors.border }]}
-          onPress={handleAppleAuth}>
+          onPress={handleAppleAuth}
+        >
           <Ionicons name="logo-apple" size={22} color={colors.text} />
           <Text style={[styles.socialText, { color: colors.text }]}>Apple</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>
-        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          Pas de compte ?{' '}
-        </Text>
+        <Text style={[styles.footerText, { color: colors.textSecondary }]}>Pas de compte ? </Text>
         <TouchableOpacity onPress={() => changeMode('signup')}>
-          <Text style={[styles.linkText, { color: colors.text }]}>
-            S'inscrire
-          </Text>
+          <Text style={[styles.linkText, { color: colors.text }]}>S'inscrire</Text>
         </TouchableOpacity>
       </View>
     </Animated.View>
   );
 
   const renderSignupForm = () => (
-    <Animated.View
-      key="signup"
-      entering={FadeIn.duration(400)}
-      exiting={FadeOut.duration(200)}>
+    <Animated.View key="signup" entering={FadeIn.duration(400)} exiting={FadeOut.duration(200)}>
       <Text style={[styles.title, { color: colors.text }]}>WOY</Text>
-      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        S'inscrire
-      </Text>
+      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>S'inscrire</Text>
 
       <InputField
         label="Pseudo"
@@ -820,14 +773,10 @@ export default function AuthScreen({ navigation }) {
 
       <SexeSelector value={sexe} onChange={setSexe} colors={colors} />
 
-      <Animated.View
-        entering={FadeIn.duration(300)}
-        style={styles.fieldContainer}>
+      <Animated.View entering={FadeIn.duration(300)} style={styles.fieldContainer}>
         <View style={styles.labelRow}>
           <View style={styles.labelWithIcon}>
-            <Text style={[styles.label, { color: colors.text }]}>
-              Date de naissance
-            </Text>
+            <Text style={[styles.label, { color: colors.text }]}>Date de naissance</Text>
             <Text style={styles.required}>*</Text>
           </View>
         </View>
@@ -839,11 +788,10 @@ export default function AuthScreen({ navigation }) {
               backgroundColor: colors.inputBg,
               borderColor: dateError ? colors.error : colors.inputBorder,
             },
-          ]}>
+          ]}
+        >
           <Calendar color={colors.textSecondary} size={22} />
-          <Text style={[styles.dateText, { color: colors.text }]}>
-            {formatDate(dateNaissance)}
-          </Text>
+          <Text style={[styles.dateText, { color: colors.text }]}>{formatDate(dateNaissance)}</Text>
         </TouchableOpacity>
         {showDatePicker && (
           <DateTimePicker
@@ -857,9 +805,7 @@ export default function AuthScreen({ navigation }) {
         {dateError && (
           <View style={styles.messageContainer}>
             <Ionicons name="close-circle" size={14} color={colors.error} />
-            <Text style={[styles.messageText, { color: colors.error }]}>
-              {dateError}
-            </Text>
+            <Text style={[styles.messageText, { color: colors.error }]}>{dateError}</Text>
           </View>
         )}
       </Animated.View>
@@ -885,11 +831,7 @@ export default function AuthScreen({ navigation }) {
         secureTextEntry={!showPassword}
         toggleSecure={() => setShowPassword(!showPassword)}
         error={passwordErrors.length > 0 ? passwordErrors.join(', ') : ''}
-        success={
-          password.length > 0 &&
-          passwordErrors.length === 0 &&
-          'Mot de passe fort'
-        }
+        success={password.length > 0 && passwordErrors.length === 0 && 'Mot de passe fort'}
         required
         colors={colors}
       />
@@ -907,44 +849,33 @@ export default function AuthScreen({ navigation }) {
         colors={colors}
       />
 
-      <Animated.View
-        entering={FadeIn.duration(300)}
-        style={styles.checkboxContainer}>
-        <TouchableOpacity
-          onPress={() => setAgreeTerms(!agreeTerms)}
-          activeOpacity={0.7}>
+      <Animated.View entering={FadeIn.duration(300)} style={styles.checkboxContainer}>
+        <TouchableOpacity onPress={() => setAgreeTerms(!agreeTerms)} activeOpacity={0.7}>
           <View
             style={[
               styles.checkbox,
               {
-                backgroundColor: agreeTerms
-                  ? colors.checkbox
-                  : colors.checkboxUnchecked,
-                borderColor: agreeTerms
-                  ? colors.checkbox
-                  : colors.checkboxUnchecked,
+                backgroundColor: agreeTerms ? colors.checkbox : colors.checkboxUnchecked,
+                borderColor: agreeTerms ? colors.checkbox : colors.checkboxUnchecked,
               },
-            ]}>
-            {agreeTerms && (
-              <Ionicons
-                name="checkmark"
-                size={16}
-                color={colors.checkboxText}
-              />
-            )}
+            ]}
+          >
+            {agreeTerms && <Ionicons name="checkmark" size={16} color={colors.checkboxText} />}
           </View>
         </TouchableOpacity>
         <Text style={[styles.termsText, { color: colors.textSecondary }]}>
           J'accepte les{' '}
           <Text
             style={[styles.termsLink, { color: colors.text }]}
-            onPress={() => navigation && navigation.navigate('Terms')}>
+            onPress={() => navigation && navigation.navigate('Terms')}
+          >
             conditions d'utilisation
           </Text>{' '}
           et la{' '}
           <Text
             style={[styles.termsLink, { color: colors.text }]}
-            onPress={() => navigation && navigation.navigate('Privacy')}>
+            onPress={() => navigation && navigation.navigate('Privacy')}
+          >
             politique de confidentialité
           </Text>
           <Text style={styles.required}>*</Text>
@@ -955,71 +886,54 @@ export default function AuthScreen({ navigation }) {
         style={[
           styles.button,
           {
-            backgroundColor:
-              isSignupValid() && !loading
-                ? colors.button
-                : colors.buttonDisabled,
+            backgroundColor: isSignupValid() && !loading ? colors.button : colors.buttonDisabled,
           },
         ]}
         onPress={handleSignup}
-        disabled={!isSignupValid() || loading}>
+        disabled={!isSignupValid() || loading}
+      >
         {loading ? (
           <ActivityIndicator color={colors.buttonText} />
         ) : (
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            S'inscrire
-          </Text>
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>S'inscrire</Text>
         )}
       </TouchableOpacity>
 
       <View style={styles.separatorContainer}>
-        <View
-          style={[styles.separatorLine, { backgroundColor: colors.border }]}
-        />
-        <Text style={[styles.separatorText, { color: colors.textSecondary }]}>
-          ou
-        </Text>
-        <View
-          style={[styles.separatorLine, { backgroundColor: colors.border }]}
-        />
+        <View style={[styles.separatorLine, { backgroundColor: colors.border }]} />
+        <Text style={[styles.separatorText, { color: colors.textSecondary }]}>ou</Text>
+        <View style={[styles.separatorLine, { backgroundColor: colors.border }]} />
       </View>
 
       <View style={styles.socialContainer}>
         <TouchableOpacity
           style={[styles.socialButton, { borderColor: colors.border }]}
-          onPress={handleGoogleAuth}>
+          onPress={handleGoogleAuth}
+        >
           <Google />
-          <Text style={[styles.socialText, { color: colors.text }]}>
-            Google
-          </Text>
+          <Text style={[styles.socialText, { color: colors.text }]}>Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.socialButton, { borderColor: colors.border }]}
-          onPress={handleAppleAuth}>
+          onPress={handleAppleAuth}
+        >
           <Ionicons name="logo-apple" size={22} color={colors.text} />
           <Text style={[styles.socialText, { color: colors.text }]}>Apple</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>
-        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          Déjà un compte ?{' '}
-        </Text>
+        <Text style={[styles.footerText, { color: colors.textSecondary }]}>Déjà un compte ? </Text>
         <TouchableOpacity onPress={() => changeMode('login')}>
-          <Text style={[styles.linkText, { color: colors.text }]}>
-            Se connecter
-          </Text>
+          <Text style={[styles.linkText, { color: colors.text }]}>Se connecter</Text>
         </TouchableOpacity>
       </View>
     </Animated.View>
   );
 
   const renderForgotForm = () => (
-    <Animated.View
-      key="forgot"
-      entering={FadeIn.duration(400)}
-      exiting={FadeOut.duration(200)}>
+    <Animated.View key="forgot" entering={FadeIn.duration(400)} exiting={FadeOut.duration(200)}>
       <Text style={[styles.title, { color: colors.text }]}>WOY</Text>
       <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
         Réinitialiser le mot de passe
@@ -1044,34 +958,25 @@ export default function AuthScreen({ navigation }) {
         style={[
           styles.button,
           {
-            backgroundColor:
-              isForgotValid() && !loading
-                ? colors.button
-                : colors.buttonDisabled,
+            backgroundColor: isForgotValid() && !loading ? colors.button : colors.buttonDisabled,
           },
         ]}
         onPress={handleForgotPassword}
-        disabled={!isForgotValid() || loading}>
+        disabled={!isForgotValid() || loading}
+      >
         {loading ? (
           <ActivityIndicator color={colors.buttonText} />
         ) : (
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Envoyer
-          </Text>
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>Envoyer</Text>
         )}
       </TouchableOpacity>
     </Animated.View>
   );
 
   const renderOtpForm = () => (
-    <Animated.View
-      key="otp"
-      entering={FadeIn.duration(400)}
-      exiting={FadeOut.duration(200)}>
+    <Animated.View key="otp" entering={FadeIn.duration(400)} exiting={FadeOut.duration(200)}>
       <Text style={[styles.title, { color: colors.text }]}>WOY</Text>
-      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        Vérification OTP
-      </Text>
+      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>Vérification OTP</Text>
       <Text style={[styles.instruction, { color: colors.textSecondary }]}>
         Entrez le code à 6 chiffres envoyé à votre email
       </Text>
@@ -1092,15 +997,10 @@ export default function AuthScreen({ navigation }) {
       <View style={styles.resendContainer}>
         <TouchableOpacity onPress={handleResendOtp} disabled={!canResend}>
           <View style={styles.resendRow}>
-            <ClockFilled
-              color={canResend ? colors.text : colors.textSecondary}
-              size={22}
-            />
+            <ClockFilled color={canResend ? colors.text : colors.textSecondary} size={22} />
             <Text
-              style={[
-                styles.resendText,
-                { color: canResend ? colors.text : colors.textSecondary },
-              ]}>
+              style={[styles.resendText, { color: canResend ? colors.text : colors.textSecondary }]}
+            >
               Renvoyer le code {canResend ? '' : `(${resendTimer}s)`}
             </Text>
           </View>
@@ -1111,31 +1011,24 @@ export default function AuthScreen({ navigation }) {
         style={[
           styles.button,
           {
-            backgroundColor:
-              isOtpValid() && !loading ? colors.button : colors.buttonDisabled,
+            backgroundColor: isOtpValid() && !loading ? colors.button : colors.buttonDisabled,
           },
         ]}
         onPress={handleVerifyOtp}
-        disabled={!isOtpValid() || loading}>
+        disabled={!isOtpValid() || loading}
+      >
         {loading ? (
           <ActivityIndicator color={colors.buttonText} />
         ) : (
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Vérifier
-          </Text>
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>Vérifier</Text>
         )}
       </TouchableOpacity>
     </Animated.View>
   );
 
   const renderCompleteForm = () => (
-    <Animated.View
-      key="complete"
-      entering={FadeIn.duration(400)}
-      exiting={FadeOut.duration(200)}>
-      <Text style={[styles.title, { color: colors.text }]}>
-        Complétez votre profil
-      </Text>
+    <Animated.View key="complete" entering={FadeIn.duration(400)} exiting={FadeOut.duration(200)}>
+      <Text style={[styles.title, { color: colors.text }]}>Complétez votre profil</Text>
       <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
         Quelques informations supplémentaires
       </Text>
@@ -1174,14 +1067,10 @@ export default function AuthScreen({ navigation }) {
 
       <SexeSelector value={sexe} onChange={setSexe} colors={colors} />
 
-      <Animated.View
-        entering={FadeIn.duration(300)}
-        style={styles.fieldContainer}>
+      <Animated.View entering={FadeIn.duration(300)} style={styles.fieldContainer}>
         <View style={styles.labelRow}>
           <View style={styles.labelWithIcon}>
-            <Text style={[styles.label, { color: colors.text }]}>
-              Date de naissance
-            </Text>
+            <Text style={[styles.label, { color: colors.text }]}>Date de naissance</Text>
             <Text style={styles.required}>*</Text>
           </View>
         </View>
@@ -1193,11 +1082,10 @@ export default function AuthScreen({ navigation }) {
               backgroundColor: colors.inputBg,
               borderColor: dateError ? colors.error : colors.inputBorder,
             },
-          ]}>
+          ]}
+        >
           <Calendar color={colors.textSecondary} size={22} />
-          <Text style={[styles.dateText, { color: colors.text }]}>
-            {formatDate(dateNaissance)}
-          </Text>
+          <Text style={[styles.dateText, { color: colors.text }]}>{formatDate(dateNaissance)}</Text>
         </TouchableOpacity>
         {showDatePicker && (
           <DateTimePicker
@@ -1211,51 +1099,38 @@ export default function AuthScreen({ navigation }) {
         {dateError && (
           <View style={styles.messageContainer}>
             <Ionicons name="close-circle" size={14} color={colors.error} />
-            <Text style={[styles.messageText, { color: colors.error }]}>
-              {dateError}
-            </Text>
+            <Text style={[styles.messageText, { color: colors.error }]}>{dateError}</Text>
           </View>
         )}
       </Animated.View>
 
-      <Animated.View
-        entering={FadeIn.duration(300)}
-        style={styles.checkboxContainer}>
-        <TouchableOpacity
-          onPress={() => setAgreeTerms(!agreeTerms)}
-          activeOpacity={0.7}>
+      <Animated.View entering={FadeIn.duration(300)} style={styles.checkboxContainer}>
+        <TouchableOpacity onPress={() => setAgreeTerms(!agreeTerms)} activeOpacity={0.7}>
           <View
             style={[
               styles.checkbox,
               {
-                backgroundColor: agreeTerms
-                  ? colors.checkbox
-                  : colors.checkboxUnchecked,
-                borderColor: agreeTerms
-                  ? colors.checkbox
-                  : colors.checkboxUnchecked,
+                backgroundColor: agreeTerms ? colors.checkbox : colors.checkboxUnchecked,
+                borderColor: agreeTerms ? colors.checkbox : colors.checkboxUnchecked,
               },
-            ]}>
-            {agreeTerms && (
-              <Ionicons
-                name="checkmark"
-                size={16}
-                color={colors.checkboxText}
-              />
-            )}
+            ]}
+          >
+            {agreeTerms && <Ionicons name="checkmark" size={16} color={colors.checkboxText} />}
           </View>
         </TouchableOpacity>
         <Text style={[styles.termsText, { color: colors.textSecondary }]}>
           J'accepte les{' '}
           <Text
             style={[styles.termsLink, { color: colors.text }]}
-            onPress={() => navigation && navigation.navigate('Terms')}>
+            onPress={() => navigation && navigation.navigate('Terms')}
+          >
             conditions d'utilisation
           </Text>{' '}
           et la{' '}
           <Text
             style={[styles.termsLink, { color: colors.text }]}
-            onPress={() => navigation && navigation.navigate('Privacy')}>
+            onPress={() => navigation && navigation.navigate('Privacy')}
+          >
             politique de confidentialité
           </Text>
           <Text style={styles.required}>*</Text>
@@ -1266,20 +1141,16 @@ export default function AuthScreen({ navigation }) {
         style={[
           styles.button,
           {
-            backgroundColor:
-              isCompleteValid() && !loading
-                ? colors.button
-                : colors.buttonDisabled,
+            backgroundColor: isCompleteValid() && !loading ? colors.button : colors.buttonDisabled,
           },
         ]}
         onPress={handleComplete}
-        disabled={!isCompleteValid() || loading}>
+        disabled={!isCompleteValid() || loading}
+      >
         {loading ? (
           <ActivityIndicator color={colors.buttonText} />
         ) : (
-          <Text style={[styles.buttonText, { color: colors.buttonText }]}>
-            Terminer
-          </Text>
+          <Text style={[styles.buttonText, { color: colors.buttonText }]}>Terminer</Text>
         )}
       </TouchableOpacity>
     </Animated.View>
@@ -1289,26 +1160,24 @@ export default function AuthScreen({ navigation }) {
   // RENDU PRINCIPAL
   // ========================================
 
-  const shouldShowBackButton =
-    mode === 'forgot' || mode === 'otp' || mode === 'signup';
+  const shouldShowBackButton = mode === 'forgot' || mode === 'otp' || mode === 'signup';
 
   return (
-    <SafeAreaView
-      style={[styles.safeContainer, { backgroundColor: colors.background }]}>
+    <SafeAreaView style={[styles.safeContainer, { backgroundColor: colors.background }]}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.keyboardView}>
+          style={styles.keyboardView}
+        >
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled">
+            keyboardShouldPersistTaps="handled"
+          >
             <View style={styles.container}>
               {shouldShowBackButton && (
-                <TouchableOpacity
-                  style={styles.backButton}
-                  onPress={handleBack}>
+                <TouchableOpacity style={styles.backButton} onPress={handleBack}>
                   <ArrowBackIosRounded color={colors.text} size={24} />
                 </TouchableOpacity>
               )}

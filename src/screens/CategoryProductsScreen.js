@@ -271,9 +271,7 @@ const CategoryProductsScreen = ({ route, navigation }) => {
             </Text>
             {item.discount ? (
               <View style={styles.priceRow}>
-                <Text
-                  style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}
-                >
+                <Text style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}>
                   {item.originalPrice}
                 </Text>
                 <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
@@ -295,7 +293,10 @@ const CategoryProductsScreen = ({ route, navigation }) => {
   const renderRequestSuggestion = ({ item }) => (
     <View style={styles.requestWrapper} key={item.id}>
       <TouchableOpacity
-        style={[styles.requestCard, { backgroundColor: colors.requestBg, borderColor: colors.border }]}
+        style={[
+          styles.requestCard,
+          { backgroundColor: colors.requestBg, borderColor: colors.border },
+        ]}
         onPress={() => handleRequestPress(item)}
         activeOpacity={0.9}
       >
@@ -338,7 +339,11 @@ const CategoryProductsScreen = ({ route, navigation }) => {
               style={[styles.skeletonCard, styles.itemLeft, { backgroundColor: colors.skeletonBg }]}
             />
             <View
-              style={[styles.skeletonCard, styles.itemRight, { backgroundColor: colors.skeletonBg }]}
+              style={[
+                styles.skeletonCard,
+                styles.itemRight,
+                { backgroundColor: colors.skeletonBg },
+              ]}
             />
           </View>
           <View style={styles.row}>
@@ -346,7 +351,11 @@ const CategoryProductsScreen = ({ route, navigation }) => {
               style={[styles.skeletonCard, styles.itemLeft, { backgroundColor: colors.skeletonBg }]}
             />
             <View
-              style={[styles.skeletonCard, styles.itemRight, { backgroundColor: colors.skeletonBg }]}
+              style={[
+                styles.skeletonCard,
+                styles.itemRight,
+                { backgroundColor: colors.skeletonBg },
+              ]}
             />
           </View>
           <View style={styles.row}>
@@ -354,7 +363,11 @@ const CategoryProductsScreen = ({ route, navigation }) => {
               style={[styles.skeletonCard, styles.itemLeft, { backgroundColor: colors.skeletonBg }]}
             />
             <View
-              style={[styles.skeletonCard, styles.itemRight, { backgroundColor: colors.skeletonBg }]}
+              style={[
+                styles.skeletonCard,
+                styles.itemRight,
+                { backgroundColor: colors.skeletonBg },
+              ]}
             />
           </View>
         </View>

@@ -75,9 +75,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
     title: 'Je cherche des Air Force 1 taille 43 en bon état',
     description:
       "Bonjour, je recherche des Nike Air Force 1 en taille 43. Je préfère du blanc mais je suis ouvert à d'autres couleurs. Budget flexible selon l'état. Contactez-moi si vous en avez ! #nike #airforce #taille43 #chaussures #sneakers",
-    images: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
-    ],
+    images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80'],
     distance: 3.2,
     views: 2450,
     publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000),
@@ -98,8 +96,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'Nike Air Force 1',
       price: '5 000',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80',
       status: 'available',
     },
     {
@@ -107,8 +104,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'Adidas Superstar',
       price: '4 500',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=300&q=80',
       status: 'available',
     },
     {
@@ -116,8 +112,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'Puma RS-X',
       price: '6 000',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&q=80',
       status: 'available',
     },
     {
@@ -125,8 +120,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'Converse Chuck Taylor',
       price: '3 500',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1607522370275-f14206abe5d3?w=300&q=80',
       status: 'sold',
     },
     {
@@ -134,8 +128,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'Vans Old Skool',
       price: '5 200',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1543508282-6319a3e2621f?w=300&q=80',
       status: 'available',
     },
     {
@@ -143,22 +136,14 @@ const RequestDetailScreen = ({ navigation, route }) => {
       title: 'New Balance 574',
       price: '5 800',
       currency: 'HTG',
-      image:
-        'https://images.unsplash.com/photo-1574847820404-5a8b5b8f7dd0?w=300&q=80',
+      image: 'https://images.unsplash.com/photo-1574847820404-5a8b5b8f7dd0?w=300&q=80',
       status: 'available',
     },
   ];
 
-  const reportReasons = [
-    'Contenu inapproprié',
-    'Spam ou arnaque',
-    'Fausses informations',
-    'Autre',
-  ];
+  const reportReasons = ['Contenu inapproprié', 'Spam ou arnaque', 'Fausses informations', 'Autre'];
 
-  const availableSuggestedProducts = suggestedProducts.filter(
-    (item) => item.status !== 'sold'
-  );
+  const availableSuggestedProducts = suggestedProducts.filter((item) => item.status !== 'sold');
 
   useEffect(() => {
     if (activeTooltip) {
@@ -210,8 +195,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
   }, [isReportModalVisible]);
 
   const formatNumber = (num) => {
-    if (num >= 1000000)
-      return (num / 1000000).toFixed(1).replace('.', ',') + 'M';
+    if (num >= 1000000) return (num / 1000000).toFixed(1).replace('.', ',') + 'M';
     if (num >= 100000) return (num / 1000).toFixed(0) + 'k';
     if (num >= 10000) return (num / 1000).toFixed(1).replace('.', ',') + 'k';
     if (num >= 1000) return (num / 1000).toFixed(1).replace('.', ',') + 'k';
@@ -421,16 +405,10 @@ const RequestDetailScreen = ({ navigation, route }) => {
       onPress={() => handleProductPress(item)}
       activeOpacity={0.9}
     >
-      <Image
-        source={{ uri: item.image }}
-        style={styles.suggestedProductImage}
-      />
+      <Image source={{ uri: item.image }} style={styles.suggestedProductImage} />
 
       <LinearGradient
-        colors={[
-          'transparent',
-          isDarkMode ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.8)',
-        ]}
+        colors={['transparent', isDarkMode ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.8)']}
         style={styles.suggestedProductGradient}
       />
 
@@ -482,9 +460,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.reportModalContainer}
         >
-          <Animated.View
-            style={[styles.reportOverlay, { opacity: fadeAnim }]}
-          />
+          <Animated.View style={[styles.reportOverlay, { opacity: fadeAnim }]} />
 
           <Animated.View
             style={[
@@ -495,15 +471,8 @@ const RequestDetailScreen = ({ navigation, route }) => {
               },
             ]}
           >
-            <View
-              style={[
-                styles.reportHeader,
-                { borderBottomColor: colors.border },
-              ]}
-            >
-              <Text style={[styles.reportTitle, { color: colors.text }]}>
-                Signaler
-              </Text>
+            <View style={[styles.reportHeader, { borderBottomColor: colors.border }]}>
+              <Text style={[styles.reportTitle, { color: colors.text }]}>Signaler</Text>
               <TouchableOpacity
                 onPress={() => {
                   setIsReportModalVisible(false);
@@ -524,10 +493,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
                 {reportReasons.map((reason, index) => (
                   <TouchableOpacity
                     key={index}
-                    style={[
-                      styles.reportOption,
-                      { backgroundColor: colors.inputBg },
-                    ]}
+                    style={[styles.reportOption, { backgroundColor: colors.inputBg }]}
                     onPress={() => setReportReason(reason)}
                   >
                     <View
@@ -539,14 +505,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
                         },
                       ]}
                     />
-                    <Text
-                      style={[
-                        styles.reportOptionText,
-                        { color: colors.text },
-                      ]}
-                    >
-                      {reason}
-                    </Text>
+                    <Text style={[styles.reportOptionText, { color: colors.text }]}>{reason}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -575,45 +534,23 @@ const RequestDetailScreen = ({ navigation, route }) => {
               <View style={{ height: 80 }} />
             </ScrollView>
 
-            <View
-              style={[
-                styles.reportButtons,
-                { borderTopColor: colors.border },
-              ]}
-            >
+            <View style={[styles.reportButtons, { borderTopColor: colors.border }]}>
               <TouchableOpacity
-                style={[
-                  styles.reportCancelButton,
-                  { borderColor: colors.border },
-                ]}
+                style={[styles.reportCancelButton, { borderColor: colors.border }]}
                 onPress={() => {
                   setIsReportModalVisible(false);
                   setReportReason('');
                   setOtherReason('');
                 }}
               >
-                <Text
-                  style={[styles.reportCancelText, { color: colors.text }]}
-                >
-                  Annuler
-                </Text>
+                <Text style={[styles.reportCancelText, { color: colors.text }]}>Annuler</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[
-                  styles.reportSubmitButton,
-                  { backgroundColor: colors.text },
-                ]}
+                style={[styles.reportSubmitButton, { backgroundColor: colors.text }]}
                 onPress={submitReport}
               >
-                <Text
-                  style={[
-                    styles.reportSubmitText,
-                    { color: colors.background },
-                  ]}
-                >
-                  Envoyer
-                </Text>
+                <Text style={[styles.reportSubmitText, { color: colors.background }]}>Envoyer</Text>
               </TouchableOpacity>
             </View>
           </Animated.View>
@@ -628,10 +565,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
         {/* Image with overlay buttons */}
         {request.images && request.images.length > 0 && (
           <View style={styles.imageContainer}>
-            <Image
-              source={{ uri: request.images[0] }}
-              style={styles.requestImage}
-            />
+            <Image source={{ uri: request.images[0] }} style={styles.requestImage} />
 
             <TouchableOpacity
               style={[styles.backButton, { top: insets.top + 8 }]}
@@ -651,30 +585,18 @@ const RequestDetailScreen = ({ navigation, route }) => {
 
         {/* Main Info */}
         <View style={styles.mainInfoContainer}>
-          <Text style={[styles.requestTitle, { color: colors.text }]}>
-            {request.title}
-          </Text>
+          <Text style={[styles.requestTitle, { color: colors.text }]}>{request.title}</Text>
 
           <View style={styles.infoRow}>
-            <TouchableOpacity
-              style={styles.infoItem}
-              onPress={() => showTooltip('views')}
-            >
+            <TouchableOpacity style={styles.infoItem} onPress={() => showTooltip('views')}>
               <EyeFill12 color={colors.textSecondary} size={16} />
-              <Text
-                style={[styles.infoText, { color: colors.textSecondary }]}
-              >
+              <Text style={[styles.infoText, { color: colors.textSecondary }]}>
                 {formatNumber(request.views)}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.infoItem}
-              onPress={() => showTooltip('time')}
-            >
+            <TouchableOpacity style={styles.infoItem} onPress={() => showTooltip('time')}>
               <ClockFilled color={colors.textSecondary} size={16} />
-              <Text
-                style={[styles.infoText, { color: colors.textSecondary }]}
-              >
+              <Text style={[styles.infoText, { color: colors.textSecondary }]}>
                 {getTimeAgo(request.publishedAt)}
               </Text>
             </TouchableOpacity>
@@ -686,19 +608,14 @@ const RequestDetailScreen = ({ navigation, route }) => {
               }}
             >
               <MapMarkerAlt color={colors.text} size={16} />
-              <Text style={[styles.infoText, { color: colors.text }]}>
-                {request.distance} km
-              </Text>
+              <Text style={[styles.infoText, { color: colors.text }]}>{request.distance} km</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.actionRow}>
             <TouchableOpacity onPress={handleLike}>
               <Animated.View
-                style={[
-                  styles.actionWithCount,
-                  { transform: [{ scale: likeScaleAnim }] },
-                ]}
+                style={[styles.actionWithCount, { transform: [{ scale: likeScaleAnim }] }]}
               >
                 <Heart color={isLiked ? '#EF4444' : colors.text} size={20} />
                 <Text style={[styles.actionCount, { color: colors.text }]}>
@@ -709,15 +626,9 @@ const RequestDetailScreen = ({ navigation, route }) => {
 
             <TouchableOpacity onPress={handleRepost}>
               <Animated.View
-                style={[
-                  styles.actionWithCount,
-                  { transform: [{ scale: repostScaleAnim }] },
-                ]}
+                style={[styles.actionWithCount, { transform: [{ scale: repostScaleAnim }] }]}
               >
-                <Repeat
-                  color={isReposted ? '#22C55E' : colors.text}
-                  size={20}
-                />
+                <Repeat color={isReposted ? '#22C55E' : colors.text} size={20} />
                 <Text style={[styles.actionCount, { color: colors.text }]}>
                   {formatNumber(repostCount)}
                 </Text>
@@ -725,17 +636,13 @@ const RequestDetailScreen = ({ navigation, route }) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleMessage}>
-              <Animated.View
-                style={{ transform: [{ scale: messageScaleAnim }] }}
-              >
+              <Animated.View style={{ transform: [{ scale: messageScaleAnim }] }}>
                 <MessageDotsFill color={colors.text} size={20} />
               </Animated.View>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleShare}>
-              <Animated.View
-                style={{ transform: [{ scale: shareScaleAnim }] }}
-              >
+              <Animated.View style={{ transform: [{ scale: shareScaleAnim }] }}>
                 <ShareForwardFill color={colors.text} size={20} />
               </Animated.View>
             </TouchableOpacity>
@@ -744,12 +651,8 @@ const RequestDetailScreen = ({ navigation, route }) => {
 
         {/* Description */}
         <View style={styles.descriptionContainer}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Description
-          </Text>
-          <Text
-            style={[styles.descriptionText, { color: colors.textSecondary }]}
-          >
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Description</Text>
+          <Text style={[styles.descriptionText, { color: colors.textSecondary }]}>
             {parseTextWithHashtags(request.description)}
           </Text>
         </View>
@@ -761,23 +664,16 @@ const RequestDetailScreen = ({ navigation, route }) => {
             onPress={handleViewProfile}
             activeOpacity={0.7}
           >
-            <Image
-              source={{ uri: request.author.profileImage }}
-              style={styles.authorImage}
-            />
+            <Image source={{ uri: request.author.profileImage }} style={styles.authorImage} />
             <View style={styles.authorInfo}>
               <View style={styles.authorNameRow}>
                 <Text style={[styles.authorName, { color: colors.text }]}>
                   {request.author.username}
                 </Text>
-                {request.author.verified && (
-                  <VerifiedCheckFill color="#3B82F6" size={18} />
-                )}
+                {request.author.verified && <VerifiedCheckFill color="#3B82F6" size={18} />}
               </View>
               <View style={styles.authorLocationRow}>
-                <Text
-                  style={[styles.authorType, { color: colors.textSecondary }]}
-                >
+                <Text style={[styles.authorType, { color: colors.textSecondary }]}>
                   {request.author.type}
                 </Text>
               </View>
@@ -804,13 +700,7 @@ const RequestDetailScreen = ({ navigation, route }) => {
 
         {/* Suggested Products */}
         <View style={styles.suggestedContainer}>
-          <Text
-            style={[
-              styles.sectionTitle,
-              styles.suggestionTitle,
-              { color: colors.text },
-            ]}
-          >
+          <Text style={[styles.sectionTitle, styles.suggestionTitle, { color: colors.text }]}>
             Suggestions
           </Text>
           <FlatList
@@ -821,13 +711,8 @@ const RequestDetailScreen = ({ navigation, route }) => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.suggestedList}
           />
-          <TouchableOpacity
-            style={styles.viewMoreButton}
-            onPress={handleViewMore}
-          >
-            <Text style={[styles.viewMoreText, { color: colors.text }]}>
-              Voir plus →
-            </Text>
+          <TouchableOpacity style={styles.viewMoreButton} onPress={handleViewMore}>
+            <Text style={[styles.viewMoreText, { color: colors.text }]}>Voir plus →</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

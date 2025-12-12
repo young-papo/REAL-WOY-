@@ -94,7 +94,7 @@ const CreateScreen = ({ navigation, route }) => {
     { id: 2, name: 'Neuf sans étiquette', description: 'Article jamais porté sans étiquettes' },
     { id: 3, name: 'Très bon état', description: 'Porté quelques fois, sans défauts' },
     { id: 4, name: 'Bon état', description: 'Porté plusieurs fois, légères traces' },
-    { id: 5, name: 'État satisfaisant', description: 'Signes d\'usure visibles' },
+    { id: 5, name: 'État satisfaisant', description: "Signes d'usure visibles" },
   ];
 
   const sizes = [
@@ -151,7 +151,7 @@ const CreateScreen = ({ navigation, route }) => {
     });
 
     if (!result.canceled) {
-      const newImages = result.assets.map(asset => ({
+      const newImages = result.assets.map((asset) => ({
         uri: asset.uri,
         type: 'image',
       }));
@@ -184,7 +184,7 @@ const CreateScreen = ({ navigation, route }) => {
       });
 
       if (!result.canceled) {
-        const newImages = result.assets.map(asset => ({
+        const newImages = result.assets.map((asset) => ({
           uri: asset.uri,
           type: 'file',
         }));
@@ -298,18 +298,14 @@ const CreateScreen = ({ navigation, route }) => {
         onPress={() => setShowImagePicker(false)}
       >
         <View style={[styles.imagePickerModal, { backgroundColor: theme.card }]}>
-          <Text style={[styles.imagePickerTitle, { color: theme.text }]}>
-            Ajouter une image
-          </Text>
+          <Text style={[styles.imagePickerTitle, { color: theme.text }]}>Ajouter une image</Text>
 
           <TouchableOpacity
             style={[styles.imagePickerOption, { borderBottomColor: theme.border }]}
             onPress={handleImageFromGallery}
           >
             <PictureSolid color={theme.primary} size={24} />
-            <Text style={[styles.imagePickerOptionText, { color: theme.text }]}>
-              Galerie
-            </Text>
+            <Text style={[styles.imagePickerOptionText, { color: theme.text }]}>Galerie</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -322,14 +318,9 @@ const CreateScreen = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.imagePickerOption}
-            onPress={handleImageFromFiles}
-          >
+          <TouchableOpacity style={styles.imagePickerOption} onPress={handleImageFromFiles}>
             <FolderFilled color={theme.primary} size={24} />
-            <Text style={[styles.imagePickerOptionText, { color: theme.text }]}>
-              Fichiers
-            </Text>
+            <Text style={[styles.imagePickerOptionText, { color: theme.text }]}>Fichiers</Text>
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -462,10 +453,9 @@ const CreateScreen = ({ navigation, route }) => {
                 setShowSizeModal(false);
               }}
             >
-              <Text style={[
-                styles.sizeText,
-                { color: size?.id === item.id ? '#FFFFFF' : theme.text },
-              ]}>
+              <Text
+                style={[styles.sizeText, { color: size?.id === item.id ? '#FFFFFF' : theme.text }]}
+              >
                 {item.name}
               </Text>
             </TouchableOpacity>
@@ -496,20 +486,19 @@ const CreateScreen = ({ navigation, route }) => {
           {colors.map((item) => (
             <TouchableOpacity
               key={item.id}
-              style={[
-                styles.colorItem,
-                color?.id === item.id && styles.colorItemSelected,
-              ]}
+              style={[styles.colorItem, color?.id === item.id && styles.colorItemSelected]}
               onPress={() => {
                 setColor(item);
                 setShowColorModal(false);
               }}
             >
-              <View style={[
-                styles.colorSwatch,
-                { backgroundColor: item.hex },
-                item.hex === '#FFFFFF' && { borderWidth: 1, borderColor: theme.border },
-              ]} />
+              <View
+                style={[
+                  styles.colorSwatch,
+                  { backgroundColor: item.hex },
+                  item.hex === '#FFFFFF' && { borderWidth: 1, borderColor: theme.border },
+                ]}
+              />
               <Text style={[styles.colorName, { color: theme.text }]}>{item.name}</Text>
               {color?.id === item.id && (
                 <Text style={[styles.checkmark, { color: theme.primary }]}>✓</Text>
@@ -584,9 +573,7 @@ const CreateScreen = ({ navigation, route }) => {
           <View style={styles.previewInfo}>
             <Text style={[styles.previewTitle, { color: theme.text }]}>{title}</Text>
             {activeTab === 'product' && (
-              <Text style={[styles.previewPrice, { color: theme.primary }]}>
-                {price} FCFA
-              </Text>
+              <Text style={[styles.previewPrice, { color: theme.primary }]}>{price} FCFA</Text>
             )}
             <Text style={[styles.previewDescription, { color: theme.textSecondary }]}>
               {description}
@@ -687,10 +674,7 @@ const CreateScreen = ({ navigation, route }) => {
             <ArrowBackIosRounded color={theme.text} size={20} />
           </TouchableOpacity>
           <Text style={[styles.headerTitle, { color: theme.text }]}>Créer</Text>
-          <TouchableOpacity
-            onPress={() => setShowPreviewModal(true)}
-            style={styles.previewButton}
-          >
+          <TouchableOpacity onPress={() => setShowPreviewModal(true)} style={styles.previewButton}>
             <EyeOutline color={theme.primary} size={24} />
           </TouchableOpacity>
         </View>
@@ -706,10 +690,12 @@ const CreateScreen = ({ navigation, route }) => {
             onPress={() => setActiveTab('product')}
           >
             <BoxBold color={activeTab === 'product' ? '#FFFFFF' : theme.textSecondary} size={16} />
-            <Text style={[
-              styles.tabText,
-              { color: activeTab === 'product' ? '#FFFFFF' : theme.textSecondary },
-            ]}>
+            <Text
+              style={[
+                styles.tabText,
+                { color: activeTab === 'product' ? '#FFFFFF' : theme.textSecondary },
+              ]}
+            >
               Produit
             </Text>
           </TouchableOpacity>
@@ -722,11 +708,16 @@ const CreateScreen = ({ navigation, route }) => {
             ]}
             onPress={() => setActiveTab('request')}
           >
-            <Megaphone color={activeTab === 'request' ? '#FFFFFF' : theme.textSecondary} size={16} />
-            <Text style={[
-              styles.tabText,
-              { color: activeTab === 'request' ? '#FFFFFF' : theme.textSecondary },
-            ]}>
+            <Megaphone
+              color={activeTab === 'request' ? '#FFFFFF' : theme.textSecondary}
+              size={16}
+            />
+            <Text
+              style={[
+                styles.tabText,
+                { color: activeTab === 'request' ? '#FFFFFF' : theme.textSecondary },
+              ]}
+            >
               Requête
             </Text>
           </TouchableOpacity>
@@ -754,7 +745,10 @@ const CreateScreen = ({ navigation, route }) => {
 
                 {images.length < 10 && (
                   <TouchableOpacity
-                    style={[styles.addImageButton, { backgroundColor: theme.card, borderColor: theme.border }]}
+                    style={[
+                      styles.addImageButton,
+                      { backgroundColor: theme.card, borderColor: theme.border },
+                    ]}
                     onPress={() => setShowImagePicker(true)}
                   >
                     <Plus color={theme.primary} size={32} />
@@ -830,10 +824,12 @@ const CreateScreen = ({ navigation, route }) => {
               style={[styles.selector, { backgroundColor: theme.inputBackground }]}
               onPress={() => setShowCategoryModal(true)}
             >
-              <Text style={[
-                styles.selectorText,
-                { color: category ? theme.text : theme.textSecondary },
-              ]}>
+              <Text
+                style={[
+                  styles.selectorText,
+                  { color: category ? theme.text : theme.textSecondary },
+                ]}
+              >
                 {category ? `${category.icon} ${category.name}` : 'Sélectionner une catégorie'}
               </Text>
               <TriangleInvertedFilled color={theme.textSecondary} size={12} />
@@ -847,11 +843,13 @@ const CreateScreen = ({ navigation, route }) => {
               style={[styles.selector, { backgroundColor: theme.inputBackground }]}
               onPress={() => setShowConditionModal(true)}
             >
-              <Text style={[
-                styles.selectorText,
-                { color: condition ? theme.text : theme.textSecondary },
-              ]}>
-                {condition ? condition.name : 'Sélectionner l\'état'}
+              <Text
+                style={[
+                  styles.selectorText,
+                  { color: condition ? theme.text : theme.textSecondary },
+                ]}
+              >
+                {condition ? condition.name : "Sélectionner l'état"}
               </Text>
               <TriangleInvertedFilled color={theme.textSecondary} size={12} />
             </TouchableOpacity>
@@ -864,10 +862,9 @@ const CreateScreen = ({ navigation, route }) => {
               style={[styles.selector, { backgroundColor: theme.inputBackground }]}
               onPress={() => setShowSizeModal(true)}
             >
-              <Text style={[
-                styles.selectorText,
-                { color: size ? theme.text : theme.textSecondary },
-              ]}>
+              <Text
+                style={[styles.selectorText, { color: size ? theme.text : theme.textSecondary }]}
+              >
                 {size ? size.name : 'Sélectionner la taille'}
               </Text>
               <TriangleInvertedFilled color={theme.textSecondary} size={12} />
@@ -905,9 +902,7 @@ const CreateScreen = ({ navigation, route }) => {
               {location ? (
                 <View style={styles.locationSelected}>
                   <MapMarkerAlt color={theme.primary} size={16} />
-                  <Text style={[styles.selectorText, { color: theme.text }]}>
-                    {location.name}
-                  </Text>
+                  <Text style={[styles.selectorText, { color: theme.text }]}>{location.name}</Text>
                 </View>
               ) : (
                 <Text style={[styles.selectorText, { color: theme.textSecondary }]}>
@@ -932,15 +927,19 @@ const CreateScreen = ({ navigation, route }) => {
                       borderColor: theme.primary,
                     },
                   ]}
-                  onPress={() => setDeliveryOptions({
-                    ...deliveryOptions,
-                    shipping: !deliveryOptions.shipping,
-                  })}
+                  onPress={() =>
+                    setDeliveryOptions({
+                      ...deliveryOptions,
+                      shipping: !deliveryOptions.shipping,
+                    })
+                  }
                 >
-                  <Text style={[
-                    styles.deliveryOptionText,
-                    { color: deliveryOptions.shipping ? theme.primary : theme.text },
-                  ]}>
+                  <Text
+                    style={[
+                      styles.deliveryOptionText,
+                      { color: deliveryOptions.shipping ? theme.primary : theme.text },
+                    ]}
+                  >
                     Livraison
                   </Text>
                 </TouchableOpacity>
@@ -954,15 +953,19 @@ const CreateScreen = ({ navigation, route }) => {
                       borderColor: theme.primary,
                     },
                   ]}
-                  onPress={() => setDeliveryOptions({
-                    ...deliveryOptions,
-                    meetup: !deliveryOptions.meetup,
-                  })}
+                  onPress={() =>
+                    setDeliveryOptions({
+                      ...deliveryOptions,
+                      meetup: !deliveryOptions.meetup,
+                    })
+                  }
                 >
-                  <Text style={[
-                    styles.deliveryOptionText,
-                    { color: deliveryOptions.meetup ? theme.primary : theme.text },
-                  ]}>
+                  <Text
+                    style={[
+                      styles.deliveryOptionText,
+                      { color: deliveryOptions.meetup ? theme.primary : theme.text },
+                    ]}
+                  >
                     Rencontre
                   </Text>
                 </TouchableOpacity>

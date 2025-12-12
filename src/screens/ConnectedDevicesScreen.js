@@ -39,13 +39,13 @@ const DeviceCard = ({ device, onDisconnect, loading, isDarkMode, isCurrentDevice
     if (isCurrentDevice) {
       Alert.alert(
         'Appareil actuel',
-        'Vous ne pouvez pas déconnecter l\'appareil que vous utilisez actuellement.'
+        "Vous ne pouvez pas déconnecter l'appareil que vous utilisez actuellement."
       );
       return;
     }
 
     Alert.alert(
-      'Déconnecter l\'appareil',
+      "Déconnecter l'appareil",
       `Voulez-vous vraiment déconnecter "${device.name}" ? Cette action fermera la session sur cet appareil.`,
       [
         { text: 'Annuler', style: 'cancel' },
@@ -192,10 +192,10 @@ export default function ConnectedDevicesScreen({ navigation }) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setDevices((prev) => prev.filter((device) => device.id !== deviceId));
-      Alert.alert('Succès', 'L\'appareil a été déconnecté avec succès.');
+      Alert.alert('Succès', "L'appareil a été déconnecté avec succès.");
     } catch (error) {
       console.error('Erreur lors de la déconnexion:', error);
-      Alert.alert('Erreur', 'Impossible de déconnecter l\'appareil. Veuillez réessayer.');
+      Alert.alert('Erreur', "Impossible de déconnecter l'appareil. Veuillez réessayer.");
     } finally {
       setDisconnectingId(null);
     }
@@ -205,7 +205,7 @@ export default function ConnectedDevicesScreen({ navigation }) {
     const otherDevices = devices.filter((device) => !device.isCurrent);
 
     if (otherDevices.length === 0) {
-      Alert.alert('Information', 'Il n\'y a pas d\'autres appareils connectés à déconnecter.');
+      Alert.alert('Information', "Il n'y a pas d'autres appareils connectés à déconnecter.");
       return;
     }
 
@@ -244,11 +244,26 @@ export default function ConnectedDevicesScreen({ navigation }) {
   const renderSkeleton = () => (
     <View style={styles.skeletonContainer}>
       {[1, 2, 3, 4].map((item) => (
-        <View key={item} style={[styles.skeletonCard, { backgroundColor: isDarkMode ? '#1A1A1A' : '#F5F5F5' }]}>
-          <View style={[styles.skeletonIcon, { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' }]} />
+        <View
+          key={item}
+          style={[styles.skeletonCard, { backgroundColor: isDarkMode ? '#1A1A1A' : '#F5F5F5' }]}
+        >
+          <View
+            style={[styles.skeletonIcon, { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' }]}
+          />
           <View style={styles.skeletonTextContainer}>
-            <View style={[styles.skeletonTitle, { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' }]} />
-            <View style={[styles.skeletonSubtitle, { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' }]} />
+            <View
+              style={[
+                styles.skeletonTitle,
+                { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' },
+              ]}
+            />
+            <View
+              style={[
+                styles.skeletonSubtitle,
+                { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' },
+              ]}
+            />
           </View>
         </View>
       ))}
@@ -258,9 +273,7 @@ export default function ConnectedDevicesScreen({ navigation }) {
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
       <PhoneLaptop16Filled color={colors.emptyIcon} size={64} />
-      <Text style={[styles.emptyText, { color: colors.emptyIcon }]}>
-        Aucun appareil connecté
-      </Text>
+      <Text style={[styles.emptyText, { color: colors.emptyIcon }]}>Aucun appareil connecté</Text>
     </View>
   );
 
@@ -305,7 +318,8 @@ export default function ConnectedDevicesScreen({ navigation }) {
         }
       >
         <Text style={[styles.description, { color: colors.textSecondary }]}>
-          Gérez les appareils connectés à votre compte. Vous pouvez déconnecter les appareils que vous ne reconnaissez pas.
+          Gérez les appareils connectés à votre compte. Vous pouvez déconnecter les appareils que
+          vous ne reconnaissez pas.
         </Text>
 
         {loading ? (

@@ -86,21 +86,69 @@ const ExplorerScreen = ({ navigation }) => {
   ]);
 
   const productCategories = [
-    { id: '1', name: 'Vêtements', image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=400&q=80' },
-    { id: '2', name: 'Chaussures', image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&q=80' },
-    { id: '3', name: 'Sacs', image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80' },
-    { id: '4', name: 'Accessoires', image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80' },
-    { id: '5', name: 'Bijoux', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80' },
-    { id: '6', name: 'En soldes', image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&q=80' },
-    { id: '0', name: 'Tout près', image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&q=80' },
-    { id: '00', name: 'Suivies', image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80' },
+    {
+      id: '1',
+      name: 'Vêtements',
+      image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=400&q=80',
+    },
+    {
+      id: '2',
+      name: 'Chaussures',
+      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&q=80',
+    },
+    {
+      id: '3',
+      name: 'Sacs',
+      image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80',
+    },
+    {
+      id: '4',
+      name: 'Accessoires',
+      image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80',
+    },
+    {
+      id: '5',
+      name: 'Bijoux',
+      image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80',
+    },
+    {
+      id: '6',
+      name: 'En soldes',
+      image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400&q=80',
+    },
+    {
+      id: '0',
+      name: 'Tout près',
+      image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&q=80',
+    },
+    {
+      id: '00',
+      name: 'Suivies',
+      image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80',
+    },
   ];
 
   const requestCategories = [
-    { id: 'r2', name: 'Récentes', image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80' },
-    { id: 'r3', name: 'Tout près', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80' },
-    { id: 'r1', name: 'Plus recherchées', image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80' },
-    { id: 'r0', name: 'Suivies', image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80' },
+    {
+      id: 'r2',
+      name: 'Récentes',
+      image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80',
+    },
+    {
+      id: 'r3',
+      name: 'Tout près',
+      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80',
+    },
+    {
+      id: 'r1',
+      name: 'Plus recherchées',
+      image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80',
+    },
+    {
+      id: 'r0',
+      name: 'Suivies',
+      image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&q=80',
+    },
   ];
 
   const productSuggestions = [
@@ -222,12 +270,21 @@ const ExplorerScreen = ({ navigation }) => {
     if (showFilterModal) {
       Animated.parallel([
         Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-        Animated.spring(slideAnim, { toValue: 0, tension: 65, friction: 11, useNativeDriver: true }),
+        Animated.spring(slideAnim, {
+          toValue: 0,
+          tension: 65,
+          friction: 11,
+          useNativeDriver: true,
+        }),
       ]).start();
     } else {
       Animated.parallel([
         Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }),
-        Animated.timing(slideAnim, { toValue: SCREEN_HEIGHT, duration: 200, useNativeDriver: true }),
+        Animated.timing(slideAnim, {
+          toValue: SCREEN_HEIGHT,
+          duration: 200,
+          useNativeDriver: true,
+        }),
       ]).start();
     }
   }, [showFilterModal]);
@@ -467,24 +524,15 @@ const ExplorerScreen = ({ navigation }) => {
             </Text>
             {item.discount ? (
               <View style={styles.priceRow}>
-                <Text
-                  style={[
-                    styles.originalPrice,
-                    shouldReduceText && styles.originalPriceSmall,
-                  ]}
-                >
+                <Text style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}>
                   {item.originalPrice}
                 </Text>
-                <Text
-                  style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}
-                >
+                <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
                   {item.price} {item.currency}
                 </Text>
               </View>
             ) : (
-              <Text
-                style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}
-              >
+              <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
                 {item.price} {item.currency}
               </Text>
             )}
@@ -584,7 +632,9 @@ const ExplorerScreen = ({ navigation }) => {
 
       {/* Toast */}
       {showToast && (
-        <View style={[styles.toastContainer, { backgroundColor: colors.toast, top: insets.top + 10 }]}>
+        <View
+          style={[styles.toastContainer, { backgroundColor: colors.toast, top: insets.top + 10 }]}
+        >
           <Text style={styles.toastText}>{showToast}</Text>
         </View>
       )}
@@ -622,9 +672,7 @@ const ExplorerScreen = ({ navigation }) => {
 
             <ScrollView style={styles.filterScroll} showsVerticalScrollIndicator={false}>
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Type de recherche
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Type de recherche</Text>
                 <View style={styles.filterOptionsRow}>
                   <TouchableOpacity
                     style={[
@@ -640,10 +688,7 @@ const ExplorerScreen = ({ navigation }) => {
                       style={[
                         styles.filterOptionText,
                         {
-                          color:
-                            currentSubTab === 'products'
-                              ? colors.background
-                              : colors.text,
+                          color: currentSubTab === 'products' ? colors.background : colors.text,
                         },
                       ]}
                     >
@@ -664,10 +709,7 @@ const ExplorerScreen = ({ navigation }) => {
                       style={[
                         styles.filterOptionText,
                         {
-                          color:
-                            currentSubTab === 'requests'
-                              ? colors.background
-                              : colors.text,
+                          color: currentSubTab === 'requests' ? colors.background : colors.text,
                         },
                       ]}
                     >
@@ -680,9 +722,7 @@ const ExplorerScreen = ({ navigation }) => {
               {currentSubTab === 'products' && (
                 <>
                   <View style={styles.filterSection}>
-                    <Text style={[styles.filterLabel, { color: colors.text }]}>
-                      Catégories
-                    </Text>
+                    <Text style={[styles.filterLabel, { color: colors.text }]}>Catégories</Text>
                     <View style={styles.filterOptionsRow}>
                       {[
                         'Tous',
@@ -742,9 +782,7 @@ const ExplorerScreen = ({ navigation }) => {
                               styles.filterOption,
                               {
                                 backgroundColor:
-                                  filters.priceRange === range
-                                    ? colors.text
-                                    : colors.inputBg,
+                                  filters.priceRange === range ? colors.text : colors.inputBg,
                               },
                             ]}
                             onPress={() => setFilters({ ...filters, priceRange: range })}
@@ -754,9 +792,7 @@ const ExplorerScreen = ({ navigation }) => {
                                 styles.filterOptionText,
                                 {
                                   color:
-                                    filters.priceRange === range
-                                      ? colors.background
-                                      : colors.text,
+                                    filters.priceRange === range ? colors.background : colors.text,
                                 },
                               ]}
                             >
@@ -808,9 +844,7 @@ const ExplorerScreen = ({ navigation }) => {
               )}
 
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Distance (km)
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Distance (km)</Text>
                 <View style={styles.filterOptionsRow}>
                   {['Tous', '5', '10', '20', '50+'].map((dist) => (
                     <TouchableOpacity
@@ -818,8 +852,7 @@ const ExplorerScreen = ({ navigation }) => {
                       style={[
                         styles.filterOption,
                         {
-                          backgroundColor:
-                            filters.distance === dist ? colors.text : colors.inputBg,
+                          backgroundColor: filters.distance === dist ? colors.text : colors.inputBg,
                         },
                       ]}
                       onPress={() => setFilters({ ...filters, distance: dist })}
@@ -828,10 +861,7 @@ const ExplorerScreen = ({ navigation }) => {
                         style={[
                           styles.filterOptionText,
                           {
-                            color:
-                              filters.distance === dist
-                                ? colors.background
-                                : colors.text,
+                            color: filters.distance === dist ? colors.background : colors.text,
                           },
                         ]}
                       >
@@ -843,9 +873,7 @@ const ExplorerScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.filterSection}>
-                <Text style={[styles.filterLabel, { color: colors.text }]}>
-                  Note minimum
-                </Text>
+                <Text style={[styles.filterLabel, { color: colors.text }]}>Note minimum</Text>
                 <View style={styles.filterOptionsRow}>
                   {['Tous', '1', '2', '3', '4', '5'].map((rating) => (
                     <TouchableOpacity
@@ -853,8 +881,7 @@ const ExplorerScreen = ({ navigation }) => {
                       style={[
                         styles.filterOption,
                         {
-                          backgroundColor:
-                            filters.rating === rating ? colors.text : colors.inputBg,
+                          backgroundColor: filters.rating === rating ? colors.text : colors.inputBg,
                         },
                       ]}
                       onPress={() => setFilters({ ...filters, rating: rating })}
@@ -864,10 +891,7 @@ const ExplorerScreen = ({ navigation }) => {
                           style={[
                             styles.filterOptionText,
                             {
-                              color:
-                                filters.rating === rating
-                                  ? colors.background
-                                  : colors.text,
+                              color: filters.rating === rating ? colors.background : colors.text,
                             },
                           ]}
                         >
@@ -879,10 +903,7 @@ const ExplorerScreen = ({ navigation }) => {
                             style={[
                               styles.filterOptionText,
                               {
-                                color:
-                                  filters.rating === rating
-                                    ? colors.background
-                                    : colors.text,
+                                color: filters.rating === rating ? colors.background : colors.text,
                                 marginRight: 4,
                               },
                             ]}
@@ -930,10 +951,7 @@ const ExplorerScreen = ({ navigation }) => {
                         style={[
                           styles.filterOptionText,
                           {
-                            color:
-                              filters.date === option.key
-                                ? colors.background
-                                : colors.text,
+                            color: filters.date === option.key ? colors.background : colors.text,
                           },
                         ]}
                       >
@@ -952,9 +970,7 @@ const ExplorerScreen = ({ navigation }) => {
                 style={[styles.filterResetButton, { borderColor: colors.border }]}
                 onPress={resetFilters}
               >
-                <Text style={[styles.filterResetText, { color: colors.text }]}>
-                  Réinitialiser
-                </Text>
+                <Text style={[styles.filterResetText, { color: colors.text }]}>Réinitialiser</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.filterApplyButton, { backgroundColor: colors.text }]}
@@ -982,18 +998,13 @@ const ExplorerScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
 
-        <View
-          style={[styles.searchContainer, isSearchFocused && styles.searchContainerExpanded]}
-        >
+        <View style={[styles.searchContainer, isSearchFocused && styles.searchContainerExpanded]}>
           <View style={styles.searchIconContainer}>
             <Search color={colors.textSecondary} size={18} />
           </View>
 
           <TextInput
-            style={[
-              styles.searchInput,
-              { backgroundColor: colors.inputBg, color: colors.text },
-            ]}
+            style={[styles.searchInput, { backgroundColor: colors.inputBg, color: colors.text }]}
             placeholder="Rechercher..."
             placeholderTextColor={colors.textSecondary}
             value={searchText}
@@ -1061,15 +1072,10 @@ const ExplorerScreen = ({ navigation }) => {
                   setTabWidth(width / 2);
                 }}
               >
-                <TouchableOpacity
-                  style={styles.tab}
-                  onPress={() => handleSubTabChange('products')}
-                >
+                <TouchableOpacity style={styles.tab} onPress={() => handleSubTabChange('products')}>
                   <View style={styles.tabContent}>
                     <BoxBold
-                      color={
-                        currentSubTab === 'products' ? colors.text : colors.textSecondary
-                      }
+                      color={currentSubTab === 'products' ? colors.text : colors.textSecondary}
                       size={16}
                     />
                     <Text
@@ -1084,15 +1090,10 @@ const ExplorerScreen = ({ navigation }) => {
                   </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.tab}
-                  onPress={() => handleSubTabChange('requests')}
-                >
+                <TouchableOpacity style={styles.tab} onPress={() => handleSubTabChange('requests')}>
                   <View style={styles.tabContent}>
                     <Megaphone
-                      color={
-                        currentSubTab === 'requests' ? colors.text : colors.textSecondary
-                      }
+                      color={currentSubTab === 'requests' ? colors.text : colors.textSecondary}
                       size={16}
                     />
                     <Text

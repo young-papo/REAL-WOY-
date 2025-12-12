@@ -100,7 +100,10 @@ export default function SettingsScreen({ navigation }) {
 
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
-    Alert.alert('✓ Langue modifiée', `La langue a été changée en ${lang === 'fr' ? 'Français' : 'English'}`);
+    Alert.alert(
+      '✓ Langue modifiée',
+      `La langue a été changée en ${lang === 'fr' ? 'Français' : 'English'}`
+    );
   };
 
   const handleCurrencyChange = (curr) => {
@@ -149,7 +152,10 @@ export default function SettingsScreen({ navigation }) {
         [{ text: 'OK' }]
       );
     } else {
-      Alert.alert('✓ Géolocalisation activée', 'Les fonctionnalités de carte sont maintenant disponibles');
+      Alert.alert(
+        '✓ Géolocalisation activée',
+        'Les fonctionnalités de carte sont maintenant disponibles'
+      );
     }
   };
 
@@ -158,13 +164,17 @@ export default function SettingsScreen({ navigation }) {
       setPushNotifications(value);
       Alert.alert(
         value ? '✓ Notifications activées' : '⚠ Notifications désactivées',
-        value ? 'Vous recevrez les notifications push' : 'Vous ne recevrez plus de notifications push'
+        value
+          ? 'Vous recevrez les notifications push'
+          : 'Vous ne recevrez plus de notifications push'
       );
     } else {
       setEmailNotifications(value);
       Alert.alert(
         value ? '✓ Notifications email activées' : '⚠ Notifications email désactivées',
-        value ? 'Vous recevrez les notifications par email' : 'Vous ne recevrez plus de notifications par email'
+        value
+          ? 'Vous recevrez les notifications par email'
+          : 'Vous ne recevrez plus de notifications par email'
       );
     }
   };
@@ -180,9 +190,9 @@ export default function SettingsScreen({ navigation }) {
   const handle2FAToggle = (value) => {
     setTwoFactorAuth(value);
     if (value) {
-      Alert.alert('✓ 2FA activée', 'L\'authentification à deux facteurs est maintenant activée');
+      Alert.alert('✓ 2FA activée', "L'authentification à deux facteurs est maintenant activée");
     } else {
-      Alert.alert('⚠ 2FA désactivée', 'L\'authentification à deux facteurs a été désactivée');
+      Alert.alert('⚠ 2FA désactivée', "L'authentification à deux facteurs a été désactivée");
     }
   };
 
@@ -216,7 +226,7 @@ export default function SettingsScreen({ navigation }) {
 
   const handleOpenSocialLink = (platform) => {
     Linking.openURL(socialLinks[platform]).catch(() => {
-      Alert.alert('Erreur', 'Impossible d\'ouvrir le lien');
+      Alert.alert('Erreur', "Impossible d'ouvrir le lien");
     });
   };
 
@@ -226,20 +236,16 @@ export default function SettingsScreen({ navigation }) {
       'Votre contribution nous aide à maintenir et améliorer la plateforme pour toute la communauté. Merci de votre soutien !',
       [
         { text: 'Annuler', style: 'cancel' },
-        { text: 'Continuer', onPress: () => navigation.navigate('Donate') }
+        { text: 'Continuer', onPress: () => navigation.navigate('Donate') },
       ]
     );
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      'Déconnexion',
-      'Êtes-vous sûr de vouloir vous déconnecter ?',
-      [
-        { text: 'Annuler', style: 'cancel' },
-        { text: 'Déconnecter', style: 'destructive', onPress: () => navigation.navigate('Login') }
-      ]
-    );
+    Alert.alert('Déconnexion', 'Êtes-vous sûr de vouloir vous déconnecter ?', [
+      { text: 'Annuler', style: 'cancel' },
+      { text: 'Déconnecter', style: 'destructive', onPress: () => navigation.navigate('Login') },
+    ]);
   };
 
   const handleDeleteAccount = () => {
@@ -262,11 +268,9 @@ export default function SettingsScreen({ navigation }) {
     setDeleteEmail('');
     setDeletePassword('');
 
-    Alert.alert(
-      'Compte supprimé',
-      'Votre compte a été définitivement supprimé.',
-      [{ text: 'OK', onPress: () => navigation.navigate('Login') }]
-    );
+    Alert.alert('Compte supprimé', 'Votre compte a été définitivement supprimé.', [
+      { text: 'OK', onPress: () => navigation.navigate('Login') },
+    ]);
   };
 
   return (
@@ -279,7 +283,12 @@ export default function SettingsScreen({ navigation }) {
 
       {/* Header */}
       <View style={[styles.safeArea, { backgroundColor: colors.headerBg, paddingTop: insets.top }]}>
-        <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
+        >
           <TouchableOpacity onPress={handleBack}>
             <ArrowBackIosRounded color={colors.text} size={24} />
           </TouchableOpacity>
@@ -293,7 +302,9 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Compte</Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             <TouchableOpacity style={styles.settingItem} onPress={handleEditProfile}>
               <Text style={[styles.settingLabel, { color: colors.text }]}>Modifier profil</Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
@@ -335,7 +346,9 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Transactions</Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             <TouchableOpacity style={styles.settingItem} onPress={handlePurchases}>
               <Text style={[styles.settingLabel, { color: colors.text }]}>Mes achats</Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
@@ -357,28 +370,60 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Préférences</Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             {/* Apparence */}
             <View style={styles.settingItem}>
               <Text style={[styles.settingLabel, { color: colors.text }]}>Apparence</Text>
               <View style={styles.displayModeButtons}>
                 <TouchableOpacity
-                  style={[styles.displayModeButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, displayMode === 'light' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.displayModeButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    displayMode === 'light' && {
+                      backgroundColor: colors.text,
+                      borderColor: colors.text,
+                    },
+                  ]}
                   onPress={() => handleDisplayModeChange('light')}
                 >
-                  <SunFill color={displayMode === 'light' ? colors.cardBg : colors.text} size={20} />
+                  <SunFill
+                    color={displayMode === 'light' ? colors.cardBg : colors.text}
+                    size={20}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.displayModeButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, displayMode === 'dark' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.displayModeButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    displayMode === 'dark' && {
+                      backgroundColor: colors.text,
+                      borderColor: colors.text,
+                    },
+                  ]}
                   onPress={() => handleDisplayModeChange('dark')}
                 >
-                  <DarkModeRounded color={displayMode === 'dark' ? colors.cardBg : colors.text} size={20} />
+                  <DarkModeRounded
+                    color={displayMode === 'dark' ? colors.cardBg : colors.text}
+                    size={20}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.displayModeButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, displayMode === 'auto' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.displayModeButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    displayMode === 'auto' && {
+                      backgroundColor: colors.text,
+                      borderColor: colors.text,
+                    },
+                  ]}
                   onPress={() => handleDisplayModeChange('auto')}
                 >
-                  <SettingAltFill color={displayMode === 'auto' ? colors.cardBg : colors.text} size={20} />
+                  <SettingAltFill
+                    color={displayMode === 'auto' ? colors.cardBg : colors.text}
+                    size={20}
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -388,18 +433,38 @@ export default function SettingsScreen({ navigation }) {
               <Text style={[styles.settingLabel, { color: colors.text }]}>Langue</Text>
               <View style={styles.languageButtons}>
                 <TouchableOpacity
-                  style={[styles.languageButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, language === 'fr' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.languageButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    language === 'fr' && { backgroundColor: colors.text, borderColor: colors.text },
+                  ]}
                   onPress={() => handleLanguageChange('fr')}
                 >
-                  <Text style={[styles.languageButtonText, { color: colors.text }, language === 'fr' && { color: colors.cardBg }]}>
+                  <Text
+                    style={[
+                      styles.languageButtonText,
+                      { color: colors.text },
+                      language === 'fr' && { color: colors.cardBg },
+                    ]}
+                  >
                     FR
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.languageButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, language === 'en' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.languageButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    language === 'en' && { backgroundColor: colors.text, borderColor: colors.text },
+                  ]}
                   onPress={() => handleLanguageChange('en')}
                 >
-                  <Text style={[styles.languageButtonText, { color: colors.text }, language === 'en' && { color: colors.cardBg }]}>
+                  <Text
+                    style={[
+                      styles.languageButtonText,
+                      { color: colors.text },
+                      language === 'en' && { color: colors.cardBg },
+                    ]}
+                  >
                     EN
                   </Text>
                 </TouchableOpacity>
@@ -411,18 +476,44 @@ export default function SettingsScreen({ navigation }) {
               <Text style={[styles.settingLabel, { color: colors.text }]}>Devise</Text>
               <View style={styles.languageButtons}>
                 <TouchableOpacity
-                  style={[styles.languageButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, currency === 'HTG' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.languageButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    currency === 'HTG' && {
+                      backgroundColor: colors.text,
+                      borderColor: colors.text,
+                    },
+                  ]}
                   onPress={() => handleCurrencyChange('HTG')}
                 >
-                  <Text style={[styles.languageButtonText, { color: colors.text }, currency === 'HTG' && { color: colors.cardBg }]}>
+                  <Text
+                    style={[
+                      styles.languageButtonText,
+                      { color: colors.text },
+                      currency === 'HTG' && { color: colors.cardBg },
+                    ]}
+                  >
                     HTG
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={[styles.languageButton, { borderColor: colors.border, backgroundColor: colors.cardBg }, currency === 'USD' && { backgroundColor: colors.text, borderColor: colors.text }]}
+                  style={[
+                    styles.languageButton,
+                    { borderColor: colors.border, backgroundColor: colors.cardBg },
+                    currency === 'USD' && {
+                      backgroundColor: colors.text,
+                      borderColor: colors.text,
+                    },
+                  ]}
                   onPress={() => handleCurrencyChange('USD')}
                 >
-                  <Text style={[styles.languageButtonText, { color: colors.text }, currency === 'USD' && { color: colors.cardBg }]}>
+                  <Text
+                    style={[
+                      styles.languageButtonText,
+                      { color: colors.text },
+                      currency === 'USD' && { color: colors.cardBg },
+                    ]}
+                  >
                     USD
                   </Text>
                 </TouchableOpacity>
@@ -471,9 +562,13 @@ export default function SettingsScreen({ navigation }) {
 
         {/* CONFIDENTIALITÉ */}
         <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Confidentialité</Text>
+          <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
+            Confidentialité
+          </Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             <View style={styles.settingItem}>
               <Text style={[styles.settingLabel, { color: colors.text }]}>Profil privé</Text>
               <Switch
@@ -485,7 +580,9 @@ export default function SettingsScreen({ navigation }) {
             </View>
 
             <TouchableOpacity style={styles.settingItem} onPress={handleBlockedUsers}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>Utilisateurs bloqués</Text>
+              <Text style={[styles.settingLabel, { color: colors.text }]}>
+                Utilisateurs bloqués
+              </Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
             </TouchableOpacity>
           </View>
@@ -495,9 +592,13 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Sécurité</Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             <View style={styles.settingItem}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>Authentification à 2 facteurs</Text>
+              <Text style={[styles.settingLabel, { color: colors.text }]}>
+                Authentification à 2 facteurs
+              </Text>
               <Switch
                 value={twoFactorAuth}
                 onValueChange={handle2FAToggle}
@@ -512,7 +613,9 @@ export default function SettingsScreen({ navigation }) {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.settingItem} onPress={handleLoginHistory}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>Historique de connexion</Text>
+              <Text style={[styles.settingLabel, { color: colors.text }]}>
+                Historique de connexion
+              </Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
             </TouchableOpacity>
           </View>
@@ -522,23 +625,46 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>Suivez-nous</Text>
 
-          <View style={[styles.socialContainer, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('instagram')}>
+          <View
+            style={[
+              styles.socialContainer,
+              { backgroundColor: colors.cardBg, borderColor: colors.border },
+            ]}
+          >
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('instagram')}
+            >
               <SquareInstagram color={colors.text} size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('tiktok')}>
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('tiktok')}
+            >
               <TiktokSolid color={colors.text} size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('youtube')}>
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('youtube')}
+            >
               <Youtube color={colors.text} size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('facebook')}>
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('facebook')}
+            >
               <Facebook1Solid color={colors.text} size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('twitter')}>
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('twitter')}
+            >
               <SquareXTwitter color={colors.text} size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton} onPress={() => handleOpenSocialLink('pinterest')}>
+            <TouchableOpacity
+              style={styles.socialButton}
+              onPress={() => handleOpenSocialLink('pinterest')}
+            >
               <PinterestSquare color={colors.text} size={24} />
             </TouchableOpacity>
           </View>
@@ -548,19 +674,25 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>À propos</Text>
 
-          <View style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}>
+          <View
+            style={[styles.card, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
+          >
             <View style={styles.settingItem}>
               <Text style={[styles.settingLabel, { color: colors.text }]}>Version</Text>
               <Text style={[styles.settingValueGray, { color: colors.textSecondary }]}>1.0.0</Text>
             </View>
 
             <TouchableOpacity style={styles.settingItem} onPress={handleTerms}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>Conditions d'utilisation</Text>
+              <Text style={[styles.settingLabel, { color: colors.text }]}>
+                Conditions d'utilisation
+              </Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.settingItem} onPress={handlePrivacy}>
-              <Text style={[styles.settingLabel, { color: colors.text }]}>Politique de confidentialité</Text>
+              <Text style={[styles.settingLabel, { color: colors.text }]}>
+                Politique de confidentialité
+              </Text>
               <Text style={[styles.settingValue, { color: colors.text }]}>→</Text>
             </TouchableOpacity>
 
@@ -586,7 +718,13 @@ export default function SettingsScreen({ navigation }) {
 
         {/* ACTIONS */}
         <View style={styles.section}>
-          <TouchableOpacity style={[styles.logoutButton, { borderColor: colors.text, backgroundColor: colors.cardBg }]} onPress={handleLogout}>
+          <TouchableOpacity
+            style={[
+              styles.logoutButton,
+              { borderColor: colors.text, backgroundColor: colors.cardBg },
+            ]}
+            onPress={handleLogout}
+          >
             <Logout1Solid color={colors.text} size={20} />
             <Text style={[styles.logoutButtonText, { color: colors.text }]}>Se déconnecter</Text>
           </TouchableOpacity>
@@ -601,7 +739,12 @@ export default function SettingsScreen({ navigation }) {
       </ScrollView>
 
       {/* Modal Suppression Compte */}
-      <Modal visible={showDeleteModal} transparent={true} animationType="fade" onRequestClose={() => setShowDeleteModal(false)}>
+      <Modal
+        visible={showDeleteModal}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setShowDeleteModal(false)}
+      >
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { backgroundColor: colors.cardBg }]}>
             <View style={styles.modalHeader}>
@@ -610,11 +753,19 @@ export default function SettingsScreen({ navigation }) {
             </View>
 
             <Text style={[styles.modalDescription, { color: colors.textSecondary }]}>
-              Pour confirmer la suppression de votre compte, veuillez entrer votre adresse mail et votre mot de passe.
+              Pour confirmer la suppression de votre compte, veuillez entrer votre adresse mail et
+              votre mot de passe.
             </Text>
 
             <TextInput
-              style={[styles.modalInput, { backgroundColor: colors.background, color: colors.text, borderColor: colors.border }]}
+              style={[
+                styles.modalInput,
+                {
+                  backgroundColor: colors.background,
+                  color: colors.text,
+                  borderColor: colors.border,
+                },
+              ]}
               placeholder="Adresse email"
               placeholderTextColor={colors.textSecondary}
               value={deleteEmail}
@@ -624,7 +775,14 @@ export default function SettingsScreen({ navigation }) {
             />
 
             <TextInput
-              style={[styles.modalInput, { backgroundColor: colors.background, color: colors.text, borderColor: colors.border }]}
+              style={[
+                styles.modalInput,
+                {
+                  backgroundColor: colors.background,
+                  color: colors.text,
+                  borderColor: colors.border,
+                },
+              ]}
               placeholder="Mot de passe"
               placeholderTextColor={colors.textSecondary}
               value={deletePassword}
@@ -634,7 +792,11 @@ export default function SettingsScreen({ navigation }) {
 
             <View style={styles.modalButtons}>
               <TouchableOpacity
-                style={[styles.modalButton, styles.modalButtonCancel, { borderColor: colors.border, backgroundColor: colors.cardBg }]}
+                style={[
+                  styles.modalButton,
+                  styles.modalButtonCancel,
+                  { borderColor: colors.border, backgroundColor: colors.cardBg },
+                ]}
                 onPress={() => {
                   setShowDeleteModal(false);
                   setDeleteEmail('');
@@ -661,40 +823,136 @@ export default function SettingsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   safeArea: {},
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   headerTitle: { fontSize: 16, fontWeight: '600' },
   section: { marginTop: 24, paddingHorizontal: 16 },
-  sectionTitle: { fontSize: 13, fontWeight: '600', textTransform: 'uppercase', marginBottom: 12, letterSpacing: 0.5 },
+  sectionTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    marginBottom: 12,
+    letterSpacing: 0.5,
+  },
   card: { borderRadius: 12, borderWidth: 1, overflow: 'hidden' },
-  settingItem: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 14, paddingHorizontal: 16 },
+  settingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+  },
   settingLabelContainer: { flex: 1 },
   settingLabel: { fontSize: 15, fontWeight: '500' },
   warningText: { fontSize: 11, color: '#EF4444', marginTop: 2 },
   settingValue: { fontSize: 16, fontWeight: '600' },
   settingValueGray: { fontSize: 14 },
   displayModeButtons: { flexDirection: 'row', gap: 8 },
-  displayModeButton: { width: 40, height: 40, borderRadius: 8, borderWidth: 1, alignItems: 'center', justifyContent: 'center' },
+  displayModeButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   languageButtons: { flexDirection: 'row', gap: 8 },
   languageButton: { paddingHorizontal: 16, paddingVertical: 6, borderRadius: 6, borderWidth: 1 },
   languageButtonText: { fontSize: 13, fontWeight: '600' },
-  verificationButton: { backgroundColor: '#3B82F6', paddingVertical: 12, borderRadius: 8, alignItems: 'center', marginTop: 12, flexDirection: 'row', justifyContent: 'center', gap: 8 },
+  verificationButton: {
+    backgroundColor: '#3B82F6',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
   verificationButtonText: { color: '#ffffff', fontSize: 14, fontWeight: '600' },
-  verifiedBadgeContainer: { backgroundColor: '#E8F5E9', paddingVertical: 12, borderRadius: 8, alignItems: 'center', marginTop: 12, flexDirection: 'row', justifyContent: 'center', gap: 8 },
+  verifiedBadgeContainer: {
+    backgroundColor: '#E8F5E9',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
   verifiedBadgeText: { color: '#22C55E', fontSize: 14, fontWeight: '600' },
-  socialContainer: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', paddingVertical: 12, paddingHorizontal: 12, borderRadius: 12, borderWidth: 1, gap: 6 },
+  socialContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    gap: 6,
+  },
   socialButton: { width: '31%', alignItems: 'center', paddingVertical: 6 },
-  donateButton: { backgroundColor: '#FF69B4', paddingVertical: 14, borderRadius: 50, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8, shadowColor: '#FF69B4', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.4, shadowRadius: 10, elevation: 8 },
+  donateButton: {
+    backgroundColor: '#FF69B4',
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+    shadowColor: '#FF69B4',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 8,
+  },
   donateButtonText: { color: '#ffffff', fontSize: 15, fontWeight: '700', letterSpacing: 0.5 },
-  logoutButton: { borderWidth: 1, paddingVertical: 14, borderRadius: 8, alignItems: 'center', marginBottom: 12, flexDirection: 'row', justifyContent: 'center', gap: 8 },
+  logoutButton: {
+    borderWidth: 1,
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
   logoutButtonText: { fontSize: 15, fontWeight: '600' },
-  deleteButton: { backgroundColor: '#EF4444', paddingVertical: 14, borderRadius: 8, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', gap: 8 },
+  deleteButton: {
+    backgroundColor: '#EF4444',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+  },
   deleteButtonText: { color: '#FFFFFF', fontSize: 15, fontWeight: '600' },
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
   modalContent: { width: '100%', borderRadius: 16, padding: 24, maxWidth: 400 },
   modalHeader: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
   modalTitle: { fontSize: 18, fontWeight: '700' },
   modalDescription: { fontSize: 14, lineHeight: 20, marginBottom: 20 },
-  modalInput: { borderWidth: 1, borderRadius: 8, paddingHorizontal: 16, paddingVertical: 12, fontSize: 15, marginBottom: 12 },
+  modalInput: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 15,
+    marginBottom: 12,
+  },
   modalButtons: { flexDirection: 'row', gap: 12, marginTop: 8 },
   modalButton: { flex: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   modalButtonCancel: { borderWidth: 1 },

@@ -18,11 +18,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import {
-  ArrowBackIosRounded,
-  MailRounded,
-  ClockFilled,
-} from '../components/icons';
+import { ArrowBackIosRounded, MailRounded, ClockFilled } from '../components/icons';
 
 export default function ManageEmailScreen({ navigation }) {
   const insets = useSafeAreaInsets();
@@ -116,9 +112,9 @@ export default function ManageEmailScreen({ navigation }) {
     setNewEmailError('');
 
     if (text.length > 0 && !validateEmail(text)) {
-      setNewEmailError('Format d\'email invalide');
+      setNewEmailError("Format d'email invalide");
     } else if (text.toLowerCase() === currentEmail.toLowerCase()) {
-      setNewEmailError('Le nouvel email doit être différent de l\'actuel');
+      setNewEmailError("Le nouvel email doit être différent de l'actuel");
     }
   };
 
@@ -130,7 +126,10 @@ export default function ManageEmailScreen({ navigation }) {
       setOldEmailCodeSent(true);
       setOldEmailResendTimer(60);
       setCanResendOldEmail(false);
-      Alert.alert('Code envoyé', `Un code de vérification a été envoyé à ${maskEmail(currentEmail)}`);
+      Alert.alert(
+        'Code envoyé',
+        `Un code de vérification a été envoyé à ${maskEmail(currentEmail)}`
+      );
     } catch (error) {
       Alert.alert('Erreur', "Impossible d'envoyer le code. Veuillez réessayer.");
     } finally {
@@ -256,11 +255,18 @@ export default function ManageEmailScreen({ navigation }) {
 
           {!oldEmailCodeSent ? (
             <>
-              <View style={[styles.infoBox, { backgroundColor: colors.inputBg, borderColor: colors.border }]}>
+              <View
+                style={[
+                  styles.infoBox,
+                  { backgroundColor: colors.inputBg, borderColor: colors.border },
+                ]}
+              >
                 <Ionicons name="mail" size={24} color={colors.textSecondary} />
                 <View style={styles.infoContent}>
                   <Text style={[styles.infoTitle, { color: colors.text }]}>Email actuel</Text>
-                  <Text style={[styles.infoText, { color: colors.textSecondary }]}>{currentEmail}</Text>
+                  <Text style={[styles.infoText, { color: colors.textSecondary }]}>
+                    {currentEmail}
+                  </Text>
                   <Text style={[styles.infoSubtext, { color: colors.textSecondary }]}>
                     Un code de vérification sera envoyé à cette adresse
                   </Text>
@@ -268,14 +274,19 @@ export default function ManageEmailScreen({ navigation }) {
               </View>
 
               <TouchableOpacity
-                style={[styles.button, { backgroundColor: sendingOldEmailCode ? colors.buttonDisabled : colors.button }]}
+                style={[
+                  styles.button,
+                  { backgroundColor: sendingOldEmailCode ? colors.buttonDisabled : colors.button },
+                ]}
                 onPress={handleSendOldEmailCode}
                 disabled={sendingOldEmailCode}
               >
                 {sendingOldEmailCode ? (
                   <ActivityIndicator color={colors.buttonText} />
                 ) : (
-                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>Envoyer le code</Text>
+                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                    Envoyer le code
+                  </Text>
                 )}
               </TouchableOpacity>
             </>
@@ -311,7 +322,9 @@ export default function ManageEmailScreen({ navigation }) {
                 {oldEmailCodeError && (
                   <View style={styles.messageContainer}>
                     <Ionicons name="close-circle" size={14} color={colors.error} />
-                    <Text style={[styles.messageText, { color: colors.error }]}>{oldEmailCodeError}</Text>
+                    <Text style={[styles.messageText, { color: colors.error }]}>
+                      {oldEmailCodeError}
+                    </Text>
                   </View>
                 )}
                 <Text style={[styles.hintText, { color: colors.textSecondary }]}>
@@ -324,7 +337,9 @@ export default function ManageEmailScreen({ navigation }) {
                   styles.button,
                   {
                     backgroundColor:
-                      oldEmailVerificationCode.length === 6 && !verifyingOldEmailCode ? colors.button : colors.buttonDisabled,
+                      oldEmailVerificationCode.length === 6 && !verifyingOldEmailCode
+                        ? colors.button
+                        : colors.buttonDisabled,
                   },
                 ]}
                 onPress={handleVerifyOldEmailCode}
@@ -333,15 +348,25 @@ export default function ManageEmailScreen({ navigation }) {
                 {verifyingOldEmailCode ? (
                   <ActivityIndicator color={colors.buttonText} />
                 ) : (
-                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>Vérifier le code</Text>
+                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                    Vérifier le code
+                  </Text>
                 )}
               </TouchableOpacity>
 
               <View style={styles.resendContainer}>
                 <TouchableOpacity onPress={handleResendOldEmailCode} disabled={!canResendOldEmail}>
                   <View style={styles.resendRow}>
-                    <ClockFilled color={canResendOldEmail ? colors.text : colors.textSecondary} size={22} />
-                    <Text style={[styles.resendText, { color: canResendOldEmail ? colors.text : colors.textSecondary }]}>
+                    <ClockFilled
+                      color={canResendOldEmail ? colors.text : colors.textSecondary}
+                      size={22}
+                    />
+                    <Text
+                      style={[
+                        styles.resendText,
+                        { color: canResendOldEmail ? colors.text : colors.textSecondary },
+                      ]}
+                    >
                       Renvoyer le code {canResendOldEmail ? '' : `(${oldEmailResendTimer}s)`}
                     </Text>
                   </View>
@@ -417,7 +442,8 @@ export default function ManageEmailScreen({ navigation }) {
             style={[
               styles.button,
               {
-                backgroundColor: isNewEmailValid() && !sendingNewEmailCode ? colors.button : colors.buttonDisabled,
+                backgroundColor:
+                  isNewEmailValid() && !sendingNewEmailCode ? colors.button : colors.buttonDisabled,
               },
             ]}
             onPress={handleSendNewEmailCode}
@@ -426,7 +452,9 @@ export default function ManageEmailScreen({ navigation }) {
             {sendingNewEmailCode ? (
               <ActivityIndicator color={colors.buttonText} />
             ) : (
-              <Text style={[styles.buttonText, { color: colors.buttonText }]}>Envoyer le code de vérification</Text>
+              <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                Envoyer le code de vérification
+              </Text>
             )}
           </TouchableOpacity>
         </View>
@@ -483,7 +511,9 @@ export default function ManageEmailScreen({ navigation }) {
             styles.button,
             {
               backgroundColor:
-                newEmailVerificationCode.length === 6 && !loading ? colors.button : colors.buttonDisabled,
+                newEmailVerificationCode.length === 6 && !loading
+                  ? colors.button
+                  : colors.buttonDisabled,
             },
           ]}
           onPress={handleVerifyNewEmailCode}
@@ -499,8 +529,16 @@ export default function ManageEmailScreen({ navigation }) {
         <View style={styles.resendContainer}>
           <TouchableOpacity onPress={handleResendNewEmailCode} disabled={!canResendNewEmail}>
             <View style={styles.resendRow}>
-              <ClockFilled color={canResendNewEmail ? colors.text : colors.textSecondary} size={22} />
-              <Text style={[styles.resendText, { color: canResendNewEmail ? colors.text : colors.textSecondary }]}>
+              <ClockFilled
+                color={canResendNewEmail ? colors.text : colors.textSecondary}
+                size={22}
+              />
+              <Text
+                style={[
+                  styles.resendText,
+                  { color: canResendNewEmail ? colors.text : colors.textSecondary },
+                ]}
+              >
                 Renvoyer le code {canResendNewEmail ? '' : `(${newEmailResendTimer}s)`}
               </Text>
             </View>
@@ -519,7 +557,12 @@ export default function ManageEmailScreen({ navigation }) {
       />
 
       <View style={[styles.safeArea, { backgroundColor: colors.headerBg, paddingTop: insets.top }]}>
-        <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
+        >
           <TouchableOpacity onPress={handleBack} style={styles.backButton}>
             <ArrowBackIosRounded color={colors.text} size={24} />
           </TouchableOpacity>
@@ -529,7 +572,10 @@ export default function ManageEmailScreen({ navigation }) {
       </View>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardView}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+        >
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}

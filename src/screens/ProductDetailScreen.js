@@ -56,7 +56,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
     size: '42',
     color: 'Noir/Blanc',
     brand: 'Nike',
-    description: 'Chaussures Nike Air Max 90 en très bon état. Portées seulement quelques fois. Taille 42. Couleur noir et blanc. Idéales pour le sport ou un look casual. #nike #airmax #sneakers #chaussures',
+    description:
+      'Chaussures Nike Air Max 90 en très bon état. Portées seulement quelques fois. Taille 42. Couleur noir et blanc. Idéales pour le sport ou un look casual. #nike #airmax #sneakers #chaussures',
     images: [
       'https://picsum.photos/400/400?random=1',
       'https://picsum.photos/400/400?random=2',
@@ -88,10 +89,30 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
   // Similar products mock data
   const similarProducts = [
-    { id: 's1', title: 'Nike Air Force 1', price: 65000, image: 'https://picsum.photos/150/150?random=20' },
-    { id: 's2', title: 'Adidas Stan Smith', price: 55000, image: 'https://picsum.photos/150/150?random=21' },
-    { id: 's3', title: 'Puma RS-X', price: 72000, image: 'https://picsum.photos/150/150?random=22' },
-    { id: 's4', title: 'New Balance 574', price: 68000, image: 'https://picsum.photos/150/150?random=23' },
+    {
+      id: 's1',
+      title: 'Nike Air Force 1',
+      price: 65000,
+      image: 'https://picsum.photos/150/150?random=20',
+    },
+    {
+      id: 's2',
+      title: 'Adidas Stan Smith',
+      price: 55000,
+      image: 'https://picsum.photos/150/150?random=21',
+    },
+    {
+      id: 's3',
+      title: 'Puma RS-X',
+      price: 72000,
+      image: 'https://picsum.photos/150/150?random=22',
+    },
+    {
+      id: 's4',
+      title: 'New Balance 574',
+      price: 68000,
+      image: 'https://picsum.photos/150/150?random=23',
+    },
   ];
 
   const reportReasons = [
@@ -286,9 +307,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
       <TouchableOpacity style={styles.actionButton} onPress={handleRepost}>
         <Repeat color={isReposted ? colors.success : colors.text} size={24} />
-        <Text style={[styles.actionText, { color: colors.textSecondary }]}>
-          Republier
-        </Text>
+        <Text style={[styles.actionText, { color: colors.textSecondary }]}>Republier</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.actionButton} onPress={handleAddToCart}>
@@ -300,23 +319,17 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
       <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
         <ShareForwardFill color={colors.text} size={24} />
-        <Text style={[styles.actionText, { color: colors.textSecondary }]}>
-          Partager
-        </Text>
+        <Text style={[styles.actionText, { color: colors.textSecondary }]}>Partager</Text>
       </TouchableOpacity>
     </View>
   );
 
   const renderProductInfo = () => (
     <View style={styles.productInfoSection}>
-      <Text style={[styles.productTitle, { color: colors.text }]}>
-        {product.title}
-      </Text>
+      <Text style={[styles.productTitle, { color: colors.text }]}>{product.title}</Text>
 
       <View style={styles.priceRow}>
-        <Text style={[styles.price, { color: colors.text }]}>
-          {formatPrice(product.price)}
-        </Text>
+        <Text style={[styles.price, { color: colors.text }]}>{formatPrice(product.price)}</Text>
         {product.originalPrice && product.originalPrice > product.price && (
           <Text style={[styles.originalPrice, { color: colors.textSecondary }]}>
             {formatPrice(product.originalPrice)}
@@ -334,24 +347,18 @@ const ProductDetailScreen = ({ navigation, route }) => {
 
         <View style={styles.statItem}>
           <ClockFilled color={colors.textSecondary} size={16} />
-          <Text style={[styles.statText, { color: colors.textSecondary }]}>
-            {product.timeAgo}
-          </Text>
+          <Text style={[styles.statText, { color: colors.textSecondary }]}>{product.timeAgo}</Text>
         </View>
 
         <TouchableOpacity style={styles.statItem} onPress={handleMapPress}>
           <MapMarkerAlt color={colors.primary} size={16} />
-          <Text style={[styles.statText, { color: colors.primary }]}>
-            {product.distance}
-          </Text>
+          <Text style={[styles.statText, { color: colors.primary }]}>{product.distance}</Text>
         </TouchableOpacity>
 
         {product.deliverable && (
           <View style={styles.statItem}>
             <Truck color={colors.success} size={16} />
-            <Text style={[styles.statText, { color: colors.success }]}>
-              Livrable
-            </Text>
+            <Text style={[styles.statText, { color: colors.success }]}>Livrable</Text>
           </View>
         )}
       </View>
@@ -395,18 +402,13 @@ const ProductDetailScreen = ({ navigation, route }) => {
   const renderSellerInfo = () => (
     <View style={[styles.sellerSection, { backgroundColor: colors.surface }]}>
       <TouchableOpacity style={styles.sellerInfo} onPress={handleProfilePress}>
-        <Image
-          source={{ uri: product.seller.avatar }}
-          style={styles.sellerAvatar}
-        />
+        <Image source={{ uri: product.seller.avatar }} style={styles.sellerAvatar} />
         <View style={styles.sellerDetails}>
           <View style={styles.sellerNameRow}>
             <Text style={[styles.sellerName, { color: colors.text }]}>
               {product.seller.username}
             </Text>
-            {product.seller.verified && (
-              <VerifiedCheckFill color={colors.primary} size={14} />
-            )}
+            {product.seller.verified && <VerifiedCheckFill color={colors.primary} size={14} />}
           </View>
           <View style={styles.sellerRating}>
             <StarSolid color="#FFD700" size={14} />
@@ -430,12 +432,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
         ]}
         onPress={handleFollow}
       >
-        <Text
-          style={[
-            styles.followButtonText,
-            { color: isFollowing ? colors.text : '#FFFFFF' },
-          ]}
-        >
+        <Text style={[styles.followButtonText, { color: isFollowing ? colors.text : '#FFFFFF' }]}>
           {isFollowing ? 'Abonné' : 'Suivre'}
         </Text>
       </TouchableOpacity>
@@ -445,13 +442,9 @@ const ProductDetailScreen = ({ navigation, route }) => {
   const renderSimilarProducts = () => (
     <View style={styles.similarSection}>
       <View style={styles.sectionHeader}>
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>
-          Articles similaires
-        </Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Articles similaires</Text>
         <TouchableOpacity onPress={handleViewMore}>
-          <Text style={[styles.viewMoreText, { color: colors.primary }]}>
-            Voir plus
-          </Text>
+          <Text style={[styles.viewMoreText, { color: colors.primary }]}>Voir plus</Text>
         </TouchableOpacity>
       </View>
 
@@ -465,14 +458,8 @@ const ProductDetailScreen = ({ navigation, route }) => {
             style={[styles.similarItem, { backgroundColor: colors.surface }]}
             onPress={() => handleSimilarProductPress(item)}
           >
-            <Image
-              source={{ uri: item.image }}
-              style={styles.similarImage}
-            />
-            <Text
-              style={[styles.similarTitle, { color: colors.text }]}
-              numberOfLines={1}
-            >
+            <Image source={{ uri: item.image }} style={styles.similarImage} />
+            <Text style={[styles.similarTitle, { color: colors.text }]} numberOfLines={1}>
               {item.title}
             </Text>
             <Text style={[styles.similarPrice, { color: colors.primary }]}>
@@ -500,9 +487,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
         style={[styles.messageButton, { borderColor: colors.primary }]}
         onPress={handleMessage}
       >
-        <Text style={[styles.messageButtonText, { color: colors.primary }]}>
-          Message
-        </Text>
+        <Text style={[styles.messageButtonText, { color: colors.primary }]}>Message</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -524,9 +509,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, { backgroundColor: colors.background }]}>
           <View style={styles.modalHeader}>
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Faire une offre
-            </Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>Faire une offre</Text>
             <TouchableOpacity onPress={() => setShowOfferModal(false)}>
               <Close color={colors.text} size={24} />
             </TouchableOpacity>
@@ -573,9 +556,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, { backgroundColor: colors.background }]}>
           <View style={styles.modalHeader}>
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Signaler l'annonce
-            </Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>Signaler l'annonce</Text>
             <TouchableOpacity onPress={() => setShowReportModal(false)}>
               <Close color={colors.text} size={24} />
             </TouchableOpacity>
@@ -589,8 +570,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
                 {
                   backgroundColor:
                     selectedReport === reason ? colors.primary + '20' : colors.surface,
-                  borderColor:
-                    selectedReport === reason ? colors.primary : colors.border,
+                  borderColor: selectedReport === reason ? colors.primary : colors.border,
                 },
               ]}
               onPress={() => setSelectedReport(reason)}
@@ -656,9 +636,7 @@ const ProductDetailScreen = ({ navigation, route }) => {
           <ArrowBackIosRounded color={colors.text} size={24} />
         </TouchableOpacity>
 
-        <Text style={[styles.headerTitle, { color: colors.text }]}>
-          Détails
-        </Text>
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Détails</Text>
 
         <TouchableOpacity onPress={handleReport} style={styles.headerButton}>
           <Warning color={colors.textSecondary} size={24} />

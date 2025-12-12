@@ -114,37 +114,36 @@ const SearchResultsScreen = ({ route, navigation }) => {
       const lowerQuery = query.toLowerCase();
 
       const mockResults = {
-        products:
-          lowerQuery.includes('nike')
+        products: lowerQuery.includes('nike')
+          ? [
+              {
+                id: 'p1',
+                title: 'Nike Air Force 1',
+                price: '5 000',
+                originalPrice: '7 500',
+                discount: 33,
+                currency: 'HTG',
+                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
+              },
+              {
+                id: 'p2',
+                title: 'Nike Air Max 90',
+                price: '6 500',
+                currency: 'HTG',
+                image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&q=80',
+              },
+            ]
+          : lowerQuery.includes('iphone')
             ? [
                 {
-                  id: 'p1',
-                  title: 'Nike Air Force 1',
-                  price: '5 000',
-                  originalPrice: '7 500',
-                  discount: 33,
+                  id: 'p3',
+                  title: 'iPhone 13 Pro Max',
+                  price: '45 000',
                   currency: 'HTG',
-                  image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
-                },
-                {
-                  id: 'p2',
-                  title: 'Nike Air Max 90',
-                  price: '6 500',
-                  currency: 'HTG',
-                  image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500&q=80',
+                  image: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=500&q=80',
                 },
               ]
-            : lowerQuery.includes('iphone')
-              ? [
-                  {
-                    id: 'p3',
-                    title: 'iPhone 13 Pro Max',
-                    price: '45 000',
-                    currency: 'HTG',
-                    image: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=500&q=80',
-                  },
-                ]
-              : [],
+            : [],
 
         profiles:
           lowerQuery.includes('nike') || lowerQuery.includes('sneaker')
@@ -180,7 +179,8 @@ const SearchResultsScreen = ({ route, navigation }) => {
                   authorId: 'user12',
                   authorImage: 'https://i.pravatar.cc/150?img=12',
                   verified: true,
-                  productImage: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=80',
+                  productImage:
+                    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=80',
                 },
               ]
             : [],
@@ -313,7 +313,10 @@ const SearchResultsScreen = ({ route, navigation }) => {
       >
         <Image source={{ uri: item.image }} style={styles.productImage} />
 
-        <LinearGradient colors={['transparent', 'rgba(0,0,0,0.8)']} style={styles.gradientOverlay} />
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,0.8)']}
+          style={styles.gradientOverlay}
+        />
 
         <View style={styles.productInfoOverlay}>
           <View style={styles.productTextSection}>
@@ -325,9 +328,7 @@ const SearchResultsScreen = ({ route, navigation }) => {
             </Text>
             {item.discount ? (
               <View style={styles.priceRow}>
-                <Text
-                  style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}
-                >
+                <Text style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}>
                   {item.originalPrice}
                 </Text>
                 <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
@@ -365,7 +366,10 @@ const SearchResultsScreen = ({ route, navigation }) => {
           {item.username}
         </Text>
 
-        <Text style={[styles.profileAccountType, { color: colors.textSecondary }]} numberOfLines={1}>
+        <Text
+          style={[styles.profileAccountType, { color: colors.textSecondary }]}
+          numberOfLines={1}
+        >
           {item.accountType}
         </Text>
 
@@ -380,7 +384,10 @@ const SearchResultsScreen = ({ route, navigation }) => {
   const renderRequestItem = ({ item }) => (
     <View style={styles.requestWrapper} key={item.id}>
       <TouchableOpacity
-        style={[styles.requestCard, { backgroundColor: colors.requestBg, borderColor: colors.border }]}
+        style={[
+          styles.requestCard,
+          { backgroundColor: colors.requestBg, borderColor: colors.border },
+        ]}
         onPress={() => handleRequestPress(item)}
         activeOpacity={0.9}
       >
@@ -604,10 +611,7 @@ const SearchResultsScreen = ({ route, navigation }) => {
 
         {/* Header avec recherche */}
         <View
-          style={[
-            styles.header,
-            { borderBottomColor: colors.border, paddingTop: insets.top + 8 },
-          ]}
+          style={[styles.header, { borderBottomColor: colors.border, paddingTop: insets.top + 8 }]}
         >
           <TouchableOpacity onPress={handleBack} style={styles.backButton}>
             <ArrowBackIosRounded color={colors.text} size={24} />
@@ -645,7 +649,10 @@ const SearchResultsScreen = ({ route, navigation }) => {
         {/* Recherches récentes */}
         <View style={[styles.recentSearchContainer, { backgroundColor: colors.background }]}>
           <Text style={[styles.recentSearchHeading, { color: colors.textSecondary }]}>Récent</Text>
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 20 }}
+          >
             {recentSearches.map((search, index) => (
               <View key={index} style={styles.recentSearchItem}>
                 <TouchableOpacity
@@ -673,10 +680,7 @@ const SearchResultsScreen = ({ route, navigation }) => {
 
       {/* Header avec recherche */}
       <View
-        style={[
-          styles.header,
-          { borderBottomColor: colors.border, paddingTop: insets.top + 8 },
-        ]}
+        style={[styles.header, { borderBottomColor: colors.border, paddingTop: insets.top + 8 }]}
       >
         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
           <ArrowBackIosRounded color={colors.text} size={24} />
