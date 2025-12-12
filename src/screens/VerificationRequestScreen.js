@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, StatusBar, useColorScheme, TextInput, Alert, Platform, ActionSheetIOS } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+  useColorScheme,
+  TextInput,
+  Alert,
+  Platform,
+  ActionSheetIOS,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
@@ -54,7 +66,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
   const validateDocumentNumber = (type, number) => {
     if (!number) return false;
 
-    switch(type) {
+    switch (type) {
       case 'id':
         return /^\d{10}$/.test(number);
       case 'passport':
@@ -83,7 +95,12 @@ export default function VerificationRequestScreen({ route, navigation }) {
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['Annuler', 'Prendre une photo', 'Choisir dans la galerie', 'Choisir un fichier'],
+          options: [
+            'Annuler',
+            'Prendre une photo',
+            'Choisir dans la galerie',
+            'Choisir un fichier',
+          ],
           cancelButtonIndex: 0,
         },
         (buttonIndex) => {
@@ -97,16 +114,12 @@ export default function VerificationRequestScreen({ route, navigation }) {
         }
       );
     } else {
-      Alert.alert(
-        'Sélectionner',
-        'Choisissez une option',
-        [
-          { text: 'Annuler', style: 'cancel' },
-          { text: 'Prendre une photo', onPress: () => takePhoto(setDocument, documentName) },
-          { text: 'Galerie', onPress: () => pickImage(setDocument, documentName) },
-          { text: 'Fichier', onPress: () => pickDocument(setDocument, documentName) },
-        ]
-      );
+      Alert.alert('Sélectionner', 'Choisissez une option', [
+        { text: 'Annuler', style: 'cancel' },
+        { text: 'Prendre une photo', onPress: () => takePhoto(setDocument, documentName) },
+        { text: 'Galerie', onPress: () => pickImage(setDocument, documentName) },
+        { text: 'Fichier', onPress: () => pickDocument(setDocument, documentName) },
+      ]);
     }
   };
 
@@ -115,7 +128,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
       const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Alert.alert('Permission refusée', 'Vous devez autoriser l\'accès à la caméra');
+        Alert.alert('Permission refusée', "Vous devez autoriser l'accès à la caméra");
         return;
       }
 
@@ -141,7 +154,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
       if (permissionResult.granted === false) {
-        Alert.alert('Permission refusée', 'Vous devez autoriser l\'accès à la galerie');
+        Alert.alert('Permission refusée', "Vous devez autoriser l'accès à la galerie");
         return;
       }
 
@@ -159,7 +172,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
         });
       }
     } catch (error) {
-      Alert.alert('Erreur', 'Impossible de sélectionner l\'image');
+      Alert.alert('Erreur', "Impossible de sélectionner l'image");
     }
   };
 
@@ -203,7 +216,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
   };
 
   const getDocumentNumberPlaceholder = () => {
-    switch(documentType) {
+    switch (documentType) {
       case 'id':
         return '10 chiffres (ex: 1234567890)';
       case 'passport':
@@ -254,7 +267,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
 
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setIsSubmitting(false);
     setSubmitted(true);
@@ -263,22 +276,41 @@ export default function VerificationRequestScreen({ route, navigation }) {
   if (hasPendingRequest || submitted) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.headerBg} translucent={false} />
-        <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border, paddingTop: insets.top }]}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={colors.headerBg}
+          translucent={false}
+        />
+        <View
+          style={[
+            styles.header,
+            {
+              backgroundColor: colors.headerBg,
+              borderBottomColor: colors.border,
+              paddingTop: insets.top,
+            },
+          ]}
+        >
           <TouchableOpacity onPress={handleBack} style={styles.headerLeft}>
             <ArrowBackIosRounded color={colors.text} size={24} />
           </TouchableOpacity>
           <View style={styles.headerCenter}>
-            <Text style={[styles.headerTitle, { color: colors.text }]}>Demande de vérification</Text>
+            <Text style={[styles.headerTitle, { color: colors.text }]}>
+              Demande de vérification
+            </Text>
           </View>
           <View style={styles.headerRight} />
         </View>
 
         <View style={styles.pendingContainer}>
           <VerifiedCheckFill color="#3B82F6" size={80} />
-          <Text style={[styles.pendingTitle, { color: colors.text }]}>Demande en cours de traitement</Text>
+          <Text style={[styles.pendingTitle, { color: colors.text }]}>
+            Demande en cours de traitement
+          </Text>
           <Text style={[styles.pendingMessage, { color: colors.textSecondary }]}>
-            Votre demande de vérification a bien été envoyée. Elle est actuellement en cours de traitement par notre équipe. Vous recevrez une notification dès qu'une décision aura été prise. Merci pour votre patience.
+            Votre demande de vérification a bien été envoyée. Elle est actuellement en cours de
+            traitement par notre équipe. Vous recevrez une notification dès qu'une décision aura été
+            prise. Merci pour votre patience.
           </Text>
         </View>
       </View>
@@ -287,8 +319,21 @@ export default function VerificationRequestScreen({ route, navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.headerBg} translucent={false} />
-      <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border, paddingTop: insets.top }]}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.headerBg}
+        translucent={false}
+      />
+      <View
+        style={[
+          styles.header,
+          {
+            backgroundColor: colors.headerBg,
+            borderBottomColor: colors.border,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
         <TouchableOpacity onPress={handleBack} style={styles.headerLeft}>
           <ArrowBackIosRounded color={colors.text} size={24} />
         </TouchableOpacity>
@@ -298,29 +343,47 @@ export default function VerificationRequestScreen({ route, navigation }) {
         <View style={styles.headerRight} />
       </View>
 
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={true}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+      >
         <View style={styles.iconContainer}>
           <VerifiedCheckFill color="#3B82F6" size={48} />
         </View>
 
         <View style={styles.introSection}>
-          <Text style={[styles.introTitle, { color: colors.text }]}>Pourquoi se faire vérifier ?</Text>
+          <Text style={[styles.introTitle, { color: colors.text }]}>
+            Pourquoi se faire vérifier ?
+          </Text>
           <Text style={[styles.introText, { color: colors.textSecondary }]}>
-            La vérification permet d'assurer que votre compte est authentique, fiable et représente réellement la personne ou l'entité qu'il prétend être. Elle aide la communauté à reconnaître les profils sérieux et à renforcer la sécurité des échanges.
+            La vérification permet d'assurer que votre compte est authentique, fiable et représente
+            réellement la personne ou l'entité qu'il prétend être. Elle aide la communauté à
+            reconnaître les profils sérieux et à renforcer la sécurité des échanges.
           </Text>
         </View>
 
         <View style={styles.formSection}>
-          <Text style={[styles.formTitle, { color: colors.text }]}>Formulaire de demande de vérification</Text>
+          <Text style={[styles.formTitle, { color: colors.text }]}>
+            Formulaire de demande de vérification
+          </Text>
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>1. Informations personnelles</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            1. Informations personnelles
+          </Text>
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Nom complet <Text style={styles.required}>*</Text></Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Nom complet <Text style={styles.required}>*</Text>
+            </Text>
             <TextInput
               style={[
                 styles.input,
-                { backgroundColor: colors.inputBg, color: colors.text, borderColor: errors.fullName ? colors.errorBorder : colors.border }
+                {
+                  backgroundColor: colors.inputBg,
+                  color: colors.text,
+                  borderColor: errors.fullName ? colors.errorBorder : colors.border,
+                },
               ]}
               placeholder="Votre nom complet"
               placeholderTextColor={colors.textSecondary}
@@ -335,13 +398,15 @@ export default function VerificationRequestScreen({ route, navigation }) {
           </View>
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Type de document <Text style={styles.required}>*</Text></Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Type de document <Text style={styles.required}>*</Text>
+            </Text>
             <View style={styles.documentTypeContainer}>
               <TouchableOpacity
                 style={[
                   styles.documentTypeButton,
                   { borderColor: errors.documentType ? colors.errorBorder : colors.border },
-                  documentType === 'id' && { backgroundColor: colors.selectedBg }
+                  documentType === 'id' && { backgroundColor: colors.selectedBg },
                 ]}
                 onPress={() => {
                   setDocumentType('id');
@@ -352,13 +417,15 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 }}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.documentTypeText, { color: colors.text }]}>Carte d'identité</Text>
+                <Text style={[styles.documentTypeText, { color: colors.text }]}>
+                  Carte d'identité
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
                   styles.documentTypeButton,
                   { borderColor: errors.documentType ? colors.errorBorder : colors.border },
-                  documentType === 'passport' && { backgroundColor: colors.selectedBg }
+                  documentType === 'passport' && { backgroundColor: colors.selectedBg },
                 ]}
                 onPress={() => {
                   setDocumentType('passport');
@@ -375,7 +442,7 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 style={[
                   styles.documentTypeButton,
                   { borderColor: errors.documentType ? colors.errorBorder : colors.border },
-                  documentType === 'license' && { backgroundColor: colors.selectedBg }
+                  documentType === 'license' && { backgroundColor: colors.selectedBg },
                 ]}
                 onPress={() => {
                   setDocumentType('license');
@@ -386,18 +453,26 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 }}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.documentTypeText, { color: colors.text }]}>Permis de conduire</Text>
+                <Text style={[styles.documentTypeText, { color: colors.text }]}>
+                  Permis de conduire
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
 
           {documentType && (
             <View style={styles.inputGroup}>
-              <Text style={[styles.inputLabel, { color: colors.text }]}>Numéro du document <Text style={styles.required}>*</Text></Text>
+              <Text style={[styles.inputLabel, { color: colors.text }]}>
+                Numéro du document <Text style={styles.required}>*</Text>
+              </Text>
               <TextInput
                 style={[
                   styles.input,
-                  { backgroundColor: colors.inputBg, color: colors.text, borderColor: errors.documentNumber ? colors.errorBorder : colors.border }
+                  {
+                    backgroundColor: colors.inputBg,
+                    color: colors.text,
+                    borderColor: errors.documentNumber ? colors.errorBorder : colors.border,
+                  },
                 ]}
                 placeholder={getDocumentNumberPlaceholder()}
                 placeholderTextColor={colors.textSecondary}
@@ -411,21 +486,28 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 autoCapitalize="characters"
               />
               {documentNumber && !validateDocumentNumber(documentType, documentNumber) && (
-                <Text style={[styles.errorText, { color: colors.errorBorder }]}>Format invalide</Text>
+                <Text style={[styles.errorText, { color: colors.errorBorder }]}>
+                  Format invalide
+                </Text>
               )}
             </View>
           )}
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Pièce d'identité officielle <Text style={styles.required}>*</Text></Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Pièce d'identité officielle <Text style={styles.required}>*</Text>
+            </Text>
             <View style={[styles.noteBox, { backgroundColor: colors.noteBg }]}>
               <Text style={[styles.noteText, { color: colors.noteText }]}>
-                Veille à ce que tous les documents soient lisibles et complets. Les informations doivent être claires et visibles.
+                Veille à ce que tous les documents soient lisibles et complets. Les informations
+                doivent être claires et visibles.
               </Text>
             </View>
             {idDocument ? (
               <View style={[styles.uploadedContainer, { backgroundColor: colors.uploadedBg }]}>
-                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>{idDocument.name}</Text>
+                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>
+                  {idDocument.name}
+                </Text>
                 <TouchableOpacity onPress={() => removeDocument(setIdDocument)} activeOpacity={0.7}>
                   <CloseCircle color="#EF4444" size={24} />
                 </TouchableOpacity>
@@ -434,7 +516,10 @@ export default function VerificationRequestScreen({ route, navigation }) {
               <TouchableOpacity
                 style={[
                   styles.uploadButton,
-                  { backgroundColor: colors.inputBg, borderColor: errors.idDocument ? colors.errorBorder : colors.border }
+                  {
+                    backgroundColor: colors.inputBg,
+                    borderColor: errors.idDocument ? colors.errorBorder : colors.border,
+                  },
                 ]}
                 onPress={() => {
                   showImagePickerOptions(setIdDocument, 'ID');
@@ -445,22 +530,32 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 activeOpacity={0.7}
               >
                 <Upload2Rounded color={colors.text} size={24} />
-                <Text style={[styles.uploadButtonText, { color: colors.text }]}>Téléverser le document</Text>
+                <Text style={[styles.uploadButtonText, { color: colors.text }]}>
+                  Téléverser le document
+                </Text>
               </TouchableOpacity>
             )}
           </View>
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Selfie avec la pièce d'identité <Text style={styles.required}>*</Text></Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Selfie avec la pièce d'identité <Text style={styles.required}>*</Text>
+            </Text>
             <View style={[styles.noteBox, { backgroundColor: colors.noteBg }]}>
               <Text style={[styles.noteText, { color: colors.noteText }]}>
-                Assure-toi que ton visage est bien visible, que la photo est nette et prise en bonne lumière. Évite les filtres ou les angles qui cachent ton visage.
+                Assure-toi que ton visage est bien visible, que la photo est nette et prise en bonne
+                lumière. Évite les filtres ou les angles qui cachent ton visage.
               </Text>
             </View>
             {selfieDocument ? (
               <View style={[styles.uploadedContainer, { backgroundColor: colors.uploadedBg }]}>
-                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>{selfieDocument.name}</Text>
-                <TouchableOpacity onPress={() => removeDocument(setSelfieDocument)} activeOpacity={0.7}>
+                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>
+                  {selfieDocument.name}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => removeDocument(setSelfieDocument)}
+                  activeOpacity={0.7}
+                >
                   <CloseCircle color="#EF4444" size={24} />
                 </TouchableOpacity>
               </View>
@@ -468,7 +563,10 @@ export default function VerificationRequestScreen({ route, navigation }) {
               <TouchableOpacity
                 style={[
                   styles.uploadButton,
-                  { backgroundColor: colors.inputBg, borderColor: errors.selfieDocument ? colors.errorBorder : colors.border }
+                  {
+                    backgroundColor: colors.inputBg,
+                    borderColor: errors.selfieDocument ? colors.errorBorder : colors.border,
+                  },
                 ]}
                 onPress={() => {
                   showImagePickerOptions(setSelfieDocument, 'Selfie');
@@ -479,19 +577,29 @@ export default function VerificationRequestScreen({ route, navigation }) {
                 activeOpacity={0.7}
               >
                 <Upload2Rounded color={colors.text} size={24} />
-                <Text style={[styles.uploadButtonText, { color: colors.text }]}>Téléverser la photo</Text>
+                <Text style={[styles.uploadButtonText, { color: colors.text }]}>
+                  Téléverser la photo
+                </Text>
               </TouchableOpacity>
             )}
           </View>
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>2. Raison de la vérification</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            2. Raison de la vérification
+          </Text>
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Courte description <Text style={styles.required}>*</Text></Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Courte description <Text style={styles.required}>*</Text>
+            </Text>
             <TextInput
               style={[
                 styles.textArea,
-                { backgroundColor: colors.inputBg, color: colors.text, borderColor: errors.reason ? colors.errorBorder : colors.border }
+                {
+                  backgroundColor: colors.inputBg,
+                  color: colors.text,
+                  borderColor: errors.reason ? colors.errorBorder : colors.border,
+                },
               ]}
               placeholder="Explique pourquoi ton compte mérite d'être vérifié (ex. : activité réelle, notoriété, projet professionnel)"
               placeholderTextColor={colors.textSecondary}
@@ -508,7 +616,9 @@ export default function VerificationRequestScreen({ route, navigation }) {
             />
           </View>
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>3. Preuves professionnelles ou institutionnelles</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            3. Preuves professionnelles ou institutionnelles
+          </Text>
 
           <View style={styles.inputGroup}>
             <Text style={[styles.inputLabel, { color: colors.text }]}>Document professionnel</Text>
@@ -517,27 +627,41 @@ export default function VerificationRequestScreen({ route, navigation }) {
             </Text>
             {businessDocument ? (
               <View style={[styles.uploadedContainer, { backgroundColor: colors.uploadedBg }]}>
-                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>{businessDocument.name}</Text>
-                <TouchableOpacity onPress={() => removeDocument(setBusinessDocument)} activeOpacity={0.7}>
+                <Text style={[styles.uploadedText, { color: colors.text }]} numberOfLines={1}>
+                  {businessDocument.name}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => removeDocument(setBusinessDocument)}
+                  activeOpacity={0.7}
+                >
                   <CloseCircle color="#EF4444" size={24} />
                 </TouchableOpacity>
               </View>
             ) : (
               <TouchableOpacity
-                style={[styles.uploadButton, { backgroundColor: colors.inputBg, borderColor: colors.border }]}
+                style={[
+                  styles.uploadButton,
+                  { backgroundColor: colors.inputBg, borderColor: colors.border },
+                ]}
                 onPress={() => showImagePickerOptions(setBusinessDocument, 'Business')}
                 activeOpacity={0.7}
               >
                 <Upload2Rounded color={colors.text} size={24} />
-                <Text style={[styles.uploadButtonText, { color: colors.text }]}>Certificat, page professionnelle, email officiel</Text>
+                <Text style={[styles.uploadButtonText, { color: colors.text }]}>
+                  Certificat, page professionnelle, email officiel
+                </Text>
               </TouchableOpacity>
             )}
           </View>
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>4. Informations supplémentaires</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            4. Informations supplémentaires
+          </Text>
 
           <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>Réseaux sociaux ou sites web</Text>
+            <Text style={[styles.inputLabel, { color: colors.text }]}>
+              Réseaux sociaux ou sites web
+            </Text>
             <Text style={[styles.helperText, { color: colors.textSecondary }]}>
               Maximum 3 liens
             </Text>
@@ -545,7 +669,12 @@ export default function VerificationRequestScreen({ route, navigation }) {
             {links.map((link, index) => (
               <View key={index} style={styles.linkItemContainer}>
                 <Text style={[styles.linkNumber, { color: colors.text }]}>Lien {index + 1}</Text>
-                <View style={[styles.linkContainer, { backgroundColor: colors.inputBg, borderColor: colors.border }]}>
+                <View
+                  style={[
+                    styles.linkContainer,
+                    { backgroundColor: colors.inputBg, borderColor: colors.border },
+                  ]}
+                >
                   <TextInput
                     style={[styles.linkTitleInput, { color: colors.text }]}
                     placeholder="Titre du lien"
@@ -563,7 +692,9 @@ export default function VerificationRequestScreen({ route, navigation }) {
                     keyboardType="url"
                   />
                   {link.url && !isValidUrl(link.url) && (
-                    <Text style={[styles.invalidUrlText, { color: colors.errorBorder }]}>URL invalide</Text>
+                    <Text style={[styles.invalidUrlText, { color: colors.errorBorder }]}>
+                      URL invalide
+                    </Text>
                   )}
                 </View>
                 {links.length > 1 && (
@@ -582,8 +713,8 @@ export default function VerificationRequestScreen({ route, navigation }) {
           <View style={styles.instructionsContainer}>
             <Text style={[styles.instructionsTitle, { color: colors.text }]}>Instructions :</Text>
             <Text style={[styles.instructionsText, { color: colors.textSecondary }]}>
-              • Tous les documents doivent être lisibles et authentiques.{'\n'}
-              • Plus le formulaire est complet, plus la vérification sera rapide et fiable.
+              • Tous les documents doivent être lisibles et authentiques.{'\n'}• Plus le formulaire
+              est complet, plus la vérification sera rapide et fiable.
             </Text>
           </View>
 
@@ -607,7 +738,14 @@ export default function VerificationRequestScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   headerLeft: { width: 40, alignItems: 'flex-start' },
   headerCenter: { flex: 1, alignItems: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700' },
@@ -627,19 +765,59 @@ const styles = StyleSheet.create({
   helperText: { fontSize: 12, marginBottom: 8, lineHeight: 18 },
   noteBox: { padding: 12, borderRadius: 8, marginBottom: 12 },
   noteText: { fontSize: 12, lineHeight: 18 },
-  input: { paddingHorizontal: 16, paddingVertical: 14, borderRadius: 8, fontSize: 14, borderWidth: 1 },
-  textArea: { paddingHorizontal: 16, paddingVertical: 14, borderRadius: 8, fontSize: 14, borderWidth: 1, minHeight: 120 },
+  input: {
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 8,
+    fontSize: 14,
+    borderWidth: 1,
+  },
+  textArea: {
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 8,
+    fontSize: 14,
+    borderWidth: 1,
+    minHeight: 120,
+  },
   documentTypeContainer: { gap: 10 },
-  documentTypeButton: { paddingHorizontal: 16, paddingVertical: 12, borderRadius: 8, borderWidth: 1, alignItems: 'center' },
+  documentTypeButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    alignItems: 'center',
+  },
   documentTypeText: { fontSize: 14, fontWeight: '600' },
-  uploadButton: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 16, paddingVertical: 14, borderRadius: 8, borderWidth: 1 },
+  uploadButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
   uploadButtonText: { fontSize: 14, flex: 1 },
-  uploadedContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 14, borderRadius: 8 },
+  uploadedContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 8,
+  },
   uploadedText: { fontSize: 14, flex: 1, marginRight: 12 },
   linkItemContainer: { marginBottom: 16 },
   linkNumber: { fontSize: 13, fontWeight: '600', marginBottom: 8 },
   linkContainer: { padding: 12, borderRadius: 8, borderWidth: 1 },
-  linkTitleInput: { fontSize: 14, paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#E5E7EB', marginBottom: 8 },
+  linkTitleInput: {
+    fontSize: 14,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+    marginBottom: 8,
+  },
   linkUrlInput: { fontSize: 14, paddingVertical: 8 },
   invalidUrlText: { fontSize: 11, marginTop: 4 },
   removeLinkButton: { alignSelf: 'flex-end', marginTop: 8 },
@@ -649,7 +827,18 @@ const styles = StyleSheet.create({
   instructionsText: { fontSize: 13, lineHeight: 20 },
   submitButton: { paddingVertical: 16, borderRadius: 10, alignItems: 'center' },
   submitButtonText: { fontSize: 16, fontWeight: '700' },
-  pendingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40 },
-  pendingTitle: { fontSize: 22, fontWeight: '700', marginTop: 24, marginBottom: 16, textAlign: 'center' },
+  pendingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 40,
+  },
+  pendingTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginTop: 24,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
   pendingMessage: { fontSize: 14, lineHeight: 22, textAlign: 'center' },
 });

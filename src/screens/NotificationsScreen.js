@@ -60,7 +60,7 @@ export default function NotificationsScreen({ navigation }) {
     {
       id: 'n2',
       type: 'follow',
-      message: 'emma s\'est abonné à toi',
+      message: "emma s'est abonné à toi",
       userName: 'emma',
       userAvatar: 'https://i.pravatar.cc/150?img=47',
       verified: true,
@@ -73,7 +73,7 @@ export default function NotificationsScreen({ navigation }) {
     {
       id: 'n3',
       type: 'review',
-      message: 'john t\'a laissé un avis 5 étoiles ⭐',
+      message: "john t'a laissé un avis 5 étoiles ⭐",
       userName: 'john',
       userAvatar: 'https://i.pravatar.cc/150?img=8',
       verified: true,
@@ -119,7 +119,7 @@ export default function NotificationsScreen({ navigation }) {
     {
       id: 'n7',
       type: 'follow',
-      message: 'mike s\'est abonné à toi',
+      message: "mike s'est abonné à toi",
       userName: 'mike',
       userAvatar: 'https://i.pravatar.cc/150?img=12',
       verified: false,
@@ -132,7 +132,7 @@ export default function NotificationsScreen({ navigation }) {
     {
       id: 'n8',
       type: 'review',
-      message: 'sarah t\'a laissé un avis',
+      message: "sarah t'a laissé un avis",
       userName: 'sarah',
       userAvatar: 'https://i.pravatar.cc/150?img=45',
       verified: true,
@@ -162,12 +162,12 @@ export default function NotificationsScreen({ navigation }) {
     try {
       setLoading(true);
       setError(null);
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // Filtrer notifications > 90 jours
       const now = Date.now();
-      const ninetyDaysAgo = now - (90 * 24 * 60 * 60 * 1000);
-      const validNotifs = initialNotifications.filter(n => n.timestamp > ninetyDaysAgo);
+      const ninetyDaysAgo = now - 90 * 24 * 60 * 60 * 1000;
+      const validNotifs = initialNotifications.filter((n) => n.timestamp > ninetyDaysAgo);
 
       setNotifications(validNotifs);
       setLoading(false);
@@ -180,7 +180,7 @@ export default function NotificationsScreen({ navigation }) {
   // Grouper notifications par type (uniquement pour filtre "Tous")
   const groupByType = (notifs) => {
     const grouped = {};
-    notifs.forEach(notif => {
+    notifs.forEach((notif) => {
       if (!grouped[notif.type]) {
         grouped[notif.type] = [];
       }
@@ -195,27 +195,27 @@ export default function NotificationsScreen({ navigation }) {
 
     if (activeFilter !== 'Tous') {
       if (activeFilter === 'Offres') {
-        filtered = notifications.filter(n => n.type === 'offer');
+        filtered = notifications.filter((n) => n.type === 'offer');
       } else if (activeFilter === 'Avis & Notes') {
-        filtered = notifications.filter(n => n.type === 'review');
+        filtered = notifications.filter((n) => n.type === 'review');
       } else if (activeFilter === 'Abonnements') {
-        filtered = notifications.filter(n => n.type === 'follow');
+        filtered = notifications.filter((n) => n.type === 'follow');
       } else if (activeFilter === 'Requêtes') {
-        filtered = notifications.filter(n => n.type === 'request');
+        filtered = notifications.filter((n) => n.type === 'request');
       } else if (activeFilter === 'Système') {
-        filtered = notifications.filter(n => n.type === 'system');
+        filtered = notifications.filter((n) => n.type === 'system');
       }
 
       // Pour les filtres spécifiques, retourner liste simple
       return {
-        recent: filtered.filter(n => n.isRecent),
-        older: filtered.filter(n => !n.isRecent),
+        recent: filtered.filter((n) => n.isRecent),
+        older: filtered.filter((n) => !n.isRecent),
       };
     }
 
     // Pour "Tous", grouper les anciennes
-    const recentNotifs = filtered.filter(n => n.isRecent);
-    const olderNotifs = filtered.filter(n => !n.isRecent);
+    const recentNotifs = filtered.filter((n) => n.isRecent);
+    const olderNotifs = filtered.filter((n) => !n.isRecent);
 
     return {
       recent: recentNotifs,
@@ -228,15 +228,18 @@ export default function NotificationsScreen({ navigation }) {
     navigation.goBack();
   };
 
-  const handleNotificationPress = useCallback((notif) => {
-    if (notif.action === 'chat') {
-      navigation.navigate('Chat', { chatId: notif.chatId });
-    } else if (notif.action === 'profile') {
-      navigation.navigate('UserProfile', { userId: notif.userId, userName: notif.userName });
-    } else if (notif.action === 'reviews') {
-      navigation.navigate('Reviews', { reviewId: notif.reviewId });
-    }
-  }, [navigation]);
+  const handleNotificationPress = useCallback(
+    (notif) => {
+      if (notif.action === 'chat') {
+        navigation.navigate('Chat', { chatId: notif.chatId });
+      } else if (notif.action === 'profile') {
+        navigation.navigate('UserProfile', { userId: notif.userId, userName: notif.userName });
+      } else if (notif.action === 'reviews') {
+        navigation.navigate('Reviews', { reviewId: notif.reviewId });
+      }
+    },
+    [navigation]
+  );
 
   const handleGroupPress = useCallback((type) => {
     if (type === 'offer') {
@@ -302,7 +305,7 @@ export default function NotificationsScreen({ navigation }) {
 
   // RENDER GROUP (seulement pour filtre "Tous")
   const renderGroup = (type, notifs) => {
-    const hasAvatars = notifs.some(n => n.userAvatar || n.productImage);
+    const hasAvatars = notifs.some((n) => n.userAvatar || n.productImage);
 
     return (
       <TouchableOpacity
@@ -324,13 +327,16 @@ export default function NotificationsScreen({ navigation }) {
             ))}
           </View>
         ) : null}
-        <View style={[styles.groupTextSection, (type === 'system' || !hasAvatars) && { marginLeft: 12 }]}>
+        <View
+          style={[
+            styles.groupTextSection,
+            (type === 'system' || !hasAvatars) && { marginLeft: 12 },
+          ]}
+        >
           <Text style={[styles.groupLabel, { color: colors.text }]}>
             {notifs.length} notification{notifs.length > 1 ? 's' : ''}
           </Text>
-          <Text style={[styles.groupTime, { color: colors.textSecondary }]}>
-            {notifs[0].time}
-          </Text>
+          <Text style={[styles.groupTime, { color: colors.textSecondary }]}>{notifs[0].time}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -340,7 +346,12 @@ export default function NotificationsScreen({ navigation }) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <SafeAreaView style={{ backgroundColor: colors.headerBg }} edges={['top']}>
-          <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+          <View
+            style={[
+              styles.header,
+              { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+            ]}
+          >
             <View style={styles.headerLeft}>
               <TouchableOpacity onPress={handleBack}>
                 <ArrowBackIosRounded color={colors.text} size={24} />
@@ -364,7 +375,9 @@ export default function NotificationsScreen({ navigation }) {
 
   const isFilteredView = activeFilter !== 'Tous';
   const hasRecent = Array.isArray(recent) ? recent.length > 0 : false;
-  const hasOlder = isFilteredView ? (Array.isArray(older) && older.length > 0) : (Object.keys(older).length > 0);
+  const hasOlder = isFilteredView
+    ? Array.isArray(older) && older.length > 0
+    : Object.keys(older).length > 0;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -375,7 +388,12 @@ export default function NotificationsScreen({ navigation }) {
       />
 
       <SafeAreaView style={{ backgroundColor: colors.headerBg }} edges={['top']}>
-        <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
+        >
           <View style={styles.headerLeft}>
             <TouchableOpacity onPress={handleBack}>
               <ArrowBackIosRounded color={colors.text} size={24} />
@@ -390,7 +408,10 @@ export default function NotificationsScreen({ navigation }) {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={[styles.filtersContainer, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}
+          style={[
+            styles.filtersContainer,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
           contentContainerStyle={styles.filtersContent}
         >
           {filters.map((filter) => (
@@ -404,7 +425,7 @@ export default function NotificationsScreen({ navigation }) {
                 style={[
                   styles.filterText,
                   { color: activeFilter === filter ? colors.filterActive : colors.filterInactive },
-                  activeFilter === filter && { fontWeight: '700' }
+                  activeFilter === filter && { fontWeight: '700' },
                 ]}
               >
                 {filter}
@@ -424,9 +445,7 @@ export default function NotificationsScreen({ navigation }) {
         ) : !hasRecent && !hasOlder ? (
           <View style={styles.emptyContainer}>
             <NotificationBell color={colors.emptyIcon} size={64} />
-            <Text style={[styles.emptyText, { color: colors.emptyIcon }]}>
-              Aucune notification
-            </Text>
+            <Text style={[styles.emptyText, { color: colors.emptyIcon }]}>Aucune notification</Text>
           </View>
         ) : (
           <View style={styles.notificationsContainer}>
@@ -442,13 +461,9 @@ export default function NotificationsScreen({ navigation }) {
             )}
 
             {isFilteredView ? (
-              <>
-                {older.map(renderNotification)}
-              </>
+              <>{older.map(renderNotification)}</>
             ) : (
-              <>
-                {Object.entries(older).map(([type, notifs]) => renderGroup(type, notifs))}
-              </>
+              <>{Object.entries(older).map(([type, notifs]) => renderGroup(type, notifs))}</>
             )}
           </View>
         )}
@@ -459,7 +474,13 @@ export default function NotificationsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   headerLeft: { width: 40 },
   headerCenter: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700' },
@@ -479,21 +500,56 @@ const styles = StyleSheet.create({
   emptyText: { fontSize: 16, marginTop: 16 },
   notificationItem: { flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 12 },
   notificationMain: { flexDirection: 'row', flex: 1 },
-  userAvatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#e0e0e0', marginRight: 12 },
-  productThumbnail: { width: 44, height: 44, borderRadius: 8, backgroundColor: '#e0e0e0', marginRight: 12 },
+  userAvatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#e0e0e0',
+    marginRight: 12,
+  },
+  productThumbnail: {
+    width: 44,
+    height: 44,
+    borderRadius: 8,
+    backgroundColor: '#e0e0e0',
+    marginRight: 12,
+  },
   notificationTextSection: { flex: 1 },
   userNameRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 },
   userName: { fontSize: 14, fontWeight: '700' },
   notificationMessage: { fontSize: 14, lineHeight: 20, marginBottom: 4 },
   notificationTime: { fontSize: 12 },
-  groupItem: { flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 12, alignItems: 'center' },
+  groupItem: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
   groupAvatars: { position: 'relative', width: 96, height: 44, marginRight: 12 },
-  groupAvatar: { position: 'absolute', width: 44, height: 44, borderRadius: 22, backgroundColor: '#e0e0e0', borderWidth: 2, borderColor: '#FFFFFF' },
+  groupAvatar: {
+    position: 'absolute',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#e0e0e0',
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+  },
   groupTextSection: { flex: 1 },
   groupLabel: { fontSize: 14, fontWeight: '600', marginBottom: 4 },
   groupTime: { fontSize: 12 },
-  errorContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 40 },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
   errorText: { fontSize: 16, textAlign: 'center', marginBottom: 20 },
-  retryButton: { paddingHorizontal: 24, paddingVertical: 12, backgroundColor: '#3B82F6', borderRadius: 8 },
+  retryButton: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    backgroundColor: '#3B82F6',
+    borderRadius: 8,
+  },
   retryText: { color: '#FFFFFF', fontSize: 14, fontWeight: '600' },
 });

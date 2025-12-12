@@ -12,17 +12,21 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  ArrowBackIosRounded,
-  Google,
-  Facebook,
-} from '../components/icons';
+import { ArrowBackIosRounded, Google, Facebook } from '../components/icons';
 
 // ========================================
 // COMPOSANT CONNEXION SOCIALE
 // ========================================
 
-const SocialConnectionCard = ({ provider, icon: Icon, isConnected, onConnect, onDisconnect, loading, isDarkMode }) => {
+const SocialConnectionCard = ({
+  provider,
+  icon: Icon,
+  isConnected,
+  onConnect,
+  onDisconnect,
+  loading,
+  isDarkMode,
+}) => {
   const colors = {
     cardBg: isDarkMode ? '#1A1A1A' : '#FFFFFF',
     text: isDarkMode ? '#FFFFFF' : '#000000',
@@ -160,7 +164,10 @@ export default function SocialConnectionsScreen({ navigation }) {
         },
       }));
 
-      Alert.alert('Succès', `Votre compte ${provider.charAt(0).toUpperCase() + provider.slice(1)} a été ajouté avec succès.`);
+      Alert.alert(
+        'Succès',
+        `Votre compte ${provider.charAt(0).toUpperCase() + provider.slice(1)} a été ajouté avec succès.`
+      );
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       Alert.alert('Erreur', `Impossible d'ajouter votre compte ${provider}. Veuillez réessayer.`);
@@ -194,7 +201,10 @@ export default function SocialConnectionsScreen({ navigation }) {
         },
       }));
 
-      Alert.alert('Succès', `Votre compte ${provider.charAt(0).toUpperCase() + provider.slice(1)} a été retiré.`);
+      Alert.alert(
+        'Succès',
+        `Votre compte ${provider.charAt(0).toUpperCase() + provider.slice(1)} a été retiré.`
+      );
     } catch (error) {
       console.error('Erreur lors de la déconnexion:', error);
       Alert.alert('Erreur', `Impossible de retirer votre compte ${provider}. Veuillez réessayer.`);
@@ -220,10 +230,23 @@ export default function SocialConnectionsScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.headerBg} translucent={false} />
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.headerBg}
+        translucent={false}
+      />
 
       {/* HEADER */}
-      <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border, paddingTop: insets.top }]}>
+      <View
+        style={[
+          styles.header,
+          {
+            backgroundColor: colors.headerBg,
+            borderBottomColor: colors.border,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
           <ArrowBackIosRounded color={colors.text} size={24} />
         </TouchableOpacity>
@@ -234,7 +257,8 @@ export default function SocialConnectionsScreen({ navigation }) {
       {/* CONTENU */}
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
         <Text style={[styles.description, { color: colors.textSecondary }]}>
-          Utilisez un moyen de connexion pour accéder rapidement à l'application. Vous pouvez le retirer à tout moment.
+          Utilisez un moyen de connexion pour accéder rapidement à l'application. Vous pouvez le
+          retirer à tout moment.
         </Text>
 
         <View style={styles.cardsContainer}>
@@ -252,7 +276,9 @@ export default function SocialConnectionsScreen({ navigation }) {
           {/* APPLE */}
           <SocialConnectionCard
             provider="Apple"
-            icon={(props) => <Ionicons name="logo-apple" size={24} color={isDarkMode ? '#FFFFFF' : '#000000'} />}
+            icon={(props) => (
+              <Ionicons name="logo-apple" size={24} color={isDarkMode ? '#FFFFFF' : '#000000'} />
+            )}
             isConnected={connections.apple.connected}
             onConnect={() => handleConnect('apple')}
             onDisconnect={() => handleDisconnect('apple')}

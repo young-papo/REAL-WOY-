@@ -80,7 +80,7 @@ export const getCollection = async (collectionName, conditions = []) => {
   }
 
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
 
 /**
@@ -125,7 +125,7 @@ export const subscribeToCollection = (collectionName, callback, conditions = [])
   }
 
   return onSnapshot(q, (querySnapshot) => {
-    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     callback(data);
   });
 };

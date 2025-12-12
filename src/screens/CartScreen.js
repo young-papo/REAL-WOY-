@@ -106,7 +106,7 @@ export default function CartScreen({ navigation }) {
     {
       id: 'c2',
       productId: 'p2',
-      title: 'Jean Levi\'s 501 Original',
+      title: "Jean Levi's 501 Original",
       price: '3500',
       currency: 'HTG',
       image: 'https://images.unsplash.com/photo-1542272454315-7f6fabf73e09?w=500&q=80',
@@ -320,7 +320,10 @@ export default function CartScreen({ navigation }) {
 
     closeOfferModal();
     setTimeout(() => {
-      Alert.alert('Offre envoyée', `Votre offre de ${formatPrice(offer)} ${selectedProduct.currency} a été envoyée au vendeur`);
+      Alert.alert(
+        'Offre envoyée',
+        `Votre offre de ${formatPrice(offer)} ${selectedProduct.currency} a été envoyée au vendeur`
+      );
     }, 300);
   };
 
@@ -329,47 +332,33 @@ export default function CartScreen({ navigation }) {
   // ========================================
 
   const handleConfirmDelivery = (item) => {
-    Alert.alert(
-      'Confirmer la livraison',
-      'Confirmez-vous avoir livré ce produit à l\'acheteur ?',
-      [
-        { text: 'Annuler', style: 'cancel' },
-        {
-          text: 'Confirmer',
-          onPress: () => {
-            setDeliveryItems((prev) =>
-              prev.map((d) =>
-                d.id === item.id ? { ...d, sellerConfirmed: true } : d
-              )
-            );
-            Alert.alert('Succès', 'Livraison confirmée ! L\'acheteur sera notifié.');
-          },
+    Alert.alert('Confirmer la livraison', "Confirmez-vous avoir livré ce produit à l'acheteur ?", [
+      { text: 'Annuler', style: 'cancel' },
+      {
+        text: 'Confirmer',
+        onPress: () => {
+          setDeliveryItems((prev) =>
+            prev.map((d) => (d.id === item.id ? { ...d, sellerConfirmed: true } : d))
+          );
+          Alert.alert('Succès', "Livraison confirmée ! L'acheteur sera notifié.");
         },
-      ]
-    );
+      },
+    ]);
   };
 
   const handleConfirmReception = (item) => {
-    Alert.alert(
-      'Confirmer la réception',
-      'Confirmez-vous avoir reçu ce produit du vendeur ?',
-      [
-        { text: 'Annuler', style: 'cancel' },
-        {
-          text: 'Confirmer',
-          onPress: () => {
-            setCartItems((prev) =>
-              prev.map((c) =>
-                c.id === item.id
-                  ? { ...c, buyerConfirmed: true, canRate: true }
-                  : c
-              )
-            );
-            Alert.alert('Succès', 'Réception confirmée ! Vous pouvez maintenant noter le vendeur.');
-          },
+    Alert.alert('Confirmer la réception', 'Confirmez-vous avoir reçu ce produit du vendeur ?', [
+      { text: 'Annuler', style: 'cancel' },
+      {
+        text: 'Confirmer',
+        onPress: () => {
+          setCartItems((prev) =>
+            prev.map((c) => (c.id === item.id ? { ...c, buyerConfirmed: true, canRate: true } : c))
+          );
+          Alert.alert('Succès', 'Réception confirmée ! Vous pouvez maintenant noter le vendeur.');
         },
-      ]
-    );
+      },
+    ]);
   };
 
   // ========================================
@@ -419,9 +408,7 @@ export default function CartScreen({ navigation }) {
       if (itemToRemove.hasOffer) {
         setDeliveryItems((prev) =>
           prev.map((d) =>
-            d.productId === itemToRemove.productId
-              ? { ...d, isCancelled: true }
-              : d
+            d.productId === itemToRemove.productId ? { ...d, isCancelled: true } : d
           )
         );
       }
@@ -430,9 +417,7 @@ export default function CartScreen({ navigation }) {
     } else {
       // Pour les livraisons, simplement marquer comme annulé
       setDeliveryItems((prev) =>
-        prev.map((d) =>
-          d.id === itemToRemove.id ? { ...d, isCancelled: true } : d
-        )
+        prev.map((d) => (d.id === itemToRemove.id ? { ...d, isCancelled: true } : d))
       );
     }
 
@@ -533,10 +518,7 @@ export default function CartScreen({ navigation }) {
     return (
       <View
         key={item.id}
-        style={[
-          styles.cartItem,
-          { backgroundColor: colors.cardBg, borderColor: colors.border },
-        ]}
+        style={[styles.cartItem, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
       >
         <TouchableOpacity
           style={styles.itemHeader}
@@ -606,7 +588,8 @@ export default function CartScreen({ navigation }) {
             )}
             {item.hasOffer && !item.sellerConfirmed && (
               <Text style={[styles.statusText, { color: colors.badgeBlue }]}>
-                Offre de {formatPrice(item.offerAmount)} {item.currency} envoyée • En attente de confirmation du vendeur
+                Offre de {formatPrice(item.offerAmount)} {item.currency} envoyée • En attente de
+                confirmation du vendeur
               </Text>
             )}
             {item.sellerConfirmed && !item.buyerConfirmed && (
@@ -632,9 +615,7 @@ export default function CartScreen({ navigation }) {
                 onPress={() => handleMessage(item.seller)}
               >
                 <MessageDotsFill color={colors.text} size={20} />
-                <Text style={[styles.actionButtonText, { color: colors.text }]}>
-                  Message
-                </Text>
+                <Text style={[styles.actionButtonText, { color: colors.text }]}>Message</Text>
               </TouchableOpacity>
 
               {!item.hasOffer && (
@@ -675,14 +656,9 @@ export default function CartScreen({ navigation }) {
             </View>
 
             {/* Bouton supprimer */}
-            <TouchableOpacity
-              style={styles.removeButton}
-              onPress={() => handleRemoveItem(item)}
-            >
+            <TouchableOpacity style={styles.removeButton} onPress={() => handleRemoveItem(item)}>
               <Trash color="#EF4444" size={18} />
-              <Text style={[styles.removeButtonText, { color: '#EF4444' }]}>
-                Retirer du panier
-              </Text>
+              <Text style={[styles.removeButtonText, { color: '#EF4444' }]}>Retirer du panier</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -702,10 +678,7 @@ export default function CartScreen({ navigation }) {
     return (
       <View
         key={item.id}
-        style={[
-          styles.cartItem,
-          { backgroundColor: colors.cardBg, borderColor: colors.border },
-        ]}
+        style={[styles.cartItem, { backgroundColor: colors.cardBg, borderColor: colors.border }]}
       >
         <TouchableOpacity
           style={styles.itemHeader}
@@ -770,7 +743,8 @@ export default function CartScreen({ navigation }) {
             {/* Status */}
             {!item.sellerConfirmed && !item.isCancelled && (
               <Text style={[styles.statusText, { color: colors.badgeBlue }]}>
-                L'acheteur a fait une offre de {formatPrice(item.offerAmount)} {item.currency} • Confirmez la livraison
+                L'acheteur a fait une offre de {formatPrice(item.offerAmount)} {item.currency} •
+                Confirmez la livraison
               </Text>
             )}
             {item.sellerConfirmed && !item.buyerConfirmed && !item.isCancelled && (
@@ -808,9 +782,7 @@ export default function CartScreen({ navigation }) {
                 onPress={() => handleMessage(item.buyer)}
               >
                 <MessageDotsFill color={colors.text} size={20} />
-                <Text style={[styles.actionButtonText, { color: colors.text }]}>
-                  Message
-                </Text>
+                <Text style={[styles.actionButtonText, { color: colors.text }]}>Message</Text>
               </TouchableOpacity>
 
               {!item.sellerConfirmed && !item.isCancelled && (
@@ -839,9 +811,7 @@ export default function CartScreen({ navigation }) {
     <View style={styles.emptyContainer}>
       <ShoppingCart color={colors.emptyIcon} size={64} />
       <Text style={[styles.emptyText, { color: colors.emptyIcon }]}>
-        {activeTab === 'articles'
-          ? 'Aucun article dans votre panier'
-          : 'Aucune livraison en cours'}
+        {activeTab === 'articles' ? 'Aucun article dans votre panier' : 'Aucune livraison en cours'}
       </Text>
       <Text style={[styles.emptySubtext, { color: colors.emptyIcon }]}>
         {activeTab === 'articles'
@@ -858,10 +828,7 @@ export default function CartScreen({ navigation }) {
   const renderSkeleton = () => (
     <View style={styles.skeletonContainer}>
       {[1, 2, 3].map((item) => (
-        <View
-          key={item}
-          style={[styles.skeletonCard, { backgroundColor: colors.border }]}
-        />
+        <View key={item} style={[styles.skeletonCard, { backgroundColor: colors.border }]} />
       ))}
     </View>
   );
@@ -923,8 +890,7 @@ export default function CartScreen({ navigation }) {
               style={[
                 styles.tabBadge,
                 {
-                  backgroundColor:
-                    activeTab === 'articles' ? colors.tabActive : colors.tabInactive,
+                  backgroundColor: activeTab === 'articles' ? colors.tabActive : colors.tabInactive,
                 },
               ]}
             >
@@ -1006,9 +972,7 @@ export default function CartScreen({ navigation }) {
         animationType="none"
         onRequestClose={closeOfferModal}
       >
-        <Animated.View
-          style={[styles.modalOverlay, { opacity: fadeAnim }]}
-        >
+        <Animated.View style={[styles.modalOverlay, { opacity: fadeAnim }]}>
           <Animated.View
             style={[
               styles.modalContent,
@@ -1018,9 +982,7 @@ export default function CartScreen({ navigation }) {
               },
             ]}
           >
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Faire une offre
-            </Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>Faire une offre</Text>
             <Text style={[styles.modalSubtitle, { color: colors.textSecondary }]}>
               Proposez votre prix pour {selectedProduct?.title}
             </Text>
@@ -1053,9 +1015,7 @@ export default function CartScreen({ navigation }) {
                 ]}
                 onPress={closeOfferModal}
               >
-                <Text style={[styles.modalButtonText, { color: colors.text }]}>
-                  Annuler
-                </Text>
+                <Text style={[styles.modalButtonText, { color: colors.text }]}>Annuler</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -1063,10 +1023,7 @@ export default function CartScreen({ navigation }) {
                 onPress={submitOffer}
               >
                 <Text
-                  style={[
-                    styles.modalButtonText,
-                    { color: isDarkMode ? '#000000' : '#FFFFFF' },
-                  ]}
+                  style={[styles.modalButtonText, { color: isDarkMode ? '#000000' : '#FFFFFF' }]}
                 >
                   Envoyer
                 </Text>
@@ -1083,9 +1040,7 @@ export default function CartScreen({ navigation }) {
         animationType="none"
         onRequestClose={closeRatingModal}
       >
-        <Animated.View
-          style={[styles.modalOverlay, { opacity: fadeAnim }]}
-        >
+        <Animated.View style={[styles.modalOverlay, { opacity: fadeAnim }]}>
           <Animated.View
             style={[
               styles.modalContent,
@@ -1095,9 +1050,7 @@ export default function CartScreen({ navigation }) {
               },
             ]}
           >
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Noter le vendeur
-            </Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>Noter le vendeur</Text>
             <Text style={[styles.modalSubtitle, { color: colors.textSecondary }]}>
               Comment s'est passée votre expérience ?
             </Text>
@@ -1110,10 +1063,7 @@ export default function CartScreen({ navigation }) {
                   onPress={() => setRating(star)}
                   style={styles.starButton}
                 >
-                  <StarSolid
-                    color={star <= rating ? '#FFC107' : colors.border}
-                    size={40}
-                  />
+                  <StarSolid color={star <= rating ? '#FFC107' : colors.border} size={40} />
                 </TouchableOpacity>
               ))}
             </View>
@@ -1146,18 +1096,14 @@ export default function CartScreen({ navigation }) {
                 ]}
                 onPress={closeRatingModal}
               >
-                <Text style={[styles.modalButtonText, { color: colors.text }]}>
-                  Annuler
-                </Text>
+                <Text style={[styles.modalButtonText, { color: colors.text }]}>Annuler</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={[styles.modalButton, { backgroundColor: '#FFC107' }]}
                 onPress={submitRating}
               >
-                <Text style={[styles.modalButtonText, { color: '#000000' }]}>
-                  Envoyer
-                </Text>
+                <Text style={[styles.modalButtonText, { color: '#000000' }]}>Envoyer</Text>
               </TouchableOpacity>
             </View>
           </Animated.View>
@@ -1173,9 +1119,7 @@ export default function CartScreen({ navigation }) {
       >
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { backgroundColor: colors.cardBg }]}>
-            <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Retirer du panier ?
-            </Text>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>Retirer du panier ?</Text>
             <Text style={[styles.modalSubtitle, { color: colors.textSecondary }]}>
               Voulez-vous vraiment retirer cet article ?
             </Text>
@@ -1191,17 +1135,13 @@ export default function CartScreen({ navigation }) {
                   setItemToRemove(null);
                 }}
               >
-                <Text style={[styles.modalButtonText, { color: colors.text }]}>
-                  Annuler
-                </Text>
+                <Text style={[styles.modalButtonText, { color: colors.text }]}>Annuler</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.modalButton, { backgroundColor: '#EF4444' }]}
                 onPress={confirmRemoveItem}
               >
-                <Text style={[styles.modalButtonText, { color: '#FFFFFF' }]}>
-                  Retirer
-                </Text>
+                <Text style={[styles.modalButtonText, { color: '#FFFFFF' }]}>Retirer</Text>
               </TouchableOpacity>
             </View>
           </View>

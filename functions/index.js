@@ -13,17 +13,20 @@ exports.onUserCreate = functions.auth.user().onCreate(async (user) => {
   const { uid, email, displayName, photoURL } = user;
 
   try {
-    await db.collection('users').doc(uid).set({
-      email: email || null,
-      displayName: displayName || null,
-      photoURL: photoURL || null,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      rating: 0,
-      totalRatings: 0,
-      productsCount: 0,
-      requestsCount: 0,
-    });
+    await db
+      .collection('users')
+      .doc(uid)
+      .set({
+        email: email || null,
+        displayName: displayName || null,
+        photoURL: photoURL || null,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        rating: 0,
+        totalRatings: 0,
+        productsCount: 0,
+        requestsCount: 0,
+      });
 
     console.log(`Utilisateur créé: ${uid}`);
     return null;
@@ -45,9 +48,7 @@ exports.onUserDelete = functions.auth.user().onDelete(async (user) => {
     await db.collection('users').doc(uid).delete();
 
     // Optionnel: Supprimer les produits de l'utilisateur
-    const productsSnapshot = await db.collection('products')
-      .where('userId', '==', uid)
-      .get();
+    const productsSnapshot = await db.collection('products').where('userId', '==', uid).get();
 
     const batch = db.batch();
     productsSnapshot.docs.forEach((doc) => {
@@ -74,9 +75,12 @@ exports.onProductCreate = functions.firestore
     const userId = product.userId;
 
     try {
-      await db.collection('users').doc(userId).update({
-        productsCount: admin.firestore.FieldValue.increment(1),
-      });
+      await db
+        .collection('users')
+        .doc(userId)
+        .update({
+          productsCount: admin.firestore.FieldValue.increment(1),
+        });
 
       console.log(`Produit créé: ${context.params.productId}`);
       return null;
@@ -97,9 +101,12 @@ exports.onProductDelete = functions.firestore
     const userId = product.userId;
 
     try {
-      await db.collection('users').doc(userId).update({
-        productsCount: admin.firestore.FieldValue.increment(-1),
-      });
+      await db
+        .collection('users')
+        .doc(userId)
+        .update({
+          productsCount: admin.firestore.FieldValue.increment(-1),
+        });
 
       console.log(`Produit supprimé: ${context.params.productId}`);
       return null;
@@ -131,7 +138,7 @@ exports.onRatingCreate = functions.firestore
 
         // Calculer la nouvelle moyenne
         const newTotalRatings = totalRatings + 1;
-        const newRating = ((currentRating * totalRatings) + ratingValue) / newTotalRatings;
+        const newRating = (currentRating * totalRatings + ratingValue) / newTotalRatings;
 
         await userRef.update({
           rating: newRating,
@@ -154,10 +161,7 @@ exports.onRatingCreate = functions.firestore
 exports.sendNotification = functions.https.onCall(async (data, context) => {
   // Vérifier l'authentification
   if (!context.auth) {
-    throw new functions.https.HttpsError(
-      'unauthenticated',
-      'L\'utilisateur doit être authentifié.'
-    );
+    throw new functions.https.HttpsError('unauthenticated', 'L\'utilisateur doit être authentifié.');
   }
 
   const { targetUserId, title, body, type } = data;
@@ -204,7 +208,8 @@ exports.cleanupOldData = functions.https.onRequest(async (req, res) => {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     // Supprimer les notifications lues de plus de 30 jours
-    const oldNotifications = await db.collection('notifications')
+    const oldNotifications = await db
+      .collection('notifications')
       .where('read', '==', true)
       .where('createdAt', '<', thirtyDaysAgo)
       .get();

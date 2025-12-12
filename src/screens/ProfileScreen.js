@@ -64,7 +64,10 @@ const COVER_HEIGHT = SCREEN_HEIGHT * 0.25;
 
 export default function ProfileScreen({ route, navigation }) {
   const insets = useSafeAreaInsets();
-  const isMyProfile = route?.params?.isMyProfile ?? auth.currentUser ? auth.currentUser.uid === (route?.params?.userId ?? 'me') : true;
+  const isMyProfile =
+    (route?.params?.isMyProfile ?? auth.currentUser)
+      ? auth.currentUser.uid === (route?.params?.userId ?? 'me')
+      : true;
   const userId = route?.params?.userId ?? auth.currentUser?.uid ?? 'me';
 
   const [activeTabContent, setActiveTabContent] = useState('products');
@@ -143,17 +146,32 @@ export default function ProfileScreen({ route, navigation }) {
           setIsFollowing(following.includes(userId));
         }
 
-        const productsDoc = await db.collection('users').doc(userId).collection('content').doc('products').get();
+        const productsDoc = await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('products')
+          .get();
         if (productsDoc.exists) {
           setProducts(productsDoc.data().items || []);
         }
 
-        const requestsDoc = await db.collection('users').doc(userId).collection('content').doc('requests').get();
+        const requestsDoc = await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('requests')
+          .get();
         if (requestsDoc.exists) {
           setRequests(requestsDoc.data().items || []);
         }
 
-        const repostsDoc = await db.collection('users').doc(userId).collection('content').doc('reposts').get();
+        const repostsDoc = await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('reposts')
+          .get();
         if (repostsDoc.exists) {
           setReposts(repostsDoc.data().items || []);
         }
@@ -186,7 +204,11 @@ export default function ProfileScreen({ route, navigation }) {
     const parts = text.split(/(#\w+)/g);
     return parts.map((part, index) => {
       if (part.startsWith('#')) {
-        return <Text key={index} style={{ color: '#3B82F6', fontWeight: '600' }}>{part}</Text>;
+        return (
+          <Text key={index} style={{ color: '#3B82F6', fontWeight: '600' }}>
+            {part}
+          </Text>
+        );
       }
       return <Text key={index}>{part}</Text>;
     });
@@ -199,15 +221,30 @@ export default function ProfileScreen({ route, navigation }) {
       if (userDoc.exists) {
         setUserData({ id: userId, ...userDoc.data() });
       }
-      const productsDoc = await db.collection('users').doc(userId).collection('content').doc('products').get();
+      const productsDoc = await db
+        .collection('users')
+        .doc(userId)
+        .collection('content')
+        .doc('products')
+        .get();
       if (productsDoc.exists) {
         setProducts(productsDoc.data().items || []);
       }
-      const requestsDoc = await db.collection('users').doc(userId).collection('content').doc('requests').get();
+      const requestsDoc = await db
+        .collection('users')
+        .doc(userId)
+        .collection('content')
+        .doc('requests')
+        .get();
       if (requestsDoc.exists) {
         setRequests(requestsDoc.data().items || []);
       }
-      const repostsDoc = await db.collection('users').doc(userId).collection('content').doc('reposts').get();
+      const repostsDoc = await db
+        .collection('users')
+        .doc(userId)
+        .collection('content')
+        .doc('reposts')
+        .get();
       if (repostsDoc.exists) {
         setReposts(repostsDoc.data().items || []);
       }
@@ -240,12 +277,16 @@ export default function ProfileScreen({ route, navigation }) {
       const currentUserRef = db.collection('users').doc(auth.currentUser.uid);
       const profileUserRef = db.collection('users').doc(userId);
       if (isFollowing) {
-        await currentUserRef.update({ following: firebase.firestore.FieldValue.arrayRemove(userId) });
+        await currentUserRef.update({
+          following: firebase.firestore.FieldValue.arrayRemove(userId),
+        });
         await profileUserRef.update({ followersCount: userData.followersCount - 1 });
         setUserData((prev) => ({ ...prev, followersCount: prev.followersCount - 1 }));
         setIsFollowing(false);
       } else {
-        await currentUserRef.update({ following: firebase.firestore.FieldValue.arrayUnion(userId) });
+        await currentUserRef.update({
+          following: firebase.firestore.FieldValue.arrayUnion(userId),
+        });
         await profileUserRef.update({ followersCount: userData.followersCount + 1 });
         setUserData((prev) => ({ ...prev, followersCount: prev.followersCount + 1 }));
         setIsFollowing(true);
@@ -294,7 +335,7 @@ export default function ProfileScreen({ route, navigation }) {
       userId: userId,
       username: userData.username,
       rating: userData.rating,
-      reviewsCount: userData.reviewsCount
+      reviewsCount: userData.reviewsCount,
     });
   };
 
@@ -396,13 +437,16 @@ export default function ProfileScreen({ route, navigation }) {
       }
     } else if (action === 'report') {
       try {
-        await db.collection('reports').doc(`${auth.currentUser.uid}_${selectedItem.id}_${Date.now()}`).set({
-          reporter: auth.currentUser.uid,
-          reportedItem: selectedItem.id,
-          type: selectedItem.type,
-          reason: 'Signalement de contenu',
-          timestamp: new Date(),
-        });
+        await db
+          .collection('reports')
+          .doc(`${auth.currentUser.uid}_${selectedItem.id}_${Date.now()}`)
+          .set({
+            reporter: auth.currentUser.uid,
+            reportedItem: selectedItem.id,
+            type: selectedItem.type,
+            reason: 'Signalement de contenu',
+            timestamp: new Date(),
+          });
         navigation.navigate('ReportSuccess', { type: 'content' });
       } catch (err) {
         setError('Erreur lors du signalement');
@@ -418,19 +462,34 @@ export default function ProfileScreen({ route, navigation }) {
     const { item, type } = longPressedItem;
     try {
       if (type === 'product') {
-        await db.collection('users').doc(userId).collection('content').doc('products').update({
-          items: firebase.firestore.FieldValue.arrayRemove(item),
-        });
+        await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('products')
+          .update({
+            items: firebase.firestore.FieldValue.arrayRemove(item),
+          });
         setProducts((prev) => prev.filter((p) => p.id !== item.id));
       } else if (type === 'request') {
-        await db.collection('users').doc(userId).collection('content').doc('requests').update({
-          items: firebase.firestore.FieldValue.arrayRemove(item),
-        });
+        await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('requests')
+          .update({
+            items: firebase.firestore.FieldValue.arrayRemove(item),
+          });
         setRequests((prev) => prev.filter((r) => r.id !== item.id));
       } else if (type === 'repost-product' || type === 'repost-request') {
-        await db.collection('users').doc(userId).collection('content').doc('reposts').update({
-          items: firebase.firestore.FieldValue.arrayRemove(item),
-        });
+        await db
+          .collection('users')
+          .doc(userId)
+          .collection('content')
+          .doc('reposts')
+          .update({
+            items: firebase.firestore.FieldValue.arrayRemove(item),
+          });
         setReposts((prev) => prev.filter((r) => r.id !== item.id));
       }
     } catch (err) {
@@ -469,7 +528,9 @@ export default function ProfileScreen({ route, navigation }) {
               {item.originalPrice && (
                 <Text style={styles.originalPrice}>{formatPrice(item.originalPrice)}</Text>
               )}
-              <Text style={styles.priceText}>{formatPrice(item.price)} {item.currency}</Text>
+              <Text style={styles.priceText}>
+                {formatPrice(item.price)} {item.currency}
+              </Text>
             </View>
           </View>
         </View>
@@ -491,16 +552,12 @@ export default function ProfileScreen({ route, navigation }) {
         delayLongPress={500}
         activeOpacity={0.9}
       >
-        {item.hasImage && (
-          <Image source={{ uri: item.image }} style={styles.requestThumbnail} />
-        )}
+        {item.hasImage && <Image source={{ uri: item.image }} style={styles.requestThumbnail} />}
         <View style={styles.requestContent}>
           {isRepost && (
             <View style={styles.requestHeader}>
               <Image source={{ uri: item.userImage }} style={styles.userAvatar} />
-              <Text style={[styles.usernameRequest, { color: colors.text }]}>
-                {item.username}
-              </Text>
+              <Text style={[styles.usernameRequest, { color: colors.text }]}>{item.username}</Text>
               {item.verified && <VerifiedCheckFill color="#3B82F6" size={14} />}
               <TouchableOpacity
                 style={styles.requestMoreButton}
@@ -513,10 +570,7 @@ export default function ProfileScreen({ route, navigation }) {
               </TouchableOpacity>
             </View>
           )}
-          <Text
-            style={[styles.requestText, { color: colors.text }]}
-            numberOfLines={2}
-          >
+          <Text style={[styles.requestText, { color: colors.text }]} numberOfLines={2}>
             {parseTextWithHashtags(item.text)}
           </Text>
         </View>
@@ -648,7 +702,10 @@ export default function ProfileScreen({ route, navigation }) {
               )}
               {isMyProfile && <View style={styles.headerButton} />}
               {!isMyProfile && (
-                <TouchableOpacity onPress={() => setShowMenu(!showMenu)} style={styles.headerButton}>
+                <TouchableOpacity
+                  onPress={() => setShowMenu(!showMenu)}
+                  style={styles.headerButton}
+                >
                   <MoreVertical color="#FFFFFF" size={24} />
                 </TouchableOpacity>
               )}
@@ -672,8 +729,16 @@ export default function ProfileScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
         {showMenu && !isMyProfile && (
-          <View style={[styles.menuDropdown, { backgroundColor: colors.background, borderColor: colors.border }]}>
-            <TouchableOpacity style={[styles.menuItem, { borderBottomColor: colors.border }]} onPress={() => handleMenuAction('block')}>
+          <View
+            style={[
+              styles.menuDropdown,
+              { backgroundColor: colors.background, borderColor: colors.border },
+            ]}
+          >
+            <TouchableOpacity
+              style={[styles.menuItem, { borderBottomColor: colors.border }]}
+              onPress={() => handleMenuAction('block')}
+            >
               <BlockOutline color={colors.text} size={20} />
               <Text style={[styles.menuItemText, { color: colors.text }]}>Bloquer</Text>
             </TouchableOpacity>
@@ -688,8 +753,15 @@ export default function ProfileScreen({ route, navigation }) {
             <Text style={[styles.username, { color: colors.text }]}>{userData.username}</Text>
             {userData.verified && <VerifiedCheckFill color="#3B82F6" size={18} />}
           </View>
-          <Text style={[styles.accountType, { color: colors.textSecondary }]}>{userData.accountType}</Text>
-          <View style={[styles.statsRow, { borderTopColor: colors.border, borderBottomColor: colors.border }]}>
+          <Text style={[styles.accountType, { color: colors.textSecondary }]}>
+            {userData.accountType}
+          </Text>
+          <View
+            style={[
+              styles.statsRow,
+              { borderTopColor: colors.border, borderBottomColor: colors.border },
+            ]}
+          >
             <TouchableOpacity style={styles.statItem} onPress={handleRatingPress}>
               <View style={styles.statValueRow}>
                 <StarSolid color="#FFA500" size={16} />
@@ -697,16 +769,23 @@ export default function ProfileScreen({ route, navigation }) {
               </View>
               <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Note</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.statItem} onPress={() => handleTabContentChange('products')}>
+            <TouchableOpacity
+              style={styles.statItem}
+              onPress={() => handleTabContentChange('products')}
+            >
               <Text style={[styles.statValue, { color: colors.text }]}>{products.length}</Text>
               <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Produits</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statItem} onPress={handleFollowersPress}>
-              <Text style={[styles.statValue, { color: colors.text }]}>{formatNumber(userData.followersCount)}</Text>
+              <Text style={[styles.statValue, { color: colors.text }]}>
+                {formatNumber(userData.followersCount)}
+              </Text>
               <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Abonnés</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statItem} onPress={handleFollowingPress}>
-              <Text style={[styles.statValue, { color: colors.text }]}>{formatNumber(userData.followingCount)}</Text>
+              <Text style={[styles.statValue, { color: colors.text }]}>
+                {formatNumber(userData.followingCount)}
+              </Text>
               <Text style={[styles.statLabel, { color: colors.textSecondary }]}>Abonnements</Text>
             </TouchableOpacity>
           </View>
@@ -726,10 +805,17 @@ export default function ProfileScreen({ route, navigation }) {
             </TouchableOpacity>
           )}
           {!isMyProfile && userData.mutualFollowers.length > 0 && (
-            <TouchableOpacity style={styles.mutualFollowersContainer} onPress={handleMutualFollowersPress}>
+            <TouchableOpacity
+              style={styles.mutualFollowersContainer}
+              onPress={handleMutualFollowersPress}
+            >
               <View style={styles.mutualAvatarsRow}>
                 {userData.mutualFollowers.slice(0, 3).map((avatar, index) => (
-                  <Image key={index} source={{ uri: avatar }} style={[styles.mutualAvatar, { marginLeft: index > 0 ? -8 : 0 }]} />
+                  <Image
+                    key={index}
+                    source={{ uri: avatar }}
+                    style={[styles.mutualAvatar, { marginLeft: index > 0 ? -8 : 0 }]}
+                  />
                 ))}
               </View>
               <Text style={[styles.mutualText, { color: colors.textSecondary }]}>
@@ -740,13 +826,31 @@ export default function ProfileScreen({ route, navigation }) {
           <View style={styles.actionButtons}>
             {isMyProfile ? (
               <>
-                <TouchableOpacity style={[styles.editButton, { backgroundColor: colors.text }]} onPress={handleEditProfile}>
+                <TouchableOpacity
+                  style={[styles.editButton, { backgroundColor: colors.text }]}
+                  onPress={handleEditProfile}
+                >
                   <Pencil color={colors.background} size={18} />
-                  <Text style={[styles.editButtonText, { color: colors.background }]}>Modifier profil</Text>
+                  <Text style={[styles.editButtonText, { color: colors.background }]}>
+                    Modifier profil
+                  </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.shareProfileButton, { backgroundColor: isDarkMode ? '#FFFFFF' : '#000000' }]} onPress={handleShareProfile}>
+                <TouchableOpacity
+                  style={[
+                    styles.shareProfileButton,
+                    { backgroundColor: isDarkMode ? '#FFFFFF' : '#000000' },
+                  ]}
+                  onPress={handleShareProfile}
+                >
                   <ShareForwardFill color={isDarkMode ? '#000000' : '#FFFFFF'} size={18} />
-                  <Text style={[styles.shareProfileButtonText, { color: isDarkMode ? '#000000' : '#FFFFFF' }]}>Partager profil</Text>
+                  <Text
+                    style={[
+                      styles.shareProfileButtonText,
+                      { color: isDarkMode ? '#000000' : '#FFFFFF' },
+                    ]}
+                  >
+                    Partager profil
+                  </Text>
                 </TouchableOpacity>
               </>
             ) : (
@@ -754,15 +858,27 @@ export default function ProfileScreen({ route, navigation }) {
                 <TouchableOpacity
                   style={[
                     styles.followButton,
-                    { backgroundColor: isFollowing ? colors.background : colors.text, borderColor: colors.text, borderWidth: isFollowing ? 1 : 0 },
+                    {
+                      backgroundColor: isFollowing ? colors.background : colors.text,
+                      borderColor: colors.text,
+                      borderWidth: isFollowing ? 1 : 0,
+                    },
                   ]}
                   onPress={handleFollow}
                 >
-                  <Text style={[styles.followButtonText, { color: isFollowing ? colors.text : colors.background }]}>
-                    {isFollowing ? '✓ Abonné' : '+ S\'abonner'}
+                  <Text
+                    style={[
+                      styles.followButtonText,
+                      { color: isFollowing ? colors.text : colors.background },
+                    ]}
+                  >
+                    {isFollowing ? '✓ Abonné' : "+ S'abonner"}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.messageButton, { borderColor: colors.text }]} onPress={handleContact}>
+                <TouchableOpacity
+                  style={[styles.messageButton, { borderColor: colors.text }]}
+                  onPress={handleContact}
+                >
                   <MessageDotsFill color={colors.text} size={20} />
                   <Text style={[styles.messageButtonText, { color: colors.text }]}>Message</Text>
                 </TouchableOpacity>
@@ -772,13 +888,22 @@ export default function ProfileScreen({ route, navigation }) {
         </View>
         <View style={[styles.tabsWrapper, { borderBottomColor: colors.border }]}>
           <TouchableOpacity style={styles.tab} onPress={() => handleTabContentChange('products')}>
-            <BoxBold color={activeTabContent === 'products' ? colors.text : colors.textSecondary} size={22} />
+            <BoxBold
+              color={activeTabContent === 'products' ? colors.text : colors.textSecondary}
+              size={22}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.tab} onPress={() => handleTabContentChange('requests')}>
-            <Megaphone color={activeTabContent === 'requests' ? colors.text : colors.textSecondary} size={22} />
+            <Megaphone
+              color={activeTabContent === 'requests' ? colors.text : colors.textSecondary}
+              size={22}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.tab} onPress={() => handleTabContentChange('reposts')}>
-            <Repeat color={activeTabContent === 'reposts' ? colors.text : colors.textSecondary} size={20} />
+            <Repeat
+              color={activeTabContent === 'reposts' ? colors.text : colors.textSecondary}
+              size={20}
+            />
           </TouchableOpacity>
           <Animated.View
             style={[
@@ -825,11 +950,18 @@ export default function ProfileScreen({ route, navigation }) {
           activeOpacity={1}
           onPress={() => setLongPressedItem(null)}
         >
-          <View style={[styles.deleteModal, { backgroundColor: colors.background, borderColor: colors.border }]}>
+          <View
+            style={[
+              styles.deleteModal,
+              { backgroundColor: colors.background, borderColor: colors.border },
+            ]}
+          >
             <Text style={[styles.deleteModalText, { color: colors.text }]}>
               {longPressedItem?.type === 'product' && 'Supprimer cette publication ?'}
               {longPressedItem?.type === 'request' && 'Supprimer cette requête ?'}
-              {(longPressedItem?.type === 'repost-product' || longPressedItem?.type === 'repost-request') && 'Supprimer cette republication ?'}
+              {(longPressedItem?.type === 'repost-product' ||
+                longPressedItem?.type === 'repost-request') &&
+                'Supprimer cette republication ?'}
             </Text>
             <View style={styles.deleteModalButtons}>
               <TouchableOpacity
@@ -859,7 +991,12 @@ export default function ProfileScreen({ route, navigation }) {
           activeOpacity={1}
           onPress={() => setShowActionModal(false)}
         >
-          <View style={[styles.actionModal, { backgroundColor: colors.background, borderColor: colors.border }]}>
+          <View
+            style={[
+              styles.actionModal,
+              { backgroundColor: colors.background, borderColor: colors.border },
+            ]}
+          >
             <TouchableOpacity
               style={[styles.actionModalButton, { borderBottomColor: colors.border }]}
               onPress={() => handleActionModalOption('share')}
@@ -887,19 +1024,66 @@ const styles = StyleSheet.create({
   coverContainer: { position: 'relative', height: COVER_HEIGHT },
   coverImage: { width: '100%', height: '100%', backgroundColor: '#E0E0E0' },
   headerOverlay: { position: 'absolute', top: 0, left: 0, right: 0 },
-  headerButtons: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 8 },
+  headerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingTop: 8,
+  },
   headerButton: { padding: 8 },
-  menuDropdown: { position: 'absolute', top: 60, right: 16, borderRadius: 8, borderWidth: 1, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 5, zIndex: 1000 },
-  menuItem: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  menuDropdown: {
+    position: 'absolute',
+    top: 60,
+    right: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+    zIndex: 1000,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   menuItemText: { fontSize: 14, fontWeight: '500' },
   profileImageContainer: { position: 'absolute', bottom: -40, left: 16 },
-  profileImageWrapper: { width: 90, height: 90, borderRadius: 45, backgroundColor: '#FFFFFF', padding: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 5 },
+  profileImageWrapper: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: '#FFFFFF',
+    padding: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   profileImage: { width: '100%', height: '100%', borderRadius: 45 },
-  profileInfoContainer: { paddingHorizontal: 16, paddingTop: 48, paddingBottom: 16, borderBottomWidth: 1 },
+  profileInfoContainer: {
+    paddingHorizontal: 16,
+    paddingTop: 48,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+  },
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   username: { fontSize: 20, fontWeight: '600' },
   accountType: { fontSize: 14, marginTop: 4 },
-  statsRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 12, marginVertical: 12, borderTopWidth: 1, borderBottomWidth: 1 },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    marginVertical: 12,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+  },
   statItem: { alignItems: 'center' },
   statValueRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   statValue: { fontSize: 16, fontWeight: '600' },
@@ -914,20 +1098,67 @@ const styles = StyleSheet.create({
   mutualAvatar: { width: 24, height: 24, borderRadius: 12, borderWidth: 1, borderColor: '#FFFFFF' },
   mutualText: { fontSize: 12, flex: 1 },
   actionButtons: { flexDirection: 'row', gap: 8, marginTop: 16 },
-  editButton: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, flex: 1, justifyContent: 'center' },
+  editButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    flex: 1,
+    justifyContent: 'center',
+  },
   editButtonText: { fontSize: 14, fontWeight: '600' },
-  shareProfileButton: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, flex: 1, justifyContent: 'center' },
+  shareProfileButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    flex: 1,
+    justifyContent: 'center',
+  },
   shareProfileButtonText: { fontSize: 14, fontWeight: '600' },
-  followButton: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, flex: 1, alignItems: 'center', justifyContent: 'center' },
+  followButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   followButtonText: { fontSize: 14, fontWeight: '600' },
-  messageButton: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, borderWidth: 1, flex: 1, justifyContent: 'center' },
+  messageButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+  },
   messageButtonText: { fontSize: 14, fontWeight: '600' },
-  tabsWrapper: { flexDirection: 'row', paddingHorizontal: 16, paddingVertical: 8, borderBottomWidth: 1, position: 'relative' },
+  tabsWrapper: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    position: 'relative',
+  },
   tab: { flex: 1, alignItems: 'center', paddingVertical: 8 },
   tabIndicator: { position: 'absolute', bottom: 0, width: `${100 / 3}%`, height: 2 },
   gridContent: { paddingHorizontal: 8, paddingTop: 16 },
   gridRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
-  productCard: { width: (SCREEN_WIDTH - 24) / 3, height: (SCREEN_WIDTH - 24) / 3, borderRadius: 8, overflow: 'hidden', borderWidth: 1 },
+  productCard: {
+    width: (SCREEN_WIDTH - 24) / 3,
+    height: (SCREEN_WIDTH - 24) / 3,
+    borderRadius: 8,
+    overflow: 'hidden',
+    borderWidth: 1,
+  },
   itemLeft: { marginRight: 4 },
   itemRight: { marginLeft: 4 },
   productImage: { width: '100%', height: '100%' },
@@ -939,7 +1170,13 @@ const styles = StyleSheet.create({
   priceText: { fontSize: 11, color: '#FFFFFF', fontWeight: '600' },
   originalPrice: { fontSize: 10, color: '#FFFFFF', textDecorationLine: 'line-through' },
   requestsContent: { paddingHorizontal: 16, paddingTop: 16 },
-  requestCard: { flexDirection: 'row', padding: 12, borderRadius: 12, borderWidth: 1, marginBottom: 8 },
+  requestCard: {
+    flexDirection: 'row',
+    padding: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 8,
+  },
   requestThumbnail: { width: 48, height: 48, borderRadius: 8, marginRight: 12 },
   requestContent: { flex: 1 },
   requestHeader: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 8 },
@@ -949,8 +1186,20 @@ const styles = StyleSheet.create({
   requestText: { fontSize: 14, lineHeight: 20 },
   emptyStateContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 40 },
   emptyStateText: { fontSize: 14, textAlign: 'center', marginTop: 12, paddingHorizontal: 16 },
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', justifyContent: 'center', alignItems: 'center' },
-  blurView: { width: '80%', height: '60%', borderRadius: 16, overflow: 'hidden', justifyContent: 'center', alignItems: 'center' },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  blurView: {
+    width: '80%',
+    height: '60%',
+    borderRadius: 16,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   modalContent: { width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' },
   modalProfileImage: { width: '90%', height: '90%', borderRadius: 16 },
   deleteModal: { padding: 16, borderRadius: 12, borderWidth: 1, width: '80%' },
@@ -959,6 +1208,13 @@ const styles = StyleSheet.create({
   deleteModalButton: { flex: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   deleteModalButtonText: { fontSize: 14, fontWeight: '600', color: '#FFFFFF' },
   actionModal: { width: '60%', borderRadius: 12, borderWidth: 1 },
-  actionModalButton: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  actionModalButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   actionModalButtonText: { fontSize: 14, fontWeight: '500' },
 });

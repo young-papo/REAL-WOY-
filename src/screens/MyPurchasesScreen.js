@@ -1,5 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, StatusBar, useColorScheme, RefreshControl, Image, Modal, Animated, ScrollView, TextInput, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  StatusBar,
+  useColorScheme,
+  RefreshControl,
+  Image,
+  Modal,
+  Animated,
+  ScrollView,
+  TextInput,
+  Dimensions,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ArrowBackIosRounded,
@@ -149,7 +165,9 @@ export default function MyPurchasesScreen({ navigation }) {
         id: `purchase_${pageNum}_${i}`,
         sellerRating: sellerRating,
         purchaseDate: purchaseDate.toISOString(),
-        purchasePrice: (parseInt(baseProduct.price.replace(/\s/g, '')) - 500).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
+        purchasePrice: (parseInt(baseProduct.price.replace(/\s/g, '')) - 500)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
         description: `Description détaillée du produit ${baseProduct.title}. Article en excellent état, peu utilisé. Vendu avec tous les accessoires d'origine.`,
         images: [
           baseProduct.image,
@@ -157,12 +175,12 @@ export default function MyPurchasesScreen({ navigation }) {
           'https://picsum.photos/seed/' + (index + 200) + '/400/400',
         ],
         seller: {
-          name: `vendeur_${index % 20 + 1}_avec_nom_tres_long`,
-          oderId: `seller_${index % 20 + 1}`,
+          name: `vendeur_${(index % 20) + 1}_avec_nom_tres_long`,
+          oderId: `seller_${(index % 20) + 1}`,
           avatar: `https://i.pravatar.cc/150?img=${(index % 70) + 1}`,
           verified: Math.random() > 0.5,
           rating: sellerRating.toFixed(1),
-        }
+        },
       });
     }
 
@@ -177,14 +195,14 @@ export default function MyPurchasesScreen({ navigation }) {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const newPurchases = generateMockPurchases(pageNum);
 
       if (pageNum === 1) {
         setPurchases(newPurchases);
       } else {
-        setPurchases(prev => [...prev, ...newPurchases]);
+        setPurchases((prev) => [...prev, ...newPurchases]);
       }
 
       if (pageNum >= 3) {
@@ -201,24 +219,24 @@ export default function MyPurchasesScreen({ navigation }) {
 
   const applyFiltersAndSearch = async () => {
     setIsFiltering(true);
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     let filtered = [...purchases];
 
     if (searchQuery.trim()) {
-      filtered = filtered.filter(item =>
+      filtered = filtered.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     if (filters.stars) {
-      filtered = filtered.filter(item => item.sellerRating === filters.stars);
+      filtered = filtered.filter((item) => item.sellerRating === filters.stars);
     }
 
     if (filters.priceRange) {
-      filtered = filtered.filter(item => {
+      filtered = filtered.filter((item) => {
         const price = parseInt(item.purchasePrice.replace(/\s/g, ''));
-        const [min, max] = filters.priceRange.split('-').map(p => parseInt(p));
+        const [min, max] = filters.priceRange.split('-').map((p) => parseInt(p));
         if (max) {
           return price >= min && price <= max;
         } else {
@@ -325,7 +343,10 @@ export default function MyPurchasesScreen({ navigation }) {
   const renderSkeleton = () => (
     <View style={styles.skeletonContainer}>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-        <View key={item} style={[styles.skeletonItem, { backgroundColor: colors.cardBg, width: CARD_WIDTH }]}>
+        <View
+          key={item}
+          style={[styles.skeletonItem, { backgroundColor: colors.cardBg, width: CARD_WIDTH }]}
+        >
           <View style={[styles.skeletonImage, { backgroundColor: colors.skeletonBg }]} />
           <View style={[styles.skeletonTitle, { backgroundColor: colors.skeletonBg }]} />
           <View style={[styles.skeletonPrice, { backgroundColor: colors.skeletonBg }]} />
@@ -356,7 +377,10 @@ export default function MyPurchasesScreen({ navigation }) {
     return (
       <View style={styles.footerLoader}>
         {[1, 2, 3].map((item) => (
-          <View key={item} style={[styles.skeletonItem, { backgroundColor: colors.cardBg, width: CARD_WIDTH }]}>
+          <View
+            key={item}
+            style={[styles.skeletonItem, { backgroundColor: colors.cardBg, width: CARD_WIDTH }]}
+          >
             <View style={[styles.skeletonImage, { backgroundColor: colors.skeletonBg }]} />
             <View style={[styles.skeletonTitle, { backgroundColor: colors.skeletonBg }]} />
             <View style={[styles.skeletonPrice, { backgroundColor: colors.skeletonBg }]} />
@@ -401,8 +425,21 @@ export default function MyPurchasesScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.headerBg} translucent={false} />
-      <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border, paddingTop: insets.top }]}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.headerBg}
+        translucent={false}
+      />
+      <View
+        style={[
+          styles.header,
+          {
+            backgroundColor: colors.headerBg,
+            borderBottomColor: colors.border,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
         <TouchableOpacity onPress={handleBack} style={styles.headerLeft}>
           <ArrowBackIosRounded color={colors.text} size={24} />
         </TouchableOpacity>
@@ -420,7 +457,12 @@ export default function MyPurchasesScreen({ navigation }) {
       </View>
 
       {showSearch && (
-        <View style={[styles.searchBar, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+        <View
+          style={[
+            styles.searchBar,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
+        >
           <View style={[styles.searchInput, { backgroundColor: colors.inputBg }]}>
             <Search color={colors.textSecondary} size={18} />
             <TextInput
@@ -450,7 +492,7 @@ export default function MyPurchasesScreen({ navigation }) {
           numColumns={3}
           contentContainerStyle={[
             styles.listContent,
-            filteredPurchases.length === 0 && styles.emptyListContent
+            filteredPurchases.length === 0 && styles.emptyListContent,
           ]}
           columnWrapperStyle={filteredPurchases.length > 0 ? styles.columnWrapper : null}
           ListHeaderComponent={
@@ -476,12 +518,22 @@ export default function MyPurchasesScreen({ navigation }) {
         />
       )}
 
-      <Modal visible={showFilterModal} transparent={true} animationType="none" onRequestClose={() => {}}>
+      <Modal
+        visible={showFilterModal}
+        transparent={true}
+        animationType="none"
+        onRequestClose={() => {}}
+      >
         <TouchableWithoutFeedback>
           <View style={styles.filterModalContainer}>
             <Animated.View style={[styles.filterOverlay, { opacity: fadeAnim }]} />
 
-            <Animated.View style={[styles.filterModalContent, { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] }]}>
+            <Animated.View
+              style={[
+                styles.filterModalContent,
+                { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] },
+              ]}
+            >
               <View style={[styles.filterHeader, { borderBottomColor: colors.border }]}>
                 <Text style={[styles.filterTitle, { color: colors.text }]}>Filtres</Text>
                 <TouchableOpacity onPress={() => setShowFilterModal(false)}>
@@ -495,22 +547,24 @@ export default function MyPurchasesScreen({ navigation }) {
                   <View style={styles.filterOptionsRow}>
                     {[
                       { value: 'recent', label: 'Plus récent' },
-                      { value: 'oldest', label: 'Plus ancien' }
+                      { value: 'oldest', label: 'Plus ancien' },
                     ].map((sort) => (
                       <TouchableOpacity
                         key={sort.value}
                         style={[
                           styles.filterOption,
                           { borderColor: colors.border },
-                          tempFilters.sortBy === sort.value && styles.filterOptionActive
+                          tempFilters.sortBy === sort.value && styles.filterOptionActive,
                         ]}
                         onPress={() => setTempFilters({ ...tempFilters, sortBy: sort.value })}
                       >
-                        <Text style={[
-                          styles.filterOptionText,
-                          { color: colors.textSecondary },
-                          tempFilters.sortBy === sort.value && styles.filterOptionTextActive
-                        ]}>
+                        <Text
+                          style={[
+                            styles.filterOptionText,
+                            { color: colors.textSecondary },
+                            tempFilters.sortBy === sort.value && styles.filterOptionTextActive,
+                          ]}
+                        >
                           {sort.label}
                         </Text>
                       </TouchableOpacity>
@@ -525,34 +579,38 @@ export default function MyPurchasesScreen({ navigation }) {
                       style={[
                         styles.filterOption,
                         { borderColor: colors.border },
-                        !tempFilters.stars && styles.filterOptionActive
+                        !tempFilters.stars && styles.filterOptionActive,
                       ]}
                       onPress={() => setTempFilters({ ...tempFilters, stars: null })}
                     >
-                      <Text style={[
-                        styles.filterOptionText,
-                        { color: colors.textSecondary },
-                        !tempFilters.stars && styles.filterOptionTextActive
-                      ]}>
+                      <Text
+                        style={[
+                          styles.filterOptionText,
+                          { color: colors.textSecondary },
+                          !tempFilters.stars && styles.filterOptionTextActive,
+                        ]}
+                      >
                         Tous
                       </Text>
                     </TouchableOpacity>
-                    {[5, 4, 3, 2, 1].map(star => (
+                    {[5, 4, 3, 2, 1].map((star) => (
                       <TouchableOpacity
                         key={star}
                         style={[
                           styles.filterOption,
                           { borderColor: colors.border },
-                          tempFilters.stars === star && styles.filterOptionActive
+                          tempFilters.stars === star && styles.filterOptionActive,
                         ]}
                         onPress={() => setTempFilters({ ...tempFilters, stars: star })}
                       >
                         <StarSolid color="#FFB800" size={14} />
-                        <Text style={[
-                          styles.filterOptionText,
-                          { color: colors.textSecondary },
-                          tempFilters.stars === star && styles.filterOptionTextActive
-                        ]}>
+                        <Text
+                          style={[
+                            styles.filterOptionText,
+                            { color: colors.textSecondary },
+                            tempFilters.stars === star && styles.filterOptionTextActive,
+                          ]}
+                        >
                           {star}
                         </Text>
                       </TouchableOpacity>
@@ -569,22 +627,24 @@ export default function MyPurchasesScreen({ navigation }) {
                       { value: '500-1000', label: '500-1 000' },
                       { value: '1000-5000', label: '1 000-5 000' },
                       { value: '5000-10000', label: '5 000-10 000' },
-                      { value: '10000-999999999', label: '10 000+' }
+                      { value: '10000-999999999', label: '10 000+' },
                     ].map((price) => (
                       <TouchableOpacity
                         key={price.value}
                         style={[
                           styles.filterOption,
                           { borderColor: colors.border },
-                          tempFilters.priceRange === price.value && styles.filterOptionActive
+                          tempFilters.priceRange === price.value && styles.filterOptionActive,
                         ]}
                         onPress={() => setTempFilters({ ...tempFilters, priceRange: price.value })}
                       >
-                        <Text style={[
-                          styles.filterOptionText,
-                          { color: colors.textSecondary },
-                          tempFilters.priceRange === price.value && styles.filterOptionTextActive
-                        ]}>
+                        <Text
+                          style={[
+                            styles.filterOptionText,
+                            { color: colors.textSecondary },
+                            tempFilters.priceRange === price.value && styles.filterOptionTextActive,
+                          ]}
+                        >
                           {price.label}
                         </Text>
                       </TouchableOpacity>
@@ -598,13 +658,17 @@ export default function MyPurchasesScreen({ navigation }) {
                   style={[styles.filterResetButton, { borderColor: colors.text }]}
                   onPress={resetFilters}
                 >
-                  <Text style={[styles.filterResetText, { color: colors.text }]}>Réinitialiser</Text>
+                  <Text style={[styles.filterResetText, { color: colors.text }]}>
+                    Réinitialiser
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.filterApplyButton, { backgroundColor: colors.text }]}
                   onPress={applyFilters}
                 >
-                  <Text style={[styles.filterApplyText, { color: colors.background }]}>Appliquer</Text>
+                  <Text style={[styles.filterApplyText, { color: colors.background }]}>
+                    Appliquer
+                  </Text>
                 </TouchableOpacity>
               </View>
             </Animated.View>
@@ -612,12 +676,22 @@ export default function MyPurchasesScreen({ navigation }) {
         </TouchableWithoutFeedback>
       </Modal>
 
-      <Modal visible={showDetailModal} transparent={true} animationType="none" onRequestClose={() => {}}>
+      <Modal
+        visible={showDetailModal}
+        transparent={true}
+        animationType="none"
+        onRequestClose={() => {}}
+      >
         <TouchableWithoutFeedback>
           <View style={styles.detailModalContainer}>
             <Animated.View style={[styles.filterOverlay, { opacity: fadeAnim }]} />
 
-            <Animated.View style={[styles.detailModalContent, { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] }]}>
+            <Animated.View
+              style={[
+                styles.detailModalContent,
+                { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] },
+              ]}
+            >
               <View style={[styles.detailHeader, { borderBottomColor: colors.border }]}>
                 <Text style={[styles.detailTitle, { color: colors.text }]}>Détails de l'achat</Text>
                 <TouchableOpacity onPress={() => setShowDetailModal(false)}>
@@ -634,21 +708,37 @@ export default function MyPurchasesScreen({ navigation }) {
 
                     <View style={styles.detailPriceSection}>
                       <View style={styles.detailPriceRow}>
-                        <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>Prix initial:</Text>
+                        <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>
+                          Prix initial:
+                        </Text>
                         <Text style={[styles.detailPriceValue, { color: colors.text }]}>
-                          {selectedProduct.originalPrice || selectedProduct.price} {selectedProduct.currency}
+                          {selectedProduct.originalPrice || selectedProduct.price}{' '}
+                          {selectedProduct.currency}
                         </Text>
                       </View>
                       {selectedProduct.originalPrice && (
                         <View style={styles.detailPriceRow}>
-                          <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>Prix de réduction:</Text>
-                          <Text style={[styles.detailDiscountPrice, { color: colors.text, textDecorationLine: 'line-through', textDecorationColor: '#EF4444' }]}>
+                          <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>
+                            Prix de réduction:
+                          </Text>
+                          <Text
+                            style={[
+                              styles.detailDiscountPrice,
+                              {
+                                color: colors.text,
+                                textDecorationLine: 'line-through',
+                                textDecorationColor: '#EF4444',
+                              },
+                            ]}
+                          >
                             {selectedProduct.price} {selectedProduct.currency}
                           </Text>
                         </View>
                       )}
                       <View style={styles.detailPriceRow}>
-                        <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>Prix d'achat:</Text>
+                        <Text style={[styles.detailPriceLabel, { color: colors.textSecondary }]}>
+                          Prix d'achat:
+                        </Text>
                         <Text style={[styles.detailPurchasePrice, { color: colors.text }]}>
                           {selectedProduct.purchasePrice} {selectedProduct.currency}
                         </Text>
@@ -656,23 +746,33 @@ export default function MyPurchasesScreen({ navigation }) {
                     </View>
 
                     <View style={styles.detailInfoRow}>
-                      <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>Date d'achat:</Text>
+                      <Text style={[styles.detailLabel, { color: colors.textSecondary }]}>
+                        Date d'achat:
+                      </Text>
                       <Text style={[styles.detailValue, { color: colors.text }]}>
                         {formatDate(selectedProduct.purchaseDate)}
                       </Text>
                     </View>
 
                     <View style={styles.detailSection}>
-                      <Text style={[styles.detailSectionTitle, { color: colors.text }]}>Vendeur</Text>
+                      <Text style={[styles.detailSectionTitle, { color: colors.text }]}>
+                        Vendeur
+                      </Text>
                       <TouchableOpacity
                         style={styles.sellerInfo}
                         onPress={() => handleSellerPress(selectedProduct.seller)}
                         activeOpacity={0.7}
                       >
-                        <Image source={{ uri: selectedProduct.seller.avatar }} style={styles.sellerAvatar} />
+                        <Image
+                          source={{ uri: selectedProduct.seller.avatar }}
+                          style={styles.sellerAvatar}
+                        />
                         <View style={styles.sellerDetails}>
                           <View style={styles.sellerNameRow}>
-                            <Text style={[styles.sellerName, { color: colors.text }]} numberOfLines={1}>
+                            <Text
+                              style={[styles.sellerName, { color: colors.text }]}
+                              numberOfLines={1}
+                            >
                               {truncateText(selectedProduct.seller.name, 20)}
                             </Text>
                             {selectedProduct.seller.verified && (
@@ -711,14 +811,28 @@ export default function MyPurchasesScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   headerLeft: { width: 40, alignItems: 'flex-start' },
   headerCenter: { flex: 1, alignItems: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700' },
   headerRight: { flexDirection: 'row', gap: 12, alignItems: 'center' },
   iconButton: { padding: 4 },
   searchBar: { paddingHorizontal: 16, paddingVertical: 8, borderBottomWidth: 1 },
-  searchInput: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingVertical: 10, borderRadius: 8 },
+  searchInput: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
   searchTextInput: { flex: 1, fontSize: 14 },
   totalPurchasesContainer: { paddingHorizontal: 16, paddingVertical: 12 },
   totalPurchasesText: { fontSize: 16, fontWeight: '700' },
@@ -735,31 +849,87 @@ const styles = StyleSheet.create({
   skeletonTitle: { width: '80%', height: 12, borderRadius: 4, marginBottom: 4 },
   skeletonPrice: { width: '50%', height: 14, borderRadius: 4 },
   footerLoader: { flexDirection: 'row', flexWrap: 'wrap', padding: 4 },
-  emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40, paddingVertical: 60 },
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 40,
+    paddingVertical: 60,
+  },
   emptyTitle: { fontSize: 20, fontWeight: '700', marginTop: 20, textAlign: 'center' },
   emptySubtitle: { fontSize: 14, marginTop: 8, textAlign: 'center', lineHeight: 20 },
   filterModalContainer: { flex: 1 },
   filterOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-  filterModalContent: { position: 'absolute', bottom: 0, left: 0, right: 0, borderTopLeftRadius: 20, borderTopRightRadius: 20, maxHeight: '80%' },
-  filterHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 16, borderBottomWidth: 1 },
+  filterModalContent: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: '80%',
+  },
+  filterHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+  },
   filterTitle: { fontSize: 20, fontWeight: 'bold' },
   filterCloseIcon: { fontSize: 24 },
   filterScroll: { paddingHorizontal: 20, paddingVertical: 16 },
   filterSection: { marginBottom: 20 },
   filterLabel: { fontSize: 14, fontWeight: '600', marginBottom: 12 },
   filterOptionsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  filterOption: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, borderWidth: 1, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  filterOption: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
   filterOptionActive: { backgroundColor: '#000000', borderColor: '#000000' },
   filterOptionText: { fontSize: 12, fontWeight: '600' },
   filterOptionTextActive: { color: '#ffffff' },
-  filterButtons: { flexDirection: 'row', gap: 12, paddingHorizontal: 20, paddingVertical: 16, borderTopWidth: 1 },
-  filterResetButton: { flex: 1, borderWidth: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
+  filterButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderTopWidth: 1,
+  },
+  filterResetButton: {
+    flex: 1,
+    borderWidth: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
   filterResetText: { fontSize: 14, fontWeight: '600' },
   filterApplyButton: { flex: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   filterApplyText: { fontSize: 14, fontWeight: '600' },
   detailModalContainer: { flex: 1 },
-  detailModalContent: { position: 'absolute', bottom: 0, left: 0, right: 0, borderTopLeftRadius: 20, borderTopRightRadius: 20, maxHeight: '90%' },
-  detailHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 16, borderBottomWidth: 1 },
+  detailModalContent: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: '90%',
+  },
+  detailHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+  },
   detailTitle: { fontSize: 20, fontWeight: 'bold' },
   detailScroll: { maxHeight: '100%' },
   detailContent: { padding: 20 },
@@ -770,7 +940,13 @@ const styles = StyleSheet.create({
   detailPriceValue: { fontSize: 16, fontWeight: '600' },
   detailDiscountPrice: { fontSize: 16, fontWeight: '600' },
   detailPurchasePrice: { fontSize: 18, fontWeight: '700' },
-  detailInfoRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#E5E7EB' },
+  detailInfoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
   detailLabel: { fontSize: 14 },
   detailValue: { fontSize: 14, fontWeight: '600' },
   detailSection: { marginTop: 20 },
@@ -782,6 +958,13 @@ const styles = StyleSheet.create({
   sellerName: { fontSize: 15, fontWeight: '600', maxWidth: '85%' },
   sellerRating: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   sellerRatingText: { fontSize: 14, fontWeight: '600' },
-  viewProductButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 14, borderRadius: 10, marginTop: 20 },
+  viewProductButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginTop: 20,
+  },
   viewProductButtonText: { fontSize: 16, fontWeight: '700' },
 });

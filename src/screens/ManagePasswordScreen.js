@@ -17,12 +17,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  ArrowBackIosRounded,
-  Lock,
-  MailRounded,
-  ClockFilled,
-} from '../components/icons';
+import { ArrowBackIosRounded, Lock, MailRounded, ClockFilled } from '../components/icons';
 
 // ========================================
 // COMPOSANT PRINCIPAL
@@ -127,7 +122,7 @@ export default function ManagePasswordScreen({ navigation }) {
 
     // Vérifier si le nouveau mot de passe est différent de l'ancien
     if (hasPassword && oldPassword && text === oldPassword) {
-      setSamePasswordError('Le nouveau mot de passe doit être différent de l\'ancien');
+      setSamePasswordError("Le nouveau mot de passe doit être différent de l'ancien");
     } else {
       setSamePasswordError('');
     }
@@ -154,7 +149,7 @@ export default function ManagePasswordScreen({ navigation }) {
 
     // Vérifier si le nouveau mot de passe est différent
     if (newPassword && text === newPassword) {
-      setSamePasswordError('Le nouveau mot de passe doit être différent de l\'ancien');
+      setSamePasswordError("Le nouveau mot de passe doit être différent de l'ancien");
     } else {
       setSamePasswordError('');
     }
@@ -288,7 +283,7 @@ export default function ManagePasswordScreen({ navigation }) {
       const oldPasswordCorrect = true; // Simuler la validation
 
       if (!oldPasswordCorrect) {
-        setOldPasswordError('L\'ancien mot de passe est incorrect');
+        setOldPasswordError("L'ancien mot de passe est incorrect");
         setLoading(false);
         return;
       }
@@ -350,7 +345,9 @@ export default function ManagePasswordScreen({ navigation }) {
   const renderSuccessScreen = () => (
     <View style={styles.successContainer}>
       <Text style={[styles.successTitle, { color: colors.text }]}>{successMessage.title}</Text>
-      <Text style={[styles.successSubtitle, { color: colors.textSecondary }]}>{successMessage.subtitle}</Text>
+      <Text style={[styles.successSubtitle, { color: colors.textSecondary }]}>
+        {successMessage.subtitle}
+      </Text>
     </View>
   );
 
@@ -395,13 +392,19 @@ export default function ManagePasswordScreen({ navigation }) {
                 autoCorrect={false}
               />
               <TouchableOpacity onPress={() => setShowOldPassword(!showOldPassword)}>
-                <Ionicons name={showOldPassword ? 'eye-off' : 'eye'} size={20} color={colors.textSecondary} />
+                <Ionicons
+                  name={showOldPassword ? 'eye-off' : 'eye'}
+                  size={20}
+                  color={colors.textSecondary}
+                />
               </TouchableOpacity>
             </View>
             {oldPasswordError && (
               <View style={styles.messageContainer}>
                 <Ionicons name="close-circle" size={14} color={colors.error} />
-                <Text style={[styles.messageText, { color: colors.error }]}>{oldPasswordError}</Text>
+                <Text style={[styles.messageText, { color: colors.error }]}>
+                  {oldPasswordError}
+                </Text>
               </View>
             )}
           </View>
@@ -414,7 +417,10 @@ export default function ManagePasswordScreen({ navigation }) {
                 styles.inputContainer,
                 {
                   backgroundColor: colors.inputBg,
-                  borderColor: passwordErrors.length > 0 || samePasswordError ? colors.error : colors.inputBorder,
+                  borderColor:
+                    passwordErrors.length > 0 || samePasswordError
+                      ? colors.error
+                      : colors.inputBorder,
                 },
               ]}
             >
@@ -430,26 +436,36 @@ export default function ManagePasswordScreen({ navigation }) {
                 autoCorrect={false}
               />
               <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
-                <Ionicons name={showNewPassword ? 'eye-off' : 'eye'} size={20} color={colors.textSecondary} />
+                <Ionicons
+                  name={showNewPassword ? 'eye-off' : 'eye'}
+                  size={20}
+                  color={colors.textSecondary}
+                />
               </TouchableOpacity>
             </View>
             {passwordErrors.length > 0 && (
               <View style={styles.messageContainer}>
                 <Ionicons name="close-circle" size={14} color={colors.error} />
-                <Text style={[styles.messageText, { color: colors.error }]}>{passwordErrors.join(', ')}</Text>
+                <Text style={[styles.messageText, { color: colors.error }]}>
+                  {passwordErrors.join(', ')}
+                </Text>
               </View>
             )}
             {samePasswordError && (
               <View style={styles.messageContainer}>
                 <Ionicons name="close-circle" size={14} color={colors.error} />
-                <Text style={[styles.messageText, { color: colors.error }]}>{samePasswordError}</Text>
+                <Text style={[styles.messageText, { color: colors.error }]}>
+                  {samePasswordError}
+                </Text>
               </View>
             )}
           </View>
 
           {/* CONFIRMER NOUVEAU MOT DE PASSE */}
           <View style={styles.fieldContainer}>
-            <Text style={[styles.label, { color: colors.text }]}>Confirmer le nouveau mot de passe</Text>
+            <Text style={[styles.label, { color: colors.text }]}>
+              Confirmer le nouveau mot de passe
+            </Text>
             <View
               style={[
                 styles.inputContainer,
@@ -471,13 +487,19 @@ export default function ManagePasswordScreen({ navigation }) {
                 autoCorrect={false}
               />
               <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-                <Ionicons name={showConfirmPassword ? 'eye-off' : 'eye'} size={20} color={colors.textSecondary} />
+                <Ionicons
+                  name={showConfirmPassword ? 'eye-off' : 'eye'}
+                  size={20}
+                  color={colors.textSecondary}
+                />
               </TouchableOpacity>
             </View>
             {passwordMismatch && (
               <View style={styles.messageContainer}>
                 <Ionicons name="close-circle" size={14} color={colors.error} />
-                <Text style={[styles.messageText, { color: colors.error }]}>{passwordMismatch}</Text>
+                <Text style={[styles.messageText, { color: colors.error }]}>
+                  {passwordMismatch}
+                </Text>
               </View>
             )}
           </View>
@@ -486,7 +508,10 @@ export default function ManagePasswordScreen({ navigation }) {
           <TouchableOpacity
             style={[
               styles.button,
-              { backgroundColor: isUpdateFormValid() && !loading ? colors.button : colors.buttonDisabled },
+              {
+                backgroundColor:
+                  isUpdateFormValid() && !loading ? colors.button : colors.buttonDisabled,
+              },
             ]}
             onPress={handleUpdatePassword}
             disabled={!isUpdateFormValid() || loading}
@@ -494,7 +519,9 @@ export default function ManagePasswordScreen({ navigation }) {
             {loading ? (
               <ActivityIndicator color={colors.buttonText} />
             ) : (
-              <Text style={[styles.buttonText, { color: colors.buttonText }]}>Modifier le mot de passe</Text>
+              <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                Modifier le mot de passe
+              </Text>
             )}
           </TouchableOpacity>
         </View>
@@ -511,10 +538,17 @@ export default function ManagePasswordScreen({ navigation }) {
 
           {!codeSent ? (
             <>
-              <View style={[styles.infoBox, { backgroundColor: colors.inputBg, borderColor: colors.border }]}>
+              <View
+                style={[
+                  styles.infoBox,
+                  { backgroundColor: colors.inputBg, borderColor: colors.border },
+                ]}
+              >
                 <Ionicons name="mail" size={24} color={colors.textSecondary} />
                 <View style={styles.infoContent}>
-                  <Text style={[styles.infoTitle, { color: colors.text }]}>Vérification par email</Text>
+                  <Text style={[styles.infoTitle, { color: colors.text }]}>
+                    Vérification par email
+                  </Text>
                   <Text style={[styles.infoText, { color: colors.textSecondary }]}>
                     Un code de vérification sera envoyé à {maskEmail(userEmail)}
                   </Text>
@@ -522,14 +556,19 @@ export default function ManagePasswordScreen({ navigation }) {
               </View>
 
               <TouchableOpacity
-                style={[styles.button, { backgroundColor: sendingCode ? colors.buttonDisabled : colors.button }]}
+                style={[
+                  styles.button,
+                  { backgroundColor: sendingCode ? colors.buttonDisabled : colors.button },
+                ]}
                 onPress={handleSendCode}
                 disabled={sendingCode}
               >
                 {sendingCode ? (
                   <ActivityIndicator color={colors.buttonText} />
                 ) : (
-                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>Envoyer le code</Text>
+                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                    Envoyer le code
+                  </Text>
                 )}
               </TouchableOpacity>
             </>
@@ -578,7 +617,9 @@ export default function ManagePasswordScreen({ navigation }) {
                   styles.button,
                   {
                     backgroundColor:
-                      verificationCode.length === 6 && !verifyingCode ? colors.button : colors.buttonDisabled,
+                      verificationCode.length === 6 && !verifyingCode
+                        ? colors.button
+                        : colors.buttonDisabled,
                   },
                 ]}
                 onPress={handleVerifyCode}
@@ -587,7 +628,9 @@ export default function ManagePasswordScreen({ navigation }) {
                 {verifyingCode ? (
                   <ActivityIndicator color={colors.buttonText} />
                 ) : (
-                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>Vérifier le code</Text>
+                  <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+                    Vérifier le code
+                  </Text>
                 )}
               </TouchableOpacity>
 
@@ -595,7 +638,12 @@ export default function ManagePasswordScreen({ navigation }) {
                 <TouchableOpacity onPress={handleResendCode} disabled={!canResend}>
                   <View style={styles.resendRow}>
                     <ClockFilled color={canResend ? colors.text : colors.textSecondary} size={22} />
-                    <Text style={[styles.resendText, { color: canResend ? colors.text : colors.textSecondary }]}>
+                    <Text
+                      style={[
+                        styles.resendText,
+                        { color: canResend ? colors.text : colors.textSecondary },
+                      ]}
+                    >
                       Renvoyer le code {canResend ? '' : `(${resendTimer}s)`}
                     </Text>
                   </View>
@@ -638,13 +686,19 @@ export default function ManagePasswordScreen({ navigation }) {
               autoCorrect={false}
             />
             <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
-              <Ionicons name={showNewPassword ? 'eye-off' : 'eye'} size={20} color={colors.textSecondary} />
+              <Ionicons
+                name={showNewPassword ? 'eye-off' : 'eye'}
+                size={20}
+                color={colors.textSecondary}
+              />
             </TouchableOpacity>
           </View>
           {passwordErrors.length > 0 && (
             <View style={styles.messageContainer}>
               <Ionicons name="close-circle" size={14} color={colors.error} />
-              <Text style={[styles.messageText, { color: colors.error }]}>{passwordErrors.join(', ')}</Text>
+              <Text style={[styles.messageText, { color: colors.error }]}>
+                {passwordErrors.join(', ')}
+              </Text>
             </View>
           )}
         </View>
@@ -673,7 +727,11 @@ export default function ManagePasswordScreen({ navigation }) {
               autoCorrect={false}
             />
             <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-              <Ionicons name={showConfirmPassword ? 'eye-off' : 'eye'} size={20} color={colors.textSecondary} />
+              <Ionicons
+                name={showConfirmPassword ? 'eye-off' : 'eye'}
+                size={20}
+                color={colors.textSecondary}
+              />
             </TouchableOpacity>
           </View>
           {passwordMismatch && (
@@ -688,7 +746,10 @@ export default function ManagePasswordScreen({ navigation }) {
         <TouchableOpacity
           style={[
             styles.button,
-            { backgroundColor: isCreateFormValid() && !loading ? colors.button : colors.buttonDisabled },
+            {
+              backgroundColor:
+                isCreateFormValid() && !loading ? colors.button : colors.buttonDisabled,
+            },
           ]}
           onPress={handleCreatePassword}
           disabled={!isCreateFormValid() || loading}
@@ -696,7 +757,9 @@ export default function ManagePasswordScreen({ navigation }) {
           {loading ? (
             <ActivityIndicator color={colors.buttonText} />
           ) : (
-            <Text style={[styles.buttonText, { color: colors.buttonText }]}>Créer le mot de passe</Text>
+            <Text style={[styles.buttonText, { color: colors.buttonText }]}>
+              Créer le mot de passe
+            </Text>
           )}
         </TouchableOpacity>
       </View>
@@ -715,7 +778,16 @@ export default function ManagePasswordScreen({ navigation }) {
         translucent={false}
       />
 
-      <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border, paddingTop: insets.top }]}>
+      <View
+        style={[
+          styles.header,
+          {
+            backgroundColor: colors.headerBg,
+            borderBottomColor: colors.border,
+            paddingTop: insets.top,
+          },
+        ]}
+      >
         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
           <ArrowBackIosRounded color={colors.text} size={24} />
         </TouchableOpacity>
@@ -726,7 +798,10 @@ export default function ManagePasswordScreen({ navigation }) {
       </View>
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardView}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+        >
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}

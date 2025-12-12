@@ -300,9 +300,7 @@ export default function HomeScreen({ navigation }) {
   ]);
 
   const getFilteredItems = () => {
-    let items = feedItems.filter(
-      (item) => item.type !== 'product' || item.status === 'available'
-    );
+    let items = feedItems.filter((item) => item.type !== 'product' || item.status === 'available');
 
     if (activeFilter === 'followed') {
       items = items.filter((item) => item.isFollowed);
@@ -363,9 +361,7 @@ export default function HomeScreen({ navigation }) {
   const handleFilterSelect = (filter) => {
     setActiveFilter(filter);
     setShowFilterModal(false);
-    showSuccessToast(
-      `Filtre "${filter === 'followed' ? 'Suivies' : 'Aimés'}" appliqué`
-    );
+    showSuccessToast(`Filtre "${filter === 'followed' ? 'Suivies' : 'Aimés'}" appliqué`);
   };
 
   const handleRemoveFilter = () => {
@@ -512,24 +508,15 @@ export default function HomeScreen({ navigation }) {
             </Text>
             {item.discount ? (
               <View style={styles.priceRow}>
-                <Text
-                  style={[
-                    styles.originalPrice,
-                    shouldReduceText && styles.originalPriceSmall,
-                  ]}
-                >
+                <Text style={[styles.originalPrice, shouldReduceText && styles.originalPriceSmall]}>
                   {item.originalPrice}
                 </Text>
-                <Text
-                  style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}
-                >
+                <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
                   {item.price} {item.currency}
                 </Text>
               </View>
             ) : (
-              <Text
-                style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}
-              >
+              <Text style={[styles.priceText, shouldReduceText && styles.priceTextSmall]}>
                 {item.price} {item.currency}
               </Text>
             )}
@@ -550,23 +537,16 @@ export default function HomeScreen({ navigation }) {
           onPress={() => handleRequestPress(item)}
           activeOpacity={0.9}
         >
-          {item.hasImage && (
-            <Image source={{ uri: item.image }} style={styles.requestThumbnail} />
-          )}
+          {item.hasImage && <Image source={{ uri: item.image }} style={styles.requestThumbnail} />}
 
           <View style={styles.requestContent}>
             <View style={styles.requestHeader}>
               <Image source={{ uri: item.userImage }} style={styles.userAvatar} />
-              <Text style={[styles.username, { color: colors.text }]}>
-                {item.username}
-              </Text>
+              <Text style={[styles.username, { color: colors.text }]}>{item.username}</Text>
               {item.verified && <VerifiedCheckFill color="#3B82F6" size={14} />}
             </View>
 
-            <Text
-              style={[styles.requestText, { color: colors.text }]}
-              numberOfLines={2}
-            >
+            <Text style={[styles.requestText, { color: colors.text }]} numberOfLines={2}>
               {parseTextWithHashtags(item.text)}
             </Text>
           </View>
@@ -595,10 +575,7 @@ export default function HomeScreen({ navigation }) {
           />
         </View>
         <View
-          style={[
-            styles.skeletonRequest,
-            { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' },
-          ]}
+          style={[styles.skeletonRequest, { backgroundColor: isDarkMode ? '#2A2A2A' : '#E0E0E0' }]}
         />
         <View style={styles.row}>
           <View
@@ -707,9 +684,7 @@ export default function HomeScreen({ navigation }) {
         style={styles.scrollView}
         contentContainerStyle={styles.feedContent}
         showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         {renderBanner()}
         {renderContent()}
@@ -728,10 +703,7 @@ export default function HomeScreen({ navigation }) {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.navButton}
-          onPress={() => handleTabPress('explore')}
-        >
+        <TouchableOpacity style={styles.navButton} onPress={() => handleTabPress('explore')}>
           <SearchCategorySolid
             color={activeTab === 'explore' ? colors.iconActive : colors.iconInactive}
             size={24}
@@ -745,10 +717,7 @@ export default function HomeScreen({ navigation }) {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.navButton}
-          onPress={() => handleTabPress('messages')}
-        >
+        <TouchableOpacity style={styles.navButton} onPress={() => handleTabPress('messages')}>
           <View>
             <MessageDotsFill
               color={activeTab === 'messages' ? colors.iconActive : colors.iconInactive}
@@ -760,10 +729,7 @@ export default function HomeScreen({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.navButton}
-          onPress={() => handleTabPress('profile')}
-        >
+        <TouchableOpacity style={styles.navButton} onPress={() => handleTabPress('profile')}>
           <ProfileFillNav
             color={activeTab === 'profile' ? colors.iconActive : colors.iconInactive}
             size={28}
@@ -791,9 +757,7 @@ export default function HomeScreen({ navigation }) {
                 onPress={() => handleFilterSelect('followed')}
               >
                 <GroupFill color={colors.text} size={18} />
-                <Text style={[styles.filterOptionText, { color: colors.text }]}>
-                  Suivies
-                </Text>
+                <Text style={[styles.filterOptionText, { color: colors.text }]}>Suivies</Text>
                 {activeFilter === 'followed' && (
                   <TouchableOpacity
                     style={styles.removeFilterButton}
@@ -814,9 +778,7 @@ export default function HomeScreen({ navigation }) {
                 onPress={() => handleFilterSelect('liked')}
               >
                 <Heart color="#EF4444" size={18} />
-                <Text style={[styles.filterOptionText, { color: colors.text }]}>
-                  Aimés
-                </Text>
+                <Text style={[styles.filterOptionText, { color: colors.text }]}>Aimés</Text>
                 {activeFilter === 'liked' && (
                   <TouchableOpacity
                     style={styles.removeFilterButton}

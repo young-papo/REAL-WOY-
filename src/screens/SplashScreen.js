@@ -30,7 +30,9 @@ export default function SplashScreen({ onFinish }) {
       {/* Image de fond pleine écran */}
       <Animated.View style={[styles.imageContainer, { opacity: fadeAnim }]}>
         <Image
-          source={{ uri: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80' }}
+          source={{
+            uri: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80',
+          }}
           style={styles.backgroundImage}
           resizeMode="cover"
         />
@@ -41,9 +43,7 @@ export default function SplashScreen({ onFinish }) {
 
       {/* Texte WOY centré */}
       <Animated.View style={[styles.textContainer, { opacity: fadeAnim }]}>
-        <Text style={[styles.logoText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>
-          WOY
-        </Text>
+        <Text style={[styles.logoText, { color: isDarkMode ? '#ffffff' : '#000000' }]}>WOY</Text>
         <Text style={[styles.tagline, { color: isDarkMode ? '#BDBDBD' : '#666666' }]}>
           What's On You
         </Text>

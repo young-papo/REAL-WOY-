@@ -141,7 +141,9 @@ export default function ReviewsScreen({ route, navigation }) {
         productName: `Produit Premium ${index + 1}`,
         comment: hasLongComment
           ? 'Excellent produit ! La qualité est au rendez-vous et la livraison a été rapide. Je recommande vivement ce vendeur. Le produit correspond exactement à la description et les photos.'
-          : Math.random() > 0.3 ? 'Très bon produit, conforme à mes attentes.' : '',
+          : Math.random() > 0.3
+            ? 'Très bon produit, conforme à mes attentes.'
+            : '',
         date: new Date(Date.now() - index * 24 * 60 * 60 * 1000).toISOString(),
         hasReplied: false,
         reply: null,
@@ -159,7 +161,7 @@ export default function ReviewsScreen({ route, navigation }) {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const newReviews = generateMockReviews(pageNum);
 
@@ -168,7 +170,7 @@ export default function ReviewsScreen({ route, navigation }) {
         setTotalReviews(45);
         setAverageRating(4.3);
       } else {
-        setReviews(prev => [...prev, ...newReviews]);
+        setReviews((prev) => [...prev, ...newReviews]);
       }
 
       if (pageNum >= 3) {
@@ -187,11 +189,11 @@ export default function ReviewsScreen({ route, navigation }) {
     let filtered = [...reviews];
 
     if (filterStars) {
-      filtered = filtered.filter(review => review.rating === filterStars);
+      filtered = filtered.filter((review) => review.rating === filterStars);
     }
 
     if (filterVerified) {
-      filtered = filtered.filter(review => review.verified === true);
+      filtered = filtered.filter((review) => review.verified === true);
     }
 
     filtered.sort((a, b) => {
@@ -271,11 +273,9 @@ export default function ReviewsScreen({ route, navigation }) {
 
     const trimmedReply = replyText.trim().substring(0, 200);
 
-    setReviews(prev =>
-      prev.map(review =>
-        review.id === reviewId
-          ? { ...review, hasReplied: true, reply: trimmedReply }
-          : review
+    setReviews((prev) =>
+      prev.map((review) =>
+        review.id === reviewId ? { ...review, hasReplied: true, reply: trimmedReply } : review
       )
     );
 
@@ -289,14 +289,14 @@ export default function ReviewsScreen({ route, navigation }) {
   };
 
   const toggleExpandComment = (reviewId) => {
-    setExpandedReviews(prev => ({
+    setExpandedReviews((prev) => ({
       ...prev,
       [reviewId]: !prev[reviewId],
     }));
   };
 
   const toggleExpandReply = (reviewId) => {
-    setExpandedReplies(prev => ({
+    setExpandedReplies((prev) => ({
       ...prev,
       [reviewId]: !prev[reviewId],
     }));
@@ -351,7 +351,11 @@ export default function ReviewsScreen({ route, navigation }) {
       <View style={styles.reviewItem}>
         <View style={styles.reviewContent}>
           <View style={styles.reviewHeader}>
-            <TouchableOpacity onPress={() => handleUserPress(item)} activeOpacity={0.7} style={styles.userSection}>
+            <TouchableOpacity
+              onPress={() => handleUserPress(item)}
+              activeOpacity={0.7}
+              style={styles.userSection}
+            >
               <Image source={{ uri: item.userAvatar }} style={styles.userAvatar} />
               <View style={styles.userInfoContainer}>
                 <View style={styles.userNameRow}>
@@ -362,7 +366,7 @@ export default function ReviewsScreen({ route, navigation }) {
                 </View>
                 <View style={styles.ratingRow}>
                   <Text style={[styles.ratingLabel, { color: colors.textSecondary }]}>
-                    {isOwner ? "T'a laissé une note de" : "A laissé une note de"}
+                    {isOwner ? "T'a laissé une note de" : 'A laissé une note de'}
                   </Text>
                   <StarSolid color="#FFB800" size={14} />
                   <Text style={[styles.ratingValue, { color: colors.text }]}>{item.rating}</Text>
@@ -374,7 +378,10 @@ export default function ReviewsScreen({ route, navigation }) {
           <View style={styles.commentSection}>
             <View style={styles.commentTextContainer}>
               <TouchableOpacity onPress={() => handleProductPress(item)} activeOpacity={0.7}>
-                <Text style={[styles.productNameInComment, { color: colors.text }]} numberOfLines={1}>
+                <Text
+                  style={[styles.productNameInComment, { color: colors.text }]}
+                  numberOfLines={1}
+                >
                   {item.productName}
                 </Text>
               </TouchableOpacity>
@@ -383,13 +390,21 @@ export default function ReviewsScreen({ route, navigation }) {
                   <Text style={[styles.comment, { color: colors.textSecondary }]}>
                     {displayComment}
                     {shouldTruncateComment && !isCommentExpanded && (
-                      <Text onPress={() => toggleExpandComment(item.id)} style={[styles.seeMore, { color: colors.text }]}>
-                        {' '}Voir plus
+                      <Text
+                        onPress={() => toggleExpandComment(item.id)}
+                        style={[styles.seeMore, { color: colors.text }]}
+                      >
+                        {' '}
+                        Voir plus
                       </Text>
                     )}
                     {shouldTruncateComment && isCommentExpanded && (
-                      <Text onPress={() => toggleExpandComment(item.id)} style={[styles.seeMore, { color: colors.text }]}>
-                        {' '}Voir moins
+                      <Text
+                        onPress={() => toggleExpandComment(item.id)}
+                        style={[styles.seeMore, { color: colors.text }]}
+                      >
+                        {' '}
+                        Voir moins
                       </Text>
                     )}
                   </Text>
@@ -398,7 +413,11 @@ export default function ReviewsScreen({ route, navigation }) {
             </View>
 
             {isOwner && !item.hasReplied && !isReplying && (
-              <TouchableOpacity onPress={() => handleReplyPress(item.id)} style={styles.replyButton} activeOpacity={0.8}>
+              <TouchableOpacity
+                onPress={() => handleReplyPress(item.id)}
+                style={styles.replyButton}
+                activeOpacity={0.8}
+              >
                 <MessageDotsFill color={colors.iconColor} size={22} />
               </TouchableOpacity>
             )}
@@ -409,7 +428,12 @@ export default function ReviewsScreen({ route, navigation }) {
               behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
               keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
             >
-              <View style={[styles.replyInputContainer, { backgroundColor: colors.inputBg, borderColor: colors.border }]}>
+              <View
+                style={[
+                  styles.replyInputContainer,
+                  { backgroundColor: colors.inputBg, borderColor: colors.border },
+                ]}
+              >
                 <TextInput
                   style={[styles.replyInput, { color: colors.text }]}
                   placeholder="Écrire une réponse..."
@@ -421,8 +445,14 @@ export default function ReviewsScreen({ route, navigation }) {
                   autoFocus
                 />
                 <View style={styles.replyActions}>
-                  <TouchableOpacity onPress={handleCancelReply} style={styles.cancelButton} activeOpacity={0.7}>
-                    <Text style={[styles.cancelButtonText, { color: colors.textSecondary }]}>Annuler</Text>
+                  <TouchableOpacity
+                    onPress={handleCancelReply}
+                    style={styles.cancelButton}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={[styles.cancelButtonText, { color: colors.textSecondary }]}>
+                      Annuler
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => handleSendReply(item.id)}
@@ -445,13 +475,21 @@ export default function ReviewsScreen({ route, navigation }) {
               <Text style={[styles.replyText, { color: colors.replyTextColor }]}>
                 {displayReply}
                 {shouldTruncateReply && !isReplyExpanded && (
-                  <Text onPress={() => toggleExpandReply(item.id)} style={[styles.seeMore, { color: colors.text }]}>
-                    {' '}Voir plus
+                  <Text
+                    onPress={() => toggleExpandReply(item.id)}
+                    style={[styles.seeMore, { color: colors.text }]}
+                  >
+                    {' '}
+                    Voir plus
                   </Text>
                 )}
                 {shouldTruncateReply && isReplyExpanded && (
-                  <Text onPress={() => toggleExpandReply(item.id)} style={[styles.seeMore, { color: colors.text }]}>
-                    {' '}Voir moins
+                  <Text
+                    onPress={() => toggleExpandReply(item.id)}
+                    style={[styles.seeMore, { color: colors.text }]}
+                  >
+                    {' '}
+                    Voir moins
                   </Text>
                 )}
               </Text>
@@ -493,9 +531,18 @@ export default function ReviewsScreen({ route, navigation }) {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.headerBg} translucent={false} />
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.headerBg}
+        translucent={false}
+      />
       <View style={[styles.safeArea, { backgroundColor: colors.headerBg, paddingTop: insets.top }]}>
-        <View style={[styles.header, { backgroundColor: colors.headerBg, borderBottomColor: colors.border }]}>
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colors.headerBg, borderBottomColor: colors.border },
+          ]}
+        >
           <TouchableOpacity onPress={handleBack} style={styles.headerLeft}>
             <ArrowBackIosRounded color={colors.text} size={24} />
           </TouchableOpacity>
@@ -527,7 +574,7 @@ export default function ReviewsScreen({ route, navigation }) {
           keyExtractor={(item) => item.id}
           contentContainerStyle={[
             styles.listContent,
-            filteredReviews.length === 0 && styles.emptyListContent
+            filteredReviews.length === 0 && styles.emptyListContent,
           ]}
           ListHeaderComponent={
             <View style={[styles.statsContainer, { backgroundColor: colors.background }]}>
@@ -571,7 +618,7 @@ export default function ReviewsScreen({ route, navigation }) {
           <Animated.View
             style={[
               styles.filterModalContent,
-              { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] }
+              { backgroundColor: colors.cardBg, transform: [{ translateY: slideAnim }] },
             ]}
           >
             <View style={[styles.filterHeader, { borderBottomColor: colors.border }]}>
@@ -586,7 +633,12 @@ export default function ReviewsScreen({ route, navigation }) {
               showsVerticalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
             >
-              <Text style={[styles.filterSectionHeader, { color: colors.text, borderBottomColor: colors.border }]}>
+              <Text
+                style={[
+                  styles.filterSectionHeader,
+                  { color: colors.text, borderBottomColor: colors.border },
+                ]}
+              >
                 Par étoiles
               </Text>
               <View style={styles.filterSection}>
@@ -595,34 +647,38 @@ export default function ReviewsScreen({ route, navigation }) {
                     style={[
                       styles.filterOption,
                       { borderColor: colors.border },
-                      !tempFilterStars && styles.filterOptionActive
+                      !tempFilterStars && styles.filterOptionActive,
                     ]}
                     onPress={() => setTempFilterStars(null)}
                   >
-                    <Text style={[
-                      styles.filterOptionText,
-                      { color: colors.textSecondary },
-                      !tempFilterStars && styles.filterOptionTextActive
-                    ]}>
+                    <Text
+                      style={[
+                        styles.filterOptionText,
+                        { color: colors.textSecondary },
+                        !tempFilterStars && styles.filterOptionTextActive,
+                      ]}
+                    >
                       Tous
                     </Text>
                   </TouchableOpacity>
-                  {[5, 4, 3, 2, 1].map(star => (
+                  {[5, 4, 3, 2, 1].map((star) => (
                     <TouchableOpacity
                       key={star}
                       style={[
                         styles.filterOption,
                         { borderColor: colors.border },
-                        tempFilterStars === star && styles.filterOptionActive
+                        tempFilterStars === star && styles.filterOptionActive,
                       ]}
                       onPress={() => setTempFilterStars(star)}
                     >
                       <StarSolid color="#FFB800" size={14} />
-                      <Text style={[
-                        styles.filterOptionText,
-                        { color: colors.textSecondary },
-                        tempFilterStars === star && styles.filterOptionTextActive
-                      ]}>
+                      <Text
+                        style={[
+                          styles.filterOptionText,
+                          { color: colors.textSecondary },
+                          tempFilterStars === star && styles.filterOptionTextActive,
+                        ]}
+                      >
                         {star}
                       </Text>
                     </TouchableOpacity>
@@ -630,7 +686,12 @@ export default function ReviewsScreen({ route, navigation }) {
                 </View>
               </View>
 
-              <Text style={[styles.filterSectionHeader, { color: colors.text, borderBottomColor: colors.border }]}>
+              <Text
+                style={[
+                  styles.filterSectionHeader,
+                  { color: colors.text, borderBottomColor: colors.border },
+                ]}
+              >
                 Trier par date
               </Text>
               <View style={styles.filterSection}>
@@ -639,15 +700,17 @@ export default function ReviewsScreen({ route, navigation }) {
                     style={[
                       styles.filterOption,
                       { borderColor: colors.border },
-                      tempSortOrder === 'recent' && styles.filterOptionActive
+                      tempSortOrder === 'recent' && styles.filterOptionActive,
                     ]}
                     onPress={() => setTempSortOrder('recent')}
                   >
-                    <Text style={[
-                      styles.filterOptionText,
-                      { color: colors.textSecondary },
-                      tempSortOrder === 'recent' && styles.filterOptionTextActive
-                    ]}>
+                    <Text
+                      style={[
+                        styles.filterOptionText,
+                        { color: colors.textSecondary },
+                        tempSortOrder === 'recent' && styles.filterOptionTextActive,
+                      ]}
+                    >
                       Plus récent
                     </Text>
                   </TouchableOpacity>
@@ -655,15 +718,17 @@ export default function ReviewsScreen({ route, navigation }) {
                     style={[
                       styles.filterOption,
                       { borderColor: colors.border },
-                      tempSortOrder === 'oldest' && styles.filterOptionActive
+                      tempSortOrder === 'oldest' && styles.filterOptionActive,
                     ]}
                     onPress={() => setTempSortOrder('oldest')}
                   >
-                    <Text style={[
-                      styles.filterOptionText,
-                      { color: colors.textSecondary },
-                      tempSortOrder === 'oldest' && styles.filterOptionTextActive
-                    ]}>
+                    <Text
+                      style={[
+                        styles.filterOptionText,
+                        { color: colors.textSecondary },
+                        tempSortOrder === 'oldest' && styles.filterOptionTextActive,
+                      ]}
+                    >
                       Plus ancien
                     </Text>
                   </TouchableOpacity>
@@ -671,22 +736,29 @@ export default function ReviewsScreen({ route, navigation }) {
                     style={[
                       styles.filterOption,
                       { borderColor: colors.border },
-                      tempSortOrder === 'random' && styles.filterOptionActive
+                      tempSortOrder === 'random' && styles.filterOptionActive,
                     ]}
                     onPress={() => setTempSortOrder('random')}
                   >
-                    <Text style={[
-                      styles.filterOptionText,
-                      { color: colors.textSecondary },
-                      tempSortOrder === 'random' && styles.filterOptionTextActive
-                    ]}>
+                    <Text
+                      style={[
+                        styles.filterOptionText,
+                        { color: colors.textSecondary },
+                        tempSortOrder === 'random' && styles.filterOptionTextActive,
+                      ]}
+                    >
                       Aléatoire
                     </Text>
                   </TouchableOpacity>
                 </View>
               </View>
 
-              <Text style={[styles.filterSectionHeader, { color: colors.text, borderBottomColor: colors.border }]}>
+              <Text
+                style={[
+                  styles.filterSectionHeader,
+                  { color: colors.text, borderBottomColor: colors.border },
+                ]}
+              >
                 Type de compte
               </Text>
               <View style={styles.filterSection}>
@@ -695,15 +767,17 @@ export default function ReviewsScreen({ route, navigation }) {
                     style={[
                       styles.filterOption,
                       { borderColor: colors.border },
-                      tempFilterVerified && styles.filterOptionActive
+                      tempFilterVerified && styles.filterOptionActive,
                     ]}
                     onPress={() => setTempFilterVerified(!tempFilterVerified)}
                   >
-                    <Text style={[
-                      styles.filterOptionText,
-                      { color: colors.textSecondary },
-                      tempFilterVerified && styles.filterOptionTextActive
-                    ]}>
+                    <Text
+                      style={[
+                        styles.filterOptionText,
+                        { color: colors.textSecondary },
+                        tempFilterVerified && styles.filterOptionTextActive,
+                      ]}
+                    >
                       Vérifiés uniquement
                     </Text>
                   </TouchableOpacity>
@@ -722,7 +796,9 @@ export default function ReviewsScreen({ route, navigation }) {
                 style={[styles.filterApplyButton, { backgroundColor: colors.text }]}
                 onPress={applyFiltersAndClose}
               >
-                <Text style={[styles.filterApplyText, { color: colors.background }]}>Appliquer</Text>
+                <Text style={[styles.filterApplyText, { color: colors.background }]}>
+                  Appliquer
+                </Text>
               </TouchableOpacity>
             </View>
           </Animated.View>
@@ -735,7 +811,14 @@ export default function ReviewsScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   safeArea: {},
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+  },
   headerLeft: { width: 40, alignItems: 'flex-start' },
   headerCenter: { flex: 1, alignItems: 'center' },
   headerTitle: { fontSize: 18, fontWeight: '700' },
@@ -769,7 +852,13 @@ const styles = StyleSheet.create({
   replyActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 10 },
   cancelButton: { paddingHorizontal: 16, paddingVertical: 8 },
   cancelButtonText: { fontSize: 14, fontWeight: '600' },
-  sendButton: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 6, alignItems: 'center', justifyContent: 'center' },
+  sendButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   replyContainer: { padding: 10, borderRadius: 6, marginTop: 6 },
   replyLabel: { fontSize: 12, fontWeight: '600', marginBottom: 4 },
   replyText: { fontSize: 13, fontStyle: 'italic', lineHeight: 18 },
@@ -782,25 +871,73 @@ const styles = StyleSheet.create({
   skeletonProduct: { width: '50%', height: 15, borderRadius: 4 },
   skeletonComment: { width: '90%', height: 40, borderRadius: 4 },
   footerLoader: { paddingVertical: 10 },
-  emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40, paddingVertical: 60 },
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 40,
+    paddingVertical: 60,
+  },
   emptyTitle: { fontSize: 18, fontWeight: '700', marginTop: 20, textAlign: 'center' },
   emptySubtitle: { fontSize: 14, marginTop: 8, textAlign: 'center', lineHeight: 20 },
   filterModalContainer: { flex: 1 },
   filterOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.5)' },
-  filterModalContent: { position: 'absolute', bottom: 0, left: 0, right: 0, borderTopLeftRadius: 20, borderTopRightRadius: 20, maxHeight: '80%' },
-  filterHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 16, borderBottomWidth: 1 },
+  filterModalContent: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    maxHeight: '80%',
+  },
+  filterHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+  },
   filterTitle: { fontSize: 20, fontWeight: 'bold' },
   filterCloseIcon: { fontSize: 24 },
   filterScroll: { paddingHorizontal: 20, paddingVertical: 16 },
-  filterSectionHeader: { fontSize: 16, fontWeight: 'bold', marginTop: 8, marginBottom: 16, paddingBottom: 8, borderBottomWidth: 2 },
+  filterSectionHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 8,
+    marginBottom: 16,
+    paddingBottom: 8,
+    borderBottomWidth: 2,
+  },
   filterSection: { marginBottom: 10 },
   filterOptionsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  filterOption: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, borderWidth: 1, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  filterOption: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
   filterOptionActive: { backgroundColor: '#000000', borderColor: '#000000' },
   filterOptionText: { fontSize: 12, fontWeight: '600' },
   filterOptionTextActive: { color: '#ffffff' },
-  filterButtons: { flexDirection: 'row', gap: 12, paddingHorizontal: 20, paddingVertical: 16, borderTopWidth: 1 },
-  filterResetButton: { flex: 1, borderWidth: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
+  filterButtons: {
+    flexDirection: 'row',
+    gap: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderTopWidth: 1,
+  },
+  filterResetButton: {
+    flex: 1,
+    borderWidth: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
   filterResetText: { fontSize: 14, fontWeight: '600' },
   filterApplyButton: { flex: 1, paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
   filterApplyText: { fontSize: 14, fontWeight: '600' },
